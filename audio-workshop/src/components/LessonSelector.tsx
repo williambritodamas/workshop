@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge } from 'lucide-react';
+import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizontal } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7) => void;
 }
 
 const lessons = [
@@ -64,6 +64,16 @@ const lessons = [
     image: 'https://images.pexels.com/photos/164680/pexels-photo-164680.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: <Gauge className="w-8 h-8" />,
     color: 'from-amber-500 to-orange-500',
+    badge: '16 slides',
+  },
+  {
+    id: 7 as const,
+    title: 'Equalização',
+    subtitle: 'Moldando o Som',
+    description: 'Aprenda a equilibrar graves, médios e agudos. Entenda o HPF, como ouvir as diferenças e por que cortar frequências é melhor que aumentar.',
+    image: 'https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg?auto=compress&cs=tinysrgb&w=800',
+    icon: <SlidersHorizontal className="w-8 h-8" />,
+    color: 'from-blue-600 to-cyan-500',
     badge: '16 slides',
   },
 ];
