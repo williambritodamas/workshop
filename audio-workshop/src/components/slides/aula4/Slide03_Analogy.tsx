@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { SlideTitle } from '../../ui/SlideTitle';
 import { slide03Notes } from './notes';
-import { Ear, Mic, Volume2 } from 'lucide-react';
+import { Ear, Mic } from 'lucide-react';
 export { slide03Notes };
 
 export const Slide03_Analogy: React.FC = () => (

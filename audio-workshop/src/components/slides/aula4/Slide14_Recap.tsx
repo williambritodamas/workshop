@@ -12,7 +12,7 @@ const pillars = [
   { icon: <Film className="w-6 h-6" />, title: 'Cuidado', desc: 'Manuseio, armazenamento e transporte', color: 'amber' },
 ];
 
-const colors = { blue: 'border-blue-500/40 bg-blue-500/10 text-blue-400', cyan: 'border-cyan-500/40 bg-cyan-500/10 text-cyan-400', purple: 'border-purple-500/40 bg-purple-500/10 text-purple-400', emerald: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400', amber: 'border-amber-500/40 bg-amber-500/10 text-amber-400' };
+const colors: Record<string, string> = { blue: 'border-blue-500/40 bg-blue-500/10 text-blue-400', cyan: 'border-cyan-500/40 bg-cyan-500/10 text-cyan-400', purple: 'border-purple-500/40 bg-purple-500/10 text-purple-400', emerald: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400', amber: 'border-amber-500/40 bg-amber-500/10 text-amber-400' };
 
 export const Slide14_Recap: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">

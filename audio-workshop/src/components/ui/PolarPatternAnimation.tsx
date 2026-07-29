@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Circle, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 interface Pattern {
   id: string;

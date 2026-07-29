@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mic, Zap, Waves, X, Check } from 'lucide-react';
+import { Mic, X, Check } from 'lucide-react';
 
 interface MicComparisonProps {
   label: string;

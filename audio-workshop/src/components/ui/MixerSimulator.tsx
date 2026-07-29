@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Volume2, Mic, Headphones, ArrowLeftRight, Bell, Ear } from 'lucide-react';
+import { Volume2, Mic, Bell, Ear } from 'lucide-react';
 
 export const MixerSimulator: React.FC = () => {
   const [gain, setGain] = useState(5);

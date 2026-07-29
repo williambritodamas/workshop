@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp, Mic, Zap, Volume2, Waves } from 'lucide-react';
+import { ChevronDown, ChevronUp, Zap, Volume2, Waves } from 'lucide-react';
 
 interface MicrophoneCardProps {
   name: string;

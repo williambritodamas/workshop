@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { SlideTitle } from '../../ui/SlideTitle';
 import { slide06Notes } from './notes';
-import { Zap, Battery, AudioLines, Waves } from 'lucide-react';
+import { Zap, AudioLines, Waves } from 'lucide-react';
 export { slide06Notes };
 
 const features = [

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { SlideTitle } from '../../ui/SlideTitle';
 import { slide09Notes } from './notes';
-import { Mic, ArrowRightCircle, XCircle, Volume2 } from 'lucide-react';
+import { ArrowRightCircle, XCircle, Volume2 } from 'lucide-react';
 export { slide09Notes };
 
 const tips = [

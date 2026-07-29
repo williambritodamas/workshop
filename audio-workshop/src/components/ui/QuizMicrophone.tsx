@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HelpCircle, CheckCircle2, Eye, EyeOff, ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
+import { HelpCircle, CheckCircle2, Eye, EyeOff, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface Question {
   image: string;

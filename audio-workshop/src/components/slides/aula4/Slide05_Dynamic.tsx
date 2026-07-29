@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { SlideTitle } from '../../ui/SlideTitle';
 import { slide05Notes } from './notes';
-import { Mic, Shield, Volume2, Wifi } from 'lucide-react';
+import { Shield, Volume2, Wifi } from 'lucide-react';
 export { slide05Notes };
 
 const features = [

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { slide15Notes } from './notes';
-import { Mic, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronRight, Sparkles } from 'lucide-react';
 export { slide15Notes };
 
 export const Slide15_Closing: React.FC = () => (
