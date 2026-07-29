@@ -35,8 +35,26 @@ import { Slide13_Quiz, slide13Notes as aula2Slide13Notes } from './components/sl
 import { Slide14_Review2, slide14Notes as aula2Slide14Notes } from './components/slides/aula2/Slide14_Review2';
 import { Slide15_Closing2, slide15Notes as aula2Slide15Notes } from './components/slides/aula2/Slide15_Closing2';
 
+// Aula 3
+import { Slide01_Opening, slide01Notes as aula3Slide01Notes } from './components/slides/aula3/Slide01_Opening';
+import { Slide02_Question as Aula3_Slide02_Question, slide02Notes as aula3Slide02Notes } from './components/slides/aula3/Slide02_Question';
+import { Slide03_FullSystem, slide03Notes as aula3Slide03Notes } from './components/slides/aula3/Slide03_FullSystem';
+import { Slide04_Source, slide04Notes as aula3Slide04Notes } from './components/slides/aula3/Slide04_Source';
+import { Slide05_Microphone, slide05Notes as aula3Slide05Notes } from './components/slides/aula3/Slide05_Microphone';
+import { Slide06_Cable, slide06Notes as aula3Slide06Notes } from './components/slides/aula3/Slide06_Cable';
+import { Slide07_Mixer, slide07Notes as aula3Slide07Notes } from './components/slides/aula3/Slide07_Mixer';
+import { Slide08_Processing, slide08Notes as aula3Slide08Notes } from './components/slides/aula3/Slide08_Processing';
+import { Slide09_Amplifier, slide09Notes as aula3Slide09Notes } from './components/slides/aula3/Slide09_Amplifier';
+import { Slide10_Speaker, slide10Notes as aula3Slide10Notes } from './components/slides/aula3/Slide10_Speaker';
+import { Slide11_FullFlow, slide11Notes as aula3Slide11Notes } from './components/slides/aula3/Slide11_FullFlow';
+import { Slide12_Problems, slide12Notes as aula3Slide12Notes } from './components/slides/aula3/Slide12_Problems';
+import { Slide13_Exercise, slide13Notes as aula3Slide13Notes } from './components/slides/aula3/Slide13_Exercise';
+import { Slide14_Practice, slide14Notes as aula3Slide14Notes } from './components/slides/aula3/Slide14_Practice';
+import { Slide15_Review, slide15Notes as aula3Slide15Notes } from './components/slides/aula3/Slide15_Review';
+import { Slide16_Closing, slide16Notes as aula3Slide16Notes } from './components/slides/aula3/Slide16_Closing';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -144,14 +162,71 @@ export function App() {
     'Slide 15 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2) => {
+  const lesson3Slides = [
+    <Slide01_Opening key="l3-1" />,
+    <Aula3_Slide02_Question key="l3-2" />,
+    <Slide03_FullSystem key="l3-3" />,
+    <Slide04_Source key="l3-4" />,
+    <Slide05_Microphone key="l3-5" />,
+    <Slide06_Cable key="l3-6" />,
+    <Slide07_Mixer key="l3-7" />,
+    <Slide08_Processing key="l3-8" />,
+    <Slide09_Amplifier key="l3-9" />,
+    <Slide10_Speaker key="l3-10" />,
+    <Slide11_FullFlow key="l3-11" />,
+    <Slide12_Problems key="l3-12" />,
+    <Slide13_Exercise key="l3-13" />,
+    <Slide14_Practice key="l3-14" />,
+    <Slide15_Review key="l3-15" />,
+    <Slide16_Closing key="l3-16" />,
+  ];
+
+  const lesson3Notes = [
+    aula3Slide01Notes,
+    aula3Slide02Notes,
+    aula3Slide03Notes,
+    aula3Slide04Notes,
+    aula3Slide05Notes,
+    aula3Slide06Notes,
+    aula3Slide07Notes,
+    aula3Slide08Notes,
+    aula3Slide09Notes,
+    aula3Slide10Notes,
+    aula3Slide11Notes,
+    aula3Slide12Notes,
+    aula3Slide13Notes,
+    aula3Slide14Notes,
+    aula3Slide15Notes,
+    aula3Slide16Notes,
+  ];
+
+  const lesson3Titles = [
+    'Slide 1 — Abertura (Aula 3)',
+    'Slide 2 — Como minha voz chega até a caixa?',
+    'Slide 3 — O Sistema Completo',
+    'Slide 4 — Tudo começa aqui',
+    'Slide 5 — O Microfone',
+    'Slide 6 — O Cabo',
+    'Slide 7 — A Mesa de Som',
+    'Slide 8 — Processamento',
+    'Slide 9 — Amplificador',
+    'Slide 10 — Caixa de Som',
+    'Slide 11 — O Caminho Completo',
+    'Slide 12 — Onde podem acontecer problemas?',
+    'Slide 13 — Exercício',
+    'Slide 14 — Demonstração Prática',
+    'Slide 15 — Revisão',
+    'Slide 16 — Encerramento',
+  ];
+
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const activeSlides = currentLesson === 1 ? lesson1Slides : lesson2Slides;
-  const activeNotes = currentLesson === 1 ? lesson1Notes : lesson2Notes;
-  const activeTitles = currentLesson === 1 ? lesson1Titles : lesson2Titles;
+  const activeSlides = currentLesson === 1 ? lesson1Slides : currentLesson === 2 ? lesson2Slides : lesson3Slides;
+  const activeNotes = currentLesson === 1 ? lesson1Notes : currentLesson === 2 ? lesson2Notes : lesson3Notes;
+  const activeTitles = currentLesson === 1 ? lesson1Titles : currentLesson === 2 ? lesson2Titles : lesson3Titles;
 
   return (
     currentLesson === 0 ? (

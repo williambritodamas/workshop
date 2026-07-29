@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { Music, Mic, Sliders, Sparkles, ArrowRight } from 'lucide-react';
+import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2) => void;
+  onSelect: (lesson: 1 | 2 | 3) => void;
 }
 
 const lessons = [
@@ -26,6 +26,16 @@ const lessons = [
     color: 'from-purple-600 to-pink-500',
     badge: '15 slides',
   },
+  {
+    id: 3 as const,
+    title: 'O Caminho do Som',
+    subtitle: 'Fluxo completo do sinal de áudio',
+    description: 'Entenda como o som percorre todo o sistema — da voz aos alto-falantes — e aprenda a identificar falhas em cada etapa do fluxo.',
+    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop',
+    icon: <Waves className="w-8 h-8" />,
+    color: 'from-amber-500 to-orange-500',
+    badge: '16 slides',
+  },
 ];
 
 export default function LessonSelector({ onSelect }: LessonSelectorProps) {
@@ -36,6 +46,7 @@ export default function LessonSelector({ onSelect }: LessonSelectorProps) {
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-3/4 left-1/3 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl" />
       </div>
 
       {/* Conteúdo */}
