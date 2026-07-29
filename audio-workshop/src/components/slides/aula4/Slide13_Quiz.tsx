@@ -4,11 +4,11 @@ import { slide13Notes } from './notes';
 export { slide13Notes };
 
 const questions = [
-  { image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop', options: ['Dinâmico', 'Condensador', 'Shotgun', 'Lapela'], correct: 0, hint: 'É o mais comum em palcos e shows ao vivo.' },
-  { image: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?q=80&w=600&auto=format&fit=crop', options: ['Condensador', 'Dinâmico', 'Headset', 'Lapela'], correct: 0, hint: 'Muito usado em estúdios e podcasts.' },
-  { image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop', options: ['Lapela', 'Headset', 'Shotgun', 'Dinâmico'], correct: 1, hint: 'Mãos livres e posição fixa na cabeça.' },
-  { image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=600&auto=format&fit=crop', options: ['Headset', 'Shotgun', 'Lapela', 'Condensador'], correct: 2, hint: 'Discreto, preso na roupa.' },
-  { image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&auto=format&fit=crop', options: ['Dinâmico', 'Condensador', 'Lapela', 'Shotgun'], correct: 3, hint: 'Formato tubular, muito direcional.' },
+  { image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop', options: ['Dinâmico', 'Condensador', 'Shotgun', 'Lapela'], correct: 0, hint: 'É o mais comum em palcos e shows ao vivo — robusto, não precisa de phantom power.' },
+  { image: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?q=80&w=600&auto=format&fit=crop', options: ['Condensador', 'Dinâmico', 'Headset', 'Lapela'], correct: 0, hint: 'Muito usado em estúdios e podcasts — requer phantom power (+48V).' },
+  { image: 'https://images.unsplash.com/photo-fvYZJCGYTjg?q=80&w=600&auto=format&fit=crop', options: ['Lapela', 'Headset', 'Shotgun', 'Dinâmico'], correct: 1, hint: 'Usado na cabeça com um arco — mãos livres e posição fixa. Comum em palestras e teatros.' },
+  { image: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Lavalier_mikrofon.jpg?width=600', options: ['Headset', 'Shotgun', 'Lapela', 'Condensador'], correct: 2, hint: 'Pequeno microfone preso na roupa — discreto, usado em TV e entrevistas.' },
+  { image: 'https://images.pexels.com/photos/14704969/pexels-photo-14704969.jpeg?auto=compress&cs=tinysrgb&w=600', options: ['Dinâmico', 'Condensador', 'Lapela', 'Shotgun'], correct: 3, hint: 'Formato tubular longo e direcional — isolado o som à frente. Usado em cinema e gravação externa.' },
 ];
 
 export const Slide13_Quiz: React.FC = () => (
