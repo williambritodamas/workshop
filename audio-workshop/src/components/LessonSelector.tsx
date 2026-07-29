@@ -78,7 +78,7 @@ export default function LessonSelector({ onSelect }: LessonSelectorProps) {
         </motion.div>
 
         {/* Grid de Cards das Aulas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-6xl">
           {lessons.map((lesson, idx) => (
             <motion.button
               key={lesson.id}
