@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4) => void;
 }
 
 const lessons = [
@@ -35,6 +35,16 @@ const lessons = [
     icon: <Waves className="w-8 h-8" />,
     color: 'from-amber-500 to-orange-500',
     badge: '16 slides',
+  },
+  {
+    id: 4 as const,
+    title: 'Microfones',
+    subtitle: 'A porta de entrada do som',
+    description: 'Conheça os tipos de microfone, padrões polares, posicionamento correto e como escolher o microfone ideal para cada situação.',
+    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop',
+    icon: <Mic className="w-8 h-8" />,
+    color: 'from-blue-600 to-cyan-500',
+    badge: '15 slides',
   },
 ];
 

@@ -53,8 +53,25 @@ import { Slide14_Practice, slide14Notes as aula3Slide14Notes } from './component
 import { Slide15_Review, slide15Notes as aula3Slide15Notes } from './components/slides/aula3/Slide15_Review';
 import { Slide16_Closing, slide16Notes as aula3Slide16Notes } from './components/slides/aula3/Slide16_Closing';
 
+// Aula 4
+import { Slide01_Opening as Aula4_Slide01_Opening, slide01Notes as aula4Slide01Notes } from './components/slides/aula4/Slide01_Opening';
+import { Slide02_WhatItDoes, slide02Notes as aula4Slide02Notes } from './components/slides/aula4/Slide02_WhatItDoes';
+import { Slide03_Analogy, slide03Notes as aula4Slide03Notes } from './components/slides/aula4/Slide03_Analogy';
+import { Slide04_Types, slide04Notes as aula4Slide04Notes } from './components/slides/aula4/Slide04_Types';
+import { Slide05_Dynamic, slide05Notes as aula4Slide05Notes } from './components/slides/aula4/Slide05_Dynamic';
+import { Slide06_Condenser, slide06Notes as aula4Slide06Notes } from './components/slides/aula4/Slide06_Condenser';
+import { Slide07_Specialized, slide07Notes as aula4Slide07Notes } from './components/slides/aula4/Slide07_Specialized';
+import { Slide08_PolarPatterns, slide08Notes as aula4Slide08Notes } from './components/slides/aula4/Slide08_PolarPatterns';
+import { Slide09_Positioning, slide09Notes as aula4Slide09Notes } from './components/slides/aula4/Slide09_Positioning';
+import { Slide10_Mistakes, slide10Notes as aula4Slide10Notes } from './components/slides/aula4/Slide10_Mistakes';
+import { Slide11_Demo, slide11Notes as aula4Slide11Notes } from './components/slides/aula4/Slide11_Demo';
+import { Slide12_Selector, slide12Notes as aula4Slide12Notes } from './components/slides/aula4/Slide12_Selector';
+import { Slide13_Quiz as Aula4_Slide13_Quiz, slide13Notes as aula4Slide13Notes } from './components/slides/aula4/Slide13_Quiz';
+import { Slide14_Recap, slide14Notes as aula4Slide14Notes } from './components/slides/aula4/Slide14_Recap';
+import { Slide15_Closing, slide15Notes as aula4Slide15Notes } from './components/slides/aula4/Slide15_Closing';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -181,6 +198,24 @@ export function App() {
     <Slide16_Closing key="l3-16" />,
   ];
 
+  const lesson4Slides = [
+    <Aula4_Slide01_Opening key="l4-1" />,
+    <Slide02_WhatItDoes key="l4-2" />,
+    <Slide03_Analogy key="l4-3" />,
+    <Slide04_Types key="l4-4" />,
+    <Slide05_Dynamic key="l4-5" />,
+    <Slide06_Condenser key="l4-6" />,
+    <Slide07_Specialized key="l4-7" />,
+    <Slide08_PolarPatterns key="l4-8" />,
+    <Slide09_Positioning key="l4-9" />,
+    <Slide10_Mistakes key="l4-10" />,
+    <Slide11_Demo key="l4-11" />,
+    <Slide12_Selector key="l4-12" />,
+    <Aula4_Slide13_Quiz key="l4-13" />,
+    <Slide14_Recap key="l4-14" />,
+    <Slide15_Closing key="l4-15" />,
+  ];
+
   const lesson3Notes = [
     aula3Slide01Notes,
     aula3Slide02Notes,
@@ -198,6 +233,42 @@ export function App() {
     aula3Slide14Notes,
     aula3Slide15Notes,
     aula3Slide16Notes,
+  ];
+
+  const lesson4Notes = [
+    aula4Slide01Notes,
+    aula4Slide02Notes,
+    aula4Slide03Notes,
+    aula4Slide04Notes,
+    aula4Slide05Notes,
+    aula4Slide06Notes,
+    aula4Slide07Notes,
+    aula4Slide08Notes,
+    aula4Slide09Notes,
+    aula4Slide10Notes,
+    aula4Slide11Notes,
+    aula4Slide12Notes,
+    aula4Slide13Notes,
+    aula4Slide14Notes,
+    aula4Slide15Notes,
+  ];
+
+  const lesson4Titles = [
+    'Slide 1 — Abertura (Aula 4)',
+    'Slide 2 — O que faz um microfone?',
+    'Slide 3 — O microfone é como...',
+    'Slide 4 — Principais tipos de microfone',
+    'Slide 5 — Microfone Dinâmico',
+    'Slide 6 — Microfone Condensador',
+    'Slide 7 — Microfones especializados',
+    'Slide 8 — Padrões Polares',
+    'Slide 9 — Posicionamento',
+    'Slide 10 — Erros comuns',
+    'Slide 11 — Demonstração prática',
+    'Slide 12 — Qual microfone escolher?',
+    'Slide 13 — Quiz',
+    'Slide 14 — Resumo da Aula 4',
+    'Slide 15 — Encerramento',
   ];
 
   const lesson3Titles = [
@@ -219,14 +290,17 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2 | 3) => {
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const activeSlides = currentLesson === 1 ? lesson1Slides : currentLesson === 2 ? lesson2Slides : lesson3Slides;
-  const activeNotes = currentLesson === 1 ? lesson1Notes : currentLesson === 2 ? lesson2Notes : lesson3Notes;
-  const activeTitles = currentLesson === 1 ? lesson1Titles : currentLesson === 2 ? lesson2Titles : lesson3Titles;
+  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides };
+  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes };
+  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles };
+  const activeSlides = slidesMap[currentLesson];
+  const activeNotes = notesMap[currentLesson];
+  const activeTitles = titlesMap[currentLesson];
 
   return (
     currentLesson === 0 ? (
