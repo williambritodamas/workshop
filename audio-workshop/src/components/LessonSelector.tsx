@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves } from 'lucide-react';
+import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3 | 4 | 5) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6) => void;
 }
 
 const lessons = [
@@ -55,6 +55,16 @@ const lessons = [
     icon: <Sliders className="w-8 h-8" />,
     color: 'from-green-600 to-teal-500',
     badge: '15 slides',
+  },
+  {
+    id: 6 as const,
+    title: 'Gain, Volume e Clip',
+    subtitle: 'O segredo do som profissional',
+    description: 'Entenda de uma vez por todas a diferença entre Gain e Fader, o que é Clip, Headroom e como ajustar corretamente o nível de cada canal.',
+    image: 'https://images.pexels.com/photos/164680/pexels-photo-164680.jpeg?auto=compress&cs=tinysrgb&w=800',
+    icon: <Gauge className="w-8 h-8" />,
+    color: 'from-amber-500 to-orange-500',
+    badge: '16 slides',
   },
 ];
 

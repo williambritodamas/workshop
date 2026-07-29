@@ -87,8 +87,26 @@ import { Slide13_FinalChallenge, slide13Notes as aula5Slide13Notes } from './com
 import { Slide14_Closing as Aula5_Slide14_Closing, slide14Notes as aula5Slide14Notes } from './components/slides/aula5/Slide14_Closing';
 import { Slide15_References, slide15Notes as aula5Slide15Notes } from './components/slides/aula5/Slide15_References';
 
+// Aula 6
+import { Slide01_Opening as Aula6_Slide01_Opening, slide01Notes as aula6Slide01Notes } from './components/slides/aula6/Slide01_Opening';
+import { Slide02_Question as Aula6_Slide02_Question, slide02Notes as aula6Slide02Notes } from './components/slides/aula6/Slide02_Question';
+import { Slide03_CelularAnalogy, slide03Notes as aula6Slide03Notes } from './components/slides/aula6/Slide03_CelularAnalogy';
+import { Slide04_GainDetail, slide04Notes as aula6Slide04Notes } from './components/slides/aula6/Slide04_GainDetail';
+import { Slide05_FaderDetail, slide05Notes as aula6Slide05Notes } from './components/slides/aula6/Slide05_FaderDetail';
+import { Slide06_Comparison as Aula6_Slide06_Comparison, slide06Notes as aula6Slide06Notes } from './components/slides/aula6/Slide06_Comparison';
+import { Slide07_ClipIntro, slide07Notes as aula6Slide07Notes } from './components/slides/aula6/Slide07_ClipIntro';
+import { Slide08_ClipEffects, slide08Notes as aula6Slide08Notes } from './components/slides/aula6/Slide08_ClipEffects';
+import { Slide09_Headroom, slide09Notes as aula6Slide09Notes } from './components/slides/aula6/Slide09_Headroom';
+import { Slide10_StepByStep, slide10Notes as aula6Slide10Notes } from './components/slides/aula6/Slide10_StepByStep';
+import { Slide11_Operador, slide11Notes as aula6Slide11Notes } from './components/slides/aula6/Slide11_Operador';
+import { Slide12_Mistakes, slide12Notes as aula6Slide12Notes } from './components/slides/aula6/Slide12_Mistakes';
+import { Slide13_Interactive, slide13Notes as aula6Slide13Notes } from './components/slides/aula6/Slide13_Interactive';
+import { Slide14_Quiz as Aula6_Slide14_Quiz, slide14Notes as aula6Slide14Notes } from './components/slides/aula6/Slide14_Quiz';
+import { Slide15_Review as Aula6_Slide15_Review, slide15Notes as aula6Slide15Notes } from './components/slides/aula6/Slide15_Review';
+import { Slide16_Closing as Aula6_Slide16_Closing, slide16Notes as aula6Slide16Notes } from './components/slides/aula6/Slide16_Closing';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -233,6 +251,25 @@ export function App() {
     <Slide15_Closing key="l4-15" />,
   ];
 
+  const lesson6Slides = [
+    <Aula6_Slide01_Opening key="l6-1" />,
+    <Aula6_Slide02_Question key="l6-2" />,
+    <Slide03_CelularAnalogy key="l6-3" />,
+    <Slide04_GainDetail key="l6-4" />,
+    <Slide05_FaderDetail key="l6-5" />,
+    <Aula6_Slide06_Comparison key="l6-6" />,
+    <Slide07_ClipIntro key="l6-7" />,
+    <Slide08_ClipEffects key="l6-8" />,
+    <Slide09_Headroom key="l6-9" />,
+    <Slide10_StepByStep key="l6-10" />,
+    <Slide11_Operador key="l6-11" />,
+    <Slide12_Mistakes key="l6-12" />,
+    <Slide13_Interactive key="l6-13" />,
+    <Aula6_Slide14_Quiz key="l6-14" />,
+    <Aula6_Slide15_Review key="l6-15" />,
+    <Aula6_Slide16_Closing key="l6-16" />,
+  ];
+
   const lesson5Slides = [
     <Aula5_Slide01_Opening key="l5-1" />,
     <Slide02_WhatIsMixer key="l5-2" />,
@@ -286,6 +323,25 @@ export function App() {
     aula4Slide13Notes,
     aula4Slide14Notes,
     aula4Slide15Notes,
+  ];
+
+  const lesson6Notes = [
+    aula6Slide01Notes,
+    aula6Slide02Notes,
+    aula6Slide03Notes,
+    aula6Slide04Notes,
+    aula6Slide05Notes,
+    aula6Slide06Notes,
+    aula6Slide07Notes,
+    aula6Slide08Notes,
+    aula6Slide09Notes,
+    aula6Slide10Notes,
+    aula6Slide11Notes,
+    aula6Slide12Notes,
+    aula6Slide13Notes,
+    aula6Slide14Notes,
+    aula6Slide15Notes,
+    aula6Slide16Notes,
   ];
 
   const lesson5Notes = [
@@ -342,6 +398,25 @@ export function App() {
     'Slide 15 — Referências',
   ];
 
+  const lesson6Titles = [
+    'Slide 1 — Abertura (Aula 6)',
+    'Slide 2 — Gain e Volume são a mesma coisa?',
+    'Slide 3 — A analogia do celular',
+    'Slide 4 — O que é Gain?',
+    'Slide 5 — O que é Fader?',
+    'Slide 6 — Gain × Fader',
+    'Slide 7 — O que é Clip?',
+    'Slide 8 — Efeitos do Clip',
+    'Slide 9 — Headroom',
+    'Slide 10 — Passo a Passo',
+    'Slide 11 — Operador por um Minuto',
+    'Slide 12 — Erros Comuns',
+    'Slide 13 — Simulador Interativo',
+    'Slide 14 — Quiz',
+    'Slide 15 — Revisão',
+    'Slide 16 — Encerramento',
+  ];
+
   const lesson3Titles = [
     'Slide 1 — Abertura (Aula 3)',
     'Slide 2 — Como minha voz chega até a caixa?',
@@ -361,14 +436,14 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5) => {
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides };
-  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes };
-  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles };
+  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides };
+  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes };
+  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles };
   const activeSlides = slidesMap[currentLesson];
   const activeNotes = notesMap[currentLesson];
   const activeTitles = titlesMap[currentLesson];
