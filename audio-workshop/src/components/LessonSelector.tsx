@@ -50,17 +50,18 @@ const lessons = [
 
 export default function LessonSelector({ onSelect }: LessonSelectorProps) {
   return (
-    <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden">
+    <div className="relative min-h-screen bg-slate-950 text-white">
       {/* Background com gradiente e efeito de ondas */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
         <div className="absolute top-3/4 left-1/3 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 right-1/2 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl" />
       </div>
 
       {/* Conteúdo */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 md:p-8">
+      <div className="relative z-10 flex flex-col items-center justify-start py-16 px-4 md:px-8">
         {/* Cabeçalho */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
