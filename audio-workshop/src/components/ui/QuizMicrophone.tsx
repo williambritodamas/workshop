@@ -62,9 +62,9 @@ export const QuizMicrophone: React.FC<QuizMicrophoneProps> = ({ questions }) => 
           <span className="text-xs text-slate-500 font-mono">{current + 1}/{questions.length}</span>
         </div>
 
-        <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden mb-4 border border-slate-800">
-          <img src={q.image} alt="Quiz Microfone" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-slate-950/20" />
+        <div className="relative h-56 md:h-64 rounded-2xl overflow-hidden mb-4 border border-slate-800 bg-slate-950 flex items-center justify-center">
+          <img src={q.image} alt="Quiz Microfone" className="w-full h-full object-scale-down p-2" />
+          <div className="absolute inset-0 bg-slate-950/10" />
         </div>
 
         <div className="grid grid-cols-2 gap-2 mb-4">
