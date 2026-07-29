@@ -7,7 +7,7 @@ export { slide05Notes };
 export const Slide05_SignalPath: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=1920&auto=format&fit=crop" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
+      <img src="https://images.unsplash.com/photo-1774967550630-ce20e84afecb?q=80&w=1920&auto=format&fit=crop" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <SlideTitle title="O caminho dentro da mesa" subtitle="O sinal percorre uma sequência lógica dentro de cada canal" badge="Fluxo" />

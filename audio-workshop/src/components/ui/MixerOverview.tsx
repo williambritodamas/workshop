@@ -92,7 +92,7 @@ export const MixerOverview: React.FC = () => {
     <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 items-stretch">
       <div className="relative w-full lg:w-3/5 min-h-[400px] rounded-2xl overflow-hidden border border-slate-800 bg-slate-950">
         <img
-          src="https://images.unsplash.com/photo-1571244470733-589930a67a8c?q=80&w=1200&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1774967550630-ce20e84afecb?q=80&w=1200&auto=format&fit=crop"
           alt="Mesa de som"
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
