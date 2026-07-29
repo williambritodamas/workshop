@@ -6,72 +6,119 @@ interface HighlightZone {
   label: string;
   description: string;
   style: React.CSSProperties;
+  color: string;
 }
 
 const zones: HighlightZone[] = [
-  { id: 'channel', label: 'Canal', description: 'Cada fonte sonora ocupa um canal independente com seus próprios controles.', style: { top: '8%', left: '2%', width: '22%', height: '84%' } },
-  { id: 'gain', label: 'Gain', description: 'Ajusta a sensibilidade da entrada — o primeiro controle do canal.', style: { top: '10%', left: '3%', width: '8%', height: '12%' } },
-  { id: 'eq', label: 'Equalizador', description: 'Ajusta graves (Low), médios (Mid) e agudos (High) do canal.', style: { top: '24%', left: '3%', width: '8%', height: '20%' } },
-  { id: 'aux', label: 'Auxiliar (AUX)', description: 'Envia o sinal para monitores de palco ou processadores de efeito.', style: { top: '46%', left: '3%', width: '8%', height: '16%' } },
-  { id: 'pan', label: 'Pan', description: 'Posiciona o som no panorama estéreo — esquerda, centro ou direita.', style: { top: '64%', left: '3%', width: '8%', height: '10%' } },
-  { id: 'mute', label: 'Mute', description: 'Silencia completamente o canal sem alterar o Fader.', style: { top: '75%', left: '2%', width: '10%', height: '8%' } },
-  { id: 'solo', label: 'Solo', description: 'Permite ouvir apenas aquele canal, isolando-o dos demais.', style: { top: '75%', left: '12%', width: '10%', height: '8%' } },
-  { id: 'fader', label: 'Fader', description: 'Controla o volume final do canal antes de enviar à saída.', style: { top: '10%', left: '20%', width: '4%', height: '80%' } },
+  {
+    id: 'channel',
+    label: 'Canal',
+    description: 'Cada fonte sonora ocupa um canal independente com controles próprios de volume, equalização e posicionamento.',
+    style: { top: '5%', left: '2%', width: '25%', height: '90%' },
+    color: 'blue',
+  },
+  {
+    id: 'gain',
+    label: 'Gain',
+    description: 'Ajusta a sensibilidade da entrada. Define o quanto o microfone "escuta". Deve ser ajustado antes do Fader.',
+    style: { top: '8%', left: '3%', width: '8%', height: '13%' },
+    color: 'amber',
+  },
+  {
+    id: 'eq',
+    label: 'Equalizador',
+    description: 'Molda o timbre do som: Low (graves), Mid (médios) e High (agudos). Use para corrigir ou realçar frequências.',
+    style: { top: '23%', left: '3%', width: '8%', height: '22%' },
+    color: 'purple',
+  },
+  {
+    id: 'aux',
+    label: 'AUX',
+    description: 'Envia o sinal para monitores de palco (para o músico se ouvir) ou para processadores de efeito como reverb.',
+    style: { top: '47%', left: '3%', width: '8%', height: '16%' },
+    color: 'cyan',
+  },
+  {
+    id: 'pan',
+    label: 'Pan',
+    description: 'Posiciona o som entre os canais esquerdo e direito do sistema estéreo. Centralizado = som igual em ambos.',
+    style: { top: '65%', left: '3%', width: '8%', height: '10%' },
+    color: 'emerald',
+  },
+  {
+    id: 'mute',
+    label: 'Mute',
+    description: 'Silencia completamente o canal, independentemente da posição do Fader. O LED acende quando ativo.',
+    style: { top: '76%', left: '2%', width: '10%', height: '9%' },
+    color: 'red',
+  },
+  {
+    id: 'solo',
+    label: 'Solo',
+    description: 'Isola o canal para audição nos fones do operador. Essencial para ajustar um microfone específico.',
+    style: { top: '76%', left: '13%', width: '10%', height: '9%' },
+    color: 'emerald',
+  },
+  {
+    id: 'fader',
+    label: 'Fader',
+    description: 'Controla o volume final do canal. Diferente do Gain (entrada), o Fader controla a saída do canal.',
+    style: { top: '8%', left: '21%', width: '5%', height: '82%' },
+    color: 'blue',
+  },
+  {
+    id: 'master',
+    label: 'Master',
+    description: 'Seção principal que controla o volume geral de saída para as caixas de som. Afeta todos os canais.',
+    style: { top: '5%', left: '72%', width: '26%', height: '90%' },
+    color: 'red',
+  },
 ];
+
+const colorMap: Record<string, { border: string; bg: string; text: string }> = {
+  blue: { border: 'border-blue-500', bg: 'bg-blue-500/15', text: 'text-blue-400' },
+  amber: { border: 'border-amber-500', bg: 'bg-amber-500/15', text: 'text-amber-400' },
+  purple: { border: 'border-purple-500', bg: 'bg-purple-500/15', text: 'text-purple-400' },
+  cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500/15', text: 'text-cyan-400' },
+  emerald: { border: 'border-emerald-500', bg: 'bg-emerald-500/15', text: 'text-emerald-400' },
+  red: { border: 'border-red-500', bg: 'bg-red-500/15', text: 'text-red-400' },
+};
 
 export const MixerOverview: React.FC = () => {
   const [activeZone, setActiveZone] = useState<string | null>(null);
   const active = zones.find((z) => z.id === activeZone);
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col md:flex-row gap-6 items-start">
-      <div className="relative w-full md:w-3/5 aspect-[4/3] rounded-2xl overflow-hidden border border-slate-800 bg-slate-950">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center p-4">
-            <div className="grid grid-cols-8 gap-0.5 w-full h-full opacity-40">
-              {Array.from({ length: 16 }).map((_, i) => (
-                <div key={i} className="flex flex-col items-center gap-0.5 p-0.5 bg-slate-900/50 rounded">
-                  <div className="w-full h-3 rounded bg-slate-800" />
-                  <div className="w-full flex gap-0.5">
-                    <div className="flex-1 h-2 rounded bg-slate-800" />
-                    <div className="flex-1 h-2 rounded bg-slate-800" />
-                    <div className="flex-1 h-2 rounded bg-slate-800" />
-                  </div>
-                  <div className="w-full h-4 rounded bg-slate-800" />
-                  <div className="w-full h-2 rounded bg-slate-800" />
-                  <div className="w-3 h-1 rounded bg-slate-800" />
-                  <div className="w-full h-2 rounded bg-slate-800" />
-                  <div className="flex gap-0.5">
-                    <div className="w-2 h-2 rounded-full bg-slate-800" />
-                    <div className="w-2 h-2 rounded-full bg-slate-800" />
-                  </div>
-                  <div className="w-full flex-1 rounded bg-slate-800 mt-0.5" style={{ height: `${20 + Math.random() * 60}%` }} />
-                </div>
-              ))}
-            </div>
-            <span className="text-slate-600 text-xs mt-2 block">Mesa de som ilustrativa</span>
-          </div>
-        </div>
-        {zones.map((zone) => (
-          <button
-            key={zone.id}
-            onClick={() => setActiveZone(activeZone === zone.id ? null : zone.id)}
-            className="absolute border-2 rounded-lg transition-all duration-300 cursor-pointer"
-            style={{
-              ...zone.style,
-              borderColor: activeZone === zone.id ? '#3B82F6' : 'transparent',
-              backgroundColor: activeZone === zone.id ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
-            }}
-          >
-            <span className={`absolute -top-6 left-0 text-xs font-bold whitespace-nowrap transition-all ${
-              activeZone === zone.id ? 'text-blue-400' : 'text-transparent'
-            }`}>
-              {zone.label}
-            </span>
-          </button>
-        ))}
+    <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 items-stretch">
+      <div className="relative w-full lg:w-3/5 min-h-[400px] rounded-2xl overflow-hidden border border-slate-800 bg-slate-950">
+        <img
+          src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=1200&auto=format&fit=crop"
+          alt="Mesa de som"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/40 via-slate-950/20 to-slate-950/40" />
+        {zones.map((zone) => {
+          const colors = colorMap[zone.color];
+          const isActive = activeZone === zone.id;
+          return (
+            <button
+              key={zone.id}
+              onClick={() => setActiveZone(activeZone === zone.id ? null : zone.id)}
+              className={`absolute border-2 rounded-lg transition-all duration-200 cursor-pointer hover:opacity-100 ${
+                isActive ? `${colors.border} ${colors.bg} opacity-100` : 'border-transparent hover:border-white/30 hover:bg-white/5 opacity-100'
+              }`}
+              style={zone.style}
+            >
+              <span className={`absolute -top-6 left-0 text-[10px] md:text-xs font-bold whitespace-nowrap px-1.5 py-0.5 rounded bg-slate-950/80 backdrop-blur-sm transition-all ${
+                isActive ? `${colors.text} opacity-100` : 'text-white/70 opacity-100'
+              }`}>
+                {zone.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
-      <div className="w-full md:w-2/5 min-h-32">
+      <div className="w-full lg:w-2/5">
         <AnimatePresence mode="wait">
           {active ? (
             <motion.div
@@ -79,19 +126,19 @@ export const MixerOverview: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="p-5 rounded-2xl bg-slate-900/90 border border-blue-500/30"
+              className={`p-5 rounded-2xl border ${colorMap[active.color].border} ${colorMap[active.color].bg} h-full`}
             >
-              <span className="text-blue-400 text-xs font-bold uppercase tracking-wider">{active.label}</span>
-              <p className="text-white text-base mt-2 leading-relaxed">{active.description}</p>
+              <span className={`text-xs font-bold uppercase tracking-wider ${colorMap[active.color].text}`}>{active.label}</span>
+              <p className="text-white text-sm md:text-base mt-3 leading-relaxed">{active.description}</p>
             </motion.div>
           ) : (
             <motion.div
               key="placeholder"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800"
+              className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800 h-full flex items-center justify-center"
             >
-              <p className="text-slate-500 text-sm text-center">Clique em uma região da mesa ao lado para ver a descrição.</p>
+              <p className="text-slate-400 text-sm text-center">Clique em uma região da mesa ao lado para ver a descrição.</p>
             </motion.div>
           )}
         </AnimatePresence>
