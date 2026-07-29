@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface SlideTitleProps {
   title: string;
@@ -15,11 +14,8 @@ export const SlideTitle: React.FC<SlideTitleProps> = ({
   center = true,
 }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`flex flex-col mb-8 ${center ? 'items-center text-center' : 'items-start text-left'}`}
+    <div
+      className={`flex flex-col mb-8 shrink-0 ${center ? 'items-center text-center' : 'items-start text-left'}`}
     >
       {badge && (
         <span className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-500/10 border border-blue-500/30 rounded-full backdrop-blur-md">
@@ -34,6 +30,6 @@ export const SlideTitle: React.FC<SlideTitleProps> = ({
           {subtitle}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 };
