@@ -70,8 +70,25 @@ import { Slide13_Quiz as Aula4_Slide13_Quiz, slide13Notes as aula4Slide13Notes }
 import { Slide14_Recap, slide14Notes as aula4Slide14Notes } from './components/slides/aula4/Slide14_Recap';
 import { Slide15_Closing, slide15Notes as aula4Slide15Notes } from './components/slides/aula4/Slide15_Closing';
 
+// Aula 5
+import { Slide01_Opening as Aula5_Slide01_Opening, slide01Notes as aula5Slide01Notes } from './components/slides/aula5/Slide01_Opening';
+import { Slide02_WhatIsMixer, slide02Notes as aula5Slide02Notes } from './components/slides/aula5/Slide02_WhatIsMixer';
+import { Slide03_Anatomy, slide03Notes as aula5Slide03Notes } from './components/slides/aula5/Slide03_Anatomy';
+import { Slide04_Channel, slide04Notes as aula5Slide04Notes } from './components/slides/aula5/Slide04_Channel';
+import { Slide05_SignalPath, slide05Notes as aula5Slide05Notes } from './components/slides/aula5/Slide05_SignalPath';
+import { Slide06_Controls, slide06Notes as aula5Slide06Notes } from './components/slides/aula5/Slide06_Controls';
+import { Slide07_AnalogVsDigital, slide07Notes as aula5Slide07Notes } from './components/slides/aula5/Slide07_AnalogVsDigital';
+import { Slide08_PracticalDifferences, slide08Notes as aula5Slide08Notes } from './components/slides/aula5/Slide08_PracticalDifferences';
+import { Slide09_Demo as Aula5_Slide09_Demo, slide09Notes as aula5Slide09Notes } from './components/slides/aula5/Slide09_Demo';
+import { Slide10_Recap as Aula5_Slide10_Recap, slide10Notes as aula5Slide10Notes } from './components/slides/aula5/Slide10_Recap';
+import { Slide11_Quiz, slide11Notes as aula5Slide11Notes } from './components/slides/aula5/Slide11_Quiz';
+import { Slide12_Exercises, slide12Notes as aula5Slide12Notes } from './components/slides/aula5/Slide12_Exercises';
+import { Slide13_FinalChallenge, slide13Notes as aula5Slide13Notes } from './components/slides/aula5/Slide13_FinalChallenge';
+import { Slide14_Closing as Aula5_Slide14_Closing, slide14Notes as aula5Slide14Notes } from './components/slides/aula5/Slide14_Closing';
+import { Slide15_References, slide15Notes as aula5Slide15Notes } from './components/slides/aula5/Slide15_References';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -216,6 +233,24 @@ export function App() {
     <Slide15_Closing key="l4-15" />,
   ];
 
+  const lesson5Slides = [
+    <Aula5_Slide01_Opening key="l5-1" />,
+    <Slide02_WhatIsMixer key="l5-2" />,
+    <Slide03_Anatomy key="l5-3" />,
+    <Slide04_Channel key="l5-4" />,
+    <Slide05_SignalPath key="l5-5" />,
+    <Slide06_Controls key="l5-6" />,
+    <Slide07_AnalogVsDigital key="l5-7" />,
+    <Slide08_PracticalDifferences key="l5-8" />,
+    <Aula5_Slide09_Demo key="l5-9" />,
+    <Aula5_Slide10_Recap key="l5-10" />,
+    <Slide11_Quiz key="l5-11" />,
+    <Slide12_Exercises key="l5-12" />,
+    <Slide13_FinalChallenge key="l5-13" />,
+    <Aula5_Slide14_Closing key="l5-14" />,
+    <Slide15_References key="l5-15" />,
+  ];
+
   const lesson3Notes = [
     aula3Slide01Notes,
     aula3Slide02Notes,
@@ -253,6 +288,24 @@ export function App() {
     aula4Slide15Notes,
   ];
 
+  const lesson5Notes = [
+    aula5Slide01Notes,
+    aula5Slide02Notes,
+    aula5Slide03Notes,
+    aula5Slide04Notes,
+    aula5Slide05Notes,
+    aula5Slide06Notes,
+    aula5Slide07Notes,
+    aula5Slide08Notes,
+    aula5Slide09Notes,
+    aula5Slide10Notes,
+    aula5Slide11Notes,
+    aula5Slide12Notes,
+    aula5Slide13Notes,
+    aula5Slide14Notes,
+    aula5Slide15Notes,
+  ];
+
   const lesson4Titles = [
     'Slide 1 — Abertura (Aula 4)',
     'Slide 2 — O que faz um microfone?',
@@ -269,6 +322,24 @@ export function App() {
     'Slide 13 — Quiz',
     'Slide 14 — Resumo da Aula 4',
     'Slide 15 — Encerramento',
+  ];
+
+  const lesson5Titles = [
+    'Slide 1 — Abertura (Aula 5)',
+    'Slide 2 — O que faz uma mesa de som?',
+    'Slide 3 — Conhecendo uma mesa',
+    'Slide 4 — O que é um canal?',
+    'Slide 5 — O caminho dentro da mesa',
+    'Slide 6 — Conhecendo cada controle',
+    'Slide 7 — Analógica × Digital',
+    'Slide 8 — O que muda na prática?',
+    'Slide 9 — Demonstração prática',
+    'Slide 10 — Recapitulação',
+    'Slide 11 — Quiz',
+    'Slide 12 — Exercícios',
+    'Slide 13 — Desafio Final',
+    'Slide 14 — Encerramento',
+    'Slide 15 — Referências',
   ];
 
   const lesson3Titles = [
@@ -290,14 +361,14 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4) => {
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides };
-  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes };
-  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles };
+  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides };
+  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes };
+  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles };
   const activeSlides = slidesMap[currentLesson];
   const activeNotes = notesMap[currentLesson];
   const activeTitles = titlesMap[currentLesson];
