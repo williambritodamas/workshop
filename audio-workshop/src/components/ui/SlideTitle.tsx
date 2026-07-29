@@ -15,18 +15,19 @@ export const SlideTitle: React.FC<SlideTitleProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col mb-8 shrink-0 ${center ? 'items-center text-center' : 'items-start text-left'}`}
+      className={`relative z-20 flex flex-col px-6 py-4 rounded-2xl bg-slate-950/60 border border-white/5 backdrop-blur-sm mb-8 shrink-0 ${center ? 'items-center text-center' : 'items-start text-left'}`}
+      style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
     >
       {badge && (
-        <span className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-500/10 border border-blue-500/30 rounded-full backdrop-blur-md">
+        <span className="inline-block px-3 py-1 mb-3 text-xs font-bold tracking-wider text-cyan-300 uppercase bg-blue-500/20 border border-cyan-500/30 rounded-full backdrop-blur-md shadow-lg">
           {badge}
         </span>
       )}
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-2xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-lg md:text-xl text-slate-400 max-w-3xl leading-relaxed">
+        <p className="mt-3 text-lg md:text-xl font-semibold text-slate-100 max-w-3xl leading-relaxed drop-shadow-lg">
           {subtitle}
         </p>
       )}
