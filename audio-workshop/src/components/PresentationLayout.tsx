@@ -82,18 +82,19 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
   }, []);
 
   // Alternar Modo Fullscreen
-  const toggleFullscreen = async () => {
-    try {
-      if (!document.fullscreenElement) {
-        await document.documentElement.requestFullscreen();
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => {
         setIsFullscreen(true);
-      } else {
-        await document.exitFullscreen();
+      }).catch((err: Error) => {
+        console.error(`Erro ao entrar em fullscreen: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
         setIsFullscreen(false);
-      }
-    } catch (err) {
-      console.error(`Erro ao alternar fullscreen: ${(err as Error).message}`);
-      setIsFullscreen(!!document.fullscreenElement);
+      }).catch((err: Error) => {
+        console.error(`Erro ao sair do fullscreen: ${err.message}`);
+      });
     }
   };
 
