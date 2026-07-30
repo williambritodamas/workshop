@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizontal } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10) => void;
 }
 
 const lessons = [
@@ -94,6 +94,16 @@ const lessons = [
     image: 'https://images.unsplash.com/photo-1558470598-a5dda9640f68?q=80&w=800&auto=format&fit=crop',
     icon: <Waves className="w-8 h-8" />,
     color: 'from-indigo-600 to-violet-500',
+    badge: '16 slides',
+  },
+  {
+    id: 10 as const,
+    title: 'Microfonia',
+    subtitle: 'O inimigo nº 1 do áudio ao vivo',
+    description: 'Entenda o que causa a microfonia, como evitá-la, como resolvê-la rapidamente e como posicionar caixas e microfones corretamente.',
+    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop',
+    icon: <Waves className="w-8 h-8" />,
+    color: 'from-red-600 to-rose-500',
     badge: '16 slides',
   },
 ];
