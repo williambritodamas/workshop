@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Monitor, X, Clock, FileText, Lightbulb, HelpCircle, Wrench } from 'lucide-react';
 import type { PresenterNote } from '../types/presentation';
@@ -28,6 +28,7 @@ export const PresenterView: React.FC<PresenterViewProps> = ({
   const totalSlides = children.length;
   const notes = slideNotes?.[currentSlide];
   const title = slideTitles?.[currentSlide] || `Slide ${currentSlide + 1}`;
+  const previewRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = useCallback(() => {
     if (currentSlide < totalSlides - 1) {
@@ -64,6 +65,15 @@ export const PresenterView: React.FC<PresenterViewProps> = ({
     sendMessage({ type: 'LESSON_CHANGE', lesson, slide: 0 });
   };
 
+  const handlePreviewClick = (e: React.MouseEvent) => {
+    const el = previewRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    sendMessage({ type: 'CLICK', lesson: currentLesson, slide: currentSlide, x, y });
+  };
+
   return (
     <div className="w-screen h-screen bg-slate-950 text-white flex flex-col overflow-hidden">
       {/* Top bar */}
@@ -97,8 +107,8 @@ export const PresenterView: React.FC<PresenterViewProps> = ({
       <div className="flex-1 flex gap-0 min-h-0">
         {/* Left: slide preview */}
         <div className="flex-1 flex flex-col p-4 gap-3 min-w-0">
-          <div className="flex-1 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
-            <div className="absolute inset-0 scale-[0.6] origin-top-left pointer-events-none" style={{ width: '166.66%', height: '166.66%' }}>
+          <div ref={previewRef} onClick={handlePreviewClick} className="flex-1 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+            <div className="absolute inset-0 scale-[0.6] origin-top-left pointer-events-none cursor-pointer" style={{ width: '166.66%', height: '166.66%' }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${currentLesson}-${currentSlide}`}
@@ -140,18 +150,26 @@ export const PresenterView: React.FC<PresenterViewProps> = ({
             />
           </div>
           {/* Slide list */}
-          <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
-            {Array.from({ length: totalSlides }, (_, i) => (
-              <button key={i} onClick={() => goToSlide(i)}
-                className={`shrink-0 w-8 h-8 rounded-lg text-xs font-bold transition-all ${
-                  i === currentSlide
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/30'
-                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white'
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
+            {Array.from({ length: totalSlides }, (_, i) => {
+              const slideTitle = slideTitles?.[i] || `Slide ${i + 1}`;
+              return (
+                <button key={i} onClick={() => goToSlide(i)}
+                  className={`shrink-0 w-28 text-left p-2 rounded-xl border transition-all ${
+                    i === currentSlide
+                      ? 'bg-blue-600/20 border-blue-500 shadow-md shadow-blue-500/20'
+                      : 'bg-slate-800/50 border-slate-700/50 hover:bg-slate-700 hover:border-slate-600'
+                  }`}
+                >
+                  <span className={`text-xs font-bold ${i === currentSlide ? 'text-blue-400' : 'text-slate-500'}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="text-[10px] text-slate-400 leading-tight mt-0.5 line-clamp-2">
+                    {slideTitle.replace('Slide — ', '').replace('Slide ', '')}
+                  </p>
+                </button>
+              );
+            })}
           </div>
         </div>
 

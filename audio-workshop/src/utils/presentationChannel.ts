@@ -1,9 +1,11 @@
 const CHANNEL_NAME = 'audio-workshop-presentation';
 
 export interface PresentationMessage {
-  type: 'SLIDE_CHANGE' | 'LESSON_CHANGE' | 'CLOSE';
+  type: 'SLIDE_CHANGE' | 'LESSON_CHANGE' | 'CLOSE' | 'CLICK';
   lesson: number;
   slide: number;
+  x?: number;
+  y?: number;
 }
 
 export function sendMessage(msg: PresentationMessage) {
