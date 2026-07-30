@@ -195,8 +195,26 @@ import { Slide14_Quiz as Aula11_Slide14_Quiz, slide14Notes as aula11Slide14Notes
 import { Slide15_Review as Aula11_Slide15_Review, slide15Notes as aula11Slide15Notes } from './components/slides/aula11/Slide15_Review';
 import { Slide16_Closing as Aula11_Slide16_Closing, slide16Notes as aula11Slide16Notes } from './components/slides/aula11/Slide16_Closing';
 
+// Aula 12
+import { Slide01_Opening as Aula12_Slide01_Opening, slide01Notes as aula12Slide01Notes } from './components/slides/aula12/Slide01_Opening';
+import { Slide02_Evolution, slide02Notes as aula12Slide02Notes } from './components/slides/aula12/Slide02_Evolution';
+import { Slide03_ScenarioChurch, slide03Notes as aula12Slide03Notes } from './components/slides/aula12/Slide03_ScenarioChurch';
+import { Slide04_ScenarioPodcast, slide04Notes as aula12Slide04Notes } from './components/slides/aula12/Slide04_ScenarioPodcast';
+import { Slide05_ScenarioAuditorium, slide05Notes as aula12Slide05Notes } from './components/slides/aula12/Slide05_ScenarioAuditorium';
+import { Slide06_NoSound, slide06Notes as aula12Slide06Notes } from './components/slides/aula12/Slide06_NoSound';
+import { Slide07_PublicArrived, slide07Notes as aula12Slide07Notes } from './components/slides/aula12/Slide07_PublicArrived';
+import { Slide08_FullSimulator, slide08Notes as aula12Slide08Notes } from './components/slides/aula12/Slide08_FullSimulator';
+import { Slide09_ErrorHunt, slide09Notes as aula12Slide09Notes } from './components/slides/aula12/Slide09_ErrorHunt';
+import { Slide10_FinalQuiz as Aula12_Slide10_FinalQuiz, slide10Notes as aula12Slide10Notes } from './components/slides/aula12/Slide10_FinalQuiz';
+import { Slide11_FinalMission, slide11Notes as aula12Slide11Notes } from './components/slides/aula12/Slide11_FinalMission';
+import { Slide12_ReviewFlow, slide12Notes as aula12Slide12Notes } from './components/slides/aula12/Slide12_ReviewFlow';
+import { Slide13_GoldenRules, slide13Notes as aula12Slide13Notes } from './components/slides/aula12/Slide13_GoldenRules';
+import { Slide14_ContinueJourney, slide14Notes as aula12Slide14Notes } from './components/slides/aula12/Slide14_ContinueJourney';
+import { Slide15_Certificate, slide15Notes as aula12Slide15Notes } from './components/slides/aula12/Slide15_Certificate';
+import { Slide16_Closing as Aula12_Slide16_Closing, slide16Notes as aula12Slide16Notes } from './components/slides/aula12/Slide16_Closing';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -455,6 +473,25 @@ export function App() {
     <Aula11_Slide16_Closing key="l11-16" />,
   ];
 
+  const lesson12Slides = [
+    <Aula12_Slide01_Opening key="l12-1" />,
+    <Slide02_Evolution key="l12-2" />,
+    <Slide03_ScenarioChurch key="l12-3" />,
+    <Slide04_ScenarioPodcast key="l12-4" />,
+    <Slide05_ScenarioAuditorium key="l12-5" />,
+    <Slide06_NoSound key="l12-6" />,
+    <Slide07_PublicArrived key="l12-7" />,
+    <Slide08_FullSimulator key="l12-8" />,
+    <Slide09_ErrorHunt key="l12-9" />,
+    <Aula12_Slide10_FinalQuiz key="l12-10" />,
+    <Slide11_FinalMission key="l12-11" />,
+    <Slide12_ReviewFlow key="l12-12" />,
+    <Slide13_GoldenRules key="l12-13" />,
+    <Slide14_ContinueJourney key="l12-14" />,
+    <Slide15_Certificate key="l12-15" />,
+    <Aula12_Slide16_Closing key="l12-16" />,
+  ];
+
   const lesson5Slides = [
     <Aula5_Slide01_Opening key="l5-1" />,
     <Slide02_WhatIsMixer key="l5-2" />,
@@ -622,6 +659,25 @@ export function App() {
     aula11Slide14Notes,
     aula11Slide15Notes,
     aula11Slide16Notes,
+  ];
+
+  const lesson12Notes = [
+    aula12Slide01Notes,
+    aula12Slide02Notes,
+    aula12Slide03Notes,
+    aula12Slide04Notes,
+    aula12Slide05Notes,
+    aula12Slide06Notes,
+    aula12Slide07Notes,
+    aula12Slide08Notes,
+    aula12Slide09Notes,
+    aula12Slide10Notes,
+    aula12Slide11Notes,
+    aula12Slide12Notes,
+    aula12Slide13Notes,
+    aula12Slide14Notes,
+    aula12Slide15Notes,
+    aula12Slide16Notes,
   ];
 
   const lesson5Notes = [
@@ -792,6 +848,25 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
+  const lesson12Titles = [
+    'Slide 1 — Abertura (Aula 12)',
+    'Slide 2 — Quanto você evoluiu?',
+    'Slide 3 — Cenário: Igreja',
+    'Slide 4 — Cenário: Podcast',
+    'Slide 5 — Cenário: Auditório',
+    'Slide 6 — O sistema não funciona!',
+    'Slide 7 — O público chegou...',
+    'Slide 8 — Simulador Completo',
+    'Slide 9 — Caça aos Erros',
+    'Slide 10 — Quiz Final',
+    'Slide 11 — Missão Final',
+    'Slide 12 — Revisão Geral',
+    'Slide 13 — As 10 Regras de Ouro',
+    'Slide 14 — Sua jornada continua',
+    'Slide 15 — Certificado',
+    'Slide 16 — Encerramento',
+  ];
+
   const lesson3Titles = [
     'Slide 1 — Abertura (Aula 3)',
     'Slide 2 — Como minha voz chega até a caixa?',
@@ -811,14 +886,14 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11) => {
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides, 8: lesson8Slides, 9: lesson9Slides, 10: lesson10Slides, 11: lesson11Slides };
-  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes, 8: lesson8Notes, 9: lesson9Notes, 10: lesson10Notes, 11: lesson11Notes };
-  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles, 8: lesson8Titles, 9: lesson9Titles, 10: lesson10Titles, 11: lesson11Titles };
+  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides, 8: lesson8Slides, 9: lesson9Slides, 10: lesson10Slides, 11: lesson11Slides, 12: lesson12Slides };
+  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes, 8: lesson8Notes, 9: lesson9Notes, 10: lesson10Notes, 11: lesson11Notes, 12: lesson12Notes };
+  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles, 8: lesson8Titles, 9: lesson9Titles, 10: lesson10Titles, 11: lesson11Titles, 12: lesson12Titles };
   const activeSlides = slidesMap[currentLesson];
   const activeNotes = notesMap[currentLesson];
   const activeTitles = titlesMap[currentLesson];

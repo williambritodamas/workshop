@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizontal } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12) => void;
 }
 
 const lessons = [
@@ -114,6 +114,16 @@ const lessons = [
     image: 'https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=800&auto=format&fit=crop',
     icon: <Sliders className="w-8 h-8" />,
     color: 'from-emerald-600 to-teal-500',
+    badge: '16 slides',
+  },
+  {
+    id: 12 as const,
+    title: 'Desafio Final',
+    subtitle: 'Agora você é o operador de áudio',
+    description: 'A última aula do workshop. Coloque em prática tudo o que aprendeu em situações reais: cenários, diagnóstico de problemas, quiz final, missão e certificado.',
+    image: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800',
+    icon: <Sparkles className="w-8 h-8" />,
+    color: 'from-yellow-500 to-amber-500',
     badge: '16 slides',
   },
 ];
