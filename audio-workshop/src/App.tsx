@@ -141,8 +141,26 @@ import { Slide14_Quiz as Aula8_Slide14_Quiz, slide14Notes as aula8Slide14Notes }
 import { Slide15_Review as Aula8_Slide15_Review, slide15Notes as aula8Slide15Notes } from './components/slides/aula8/Slide15_Review';
 import { Slide16_Closing as Aula8_Slide16_Closing, slide16Notes as aula8Slide16Notes } from './components/slides/aula8/Slide16_Closing';
 
+// Aula 9
+import { Slide01_Opening as Aula9_Slide01_Opening, slide01Notes as aula9Slide01Notes } from './components/slides/aula9/Slide01_Opening';
+import { Slide02_PushingCar, slide02Notes as aula9Slide02Notes } from './components/slides/aula9/Slide02_PushingCar';
+import { Slide03_SoundWave, slide03Notes as aula9Slide03Notes } from './components/slides/aula9/Slide03_SoundWave';
+import { Slide04_WavesInPhase, slide04Notes as aula9Slide04Notes } from './components/slides/aula9/Slide04_WavesInPhase';
+import { Slide05_WavesOutOfPhase, slide05Notes as aula9Slide05Notes } from './components/slides/aula9/Slide05_WavesOutOfPhase';
+import { Slide06_Polarity, slide06Notes as aula9Slide06Notes } from './components/slides/aula9/Slide06_Polarity';
+import { Slide07_PhaseVsPolarity, slide07Notes as aula9Slide07Notes } from './components/slides/aula9/Slide07_PhaseVsPolarity';
+import { Slide08_TwoMics, slide08Notes as aula9Slide08Notes } from './components/slides/aula9/Slide08_TwoMics';
+import { Slide09_RealProblems, slide09Notes as aula9Slide09Notes } from './components/slides/aula9/Slide09_RealProblems';
+import { Slide10_DemoVisual, slide10Notes as aula9Slide10Notes } from './components/slides/aula9/Slide10_DemoVisual';
+import { Slide11_HowToIdentify, slide11Notes as aula9Slide11Notes } from './components/slides/aula9/Slide11_HowToIdentify';
+import { Slide12_HowToAvoid, slide12Notes as aula9Slide12Notes } from './components/slides/aula9/Slide12_HowToAvoid';
+import { Slide13_Practice as Aula9_Slide13_Practice, slide13Notes as aula9Slide13Notes } from './components/slides/aula9/Slide13_Practice';
+import { Slide14_Quiz as Aula9_Slide14_Quiz, slide14Notes as aula9Slide14Notes } from './components/slides/aula9/Slide14_Quiz';
+import { Slide15_Review as Aula9_Slide15_Review, slide15Notes as aula9Slide15Notes } from './components/slides/aula9/Slide15_Review';
+import { Slide16_Closing as Aula9_Slide16_Closing, slide16Notes as aula9Slide16Notes } from './components/slides/aula9/Slide16_Closing';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -344,6 +362,25 @@ export function App() {
     <Aula8_Slide16_Closing key="l8-16" />,
   ];
 
+  const lesson9Slides = [
+    <Aula9_Slide01_Opening key="l9-1" />,
+    <Slide02_PushingCar key="l9-2" />,
+    <Slide03_SoundWave key="l9-3" />,
+    <Slide04_WavesInPhase key="l9-4" />,
+    <Slide05_WavesOutOfPhase key="l9-5" />,
+    <Slide06_Polarity key="l9-6" />,
+    <Slide07_PhaseVsPolarity key="l9-7" />,
+    <Slide08_TwoMics key="l9-8" />,
+    <Slide09_RealProblems key="l9-9" />,
+    <Slide10_DemoVisual key="l9-10" />,
+    <Slide11_HowToIdentify key="l9-11" />,
+    <Slide12_HowToAvoid key="l9-12" />,
+    <Aula9_Slide13_Practice key="l9-13" />,
+    <Aula9_Slide14_Quiz key="l9-14" />,
+    <Aula9_Slide15_Review key="l9-15" />,
+    <Aula9_Slide16_Closing key="l9-16" />,
+  ];
+
   const lesson5Slides = [
     <Aula5_Slide01_Opening key="l5-1" />,
     <Slide02_WhatIsMixer key="l5-2" />,
@@ -454,6 +491,25 @@ export function App() {
     aula8Slide14Notes,
     aula8Slide15Notes,
     aula8Slide16Notes,
+  ];
+
+  const lesson9Notes = [
+    aula9Slide01Notes,
+    aula9Slide02Notes,
+    aula9Slide03Notes,
+    aula9Slide04Notes,
+    aula9Slide05Notes,
+    aula9Slide06Notes,
+    aula9Slide07Notes,
+    aula9Slide08Notes,
+    aula9Slide09Notes,
+    aula9Slide10Notes,
+    aula9Slide11Notes,
+    aula9Slide12Notes,
+    aula9Slide13Notes,
+    aula9Slide14Notes,
+    aula9Slide15Notes,
+    aula9Slide16Notes,
   ];
 
   const lesson5Notes = [
@@ -567,6 +623,25 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
+  const lesson9Titles = [
+    'Slide 1 — Abertura (Aula 9)',
+    'Slide 2 — Imagine duas pessoas empurrando um carro',
+    'Slide 3 — O que é uma onda sonora?',
+    'Slide 4 — Ondas em fase',
+    'Slide 5 — Ondas fora de fase',
+    'Slide 6 — Polaridade',
+    'Slide 7 — Fase x Polaridade',
+    'Slide 8 — Dois microfones na mesma voz',
+    'Slide 9 — Problemas reais',
+    'Slide 10 — Demonstração visual',
+    'Slide 11 — Como identificar?',
+    'Slide 12 — Como evitar?',
+    'Slide 13 — Demonstração prática',
+    'Slide 14 — Quiz',
+    'Slide 15 — Revisão',
+    'Slide 16 — Encerramento',
+  ];
+
   const lesson3Titles = [
     'Slide 1 — Abertura (Aula 3)',
     'Slide 2 — Como minha voz chega até a caixa?',
@@ -586,14 +661,14 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => {
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides, 8: lesson8Slides };
-  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes, 8: lesson8Notes };
-  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles, 8: lesson8Titles };
+  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides, 8: lesson8Slides, 9: lesson9Slides };
+  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes, 8: lesson8Notes, 9: lesson9Notes };
+  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles, 8: lesson8Titles, 9: lesson9Titles };
   const activeSlides = slidesMap[currentLesson];
   const activeNotes = notesMap[currentLesson];
   const activeTitles = titlesMap[currentLesson];

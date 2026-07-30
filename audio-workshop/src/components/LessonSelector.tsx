@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizontal } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9) => void;
 }
 
 const lessons = [
@@ -84,6 +84,16 @@ const lessons = [
     image: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?q=80&w=800&auto=format&fit=crop',
     icon: <Waves className="w-8 h-8" />,
     color: 'from-purple-600 to-pink-500',
+    badge: '16 slides',
+  },
+  {
+    id: 9 as const,
+    title: 'Fase e Polaridade',
+    subtitle: 'Quando dois sons trabalham juntos... ou contra você',
+    description: 'Entenda o que é fase, polaridade, como ondas se somam ou se cancelam, e por que dois microfones podem causar cancelamento de fase.',
+    image: 'https://images.unsplash.com/photo-1558470598-a5dda9640f68?q=80&w=800&auto=format&fit=crop',
+    icon: <Waves className="w-8 h-8" />,
+    color: 'from-indigo-600 to-violet-500',
     badge: '16 slides',
   },
 ];
