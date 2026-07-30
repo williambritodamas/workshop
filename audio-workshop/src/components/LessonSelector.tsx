@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizontal } from 'lucide-react';
 
 interface LessonSelectorProps {
-  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7) => void;
+  onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => void;
 }
 
 const lessons = [
@@ -74,6 +74,16 @@ const lessons = [
     image: 'https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: <SlidersHorizontal className="w-8 h-8" />,
     color: 'from-blue-600 to-cyan-500',
+    badge: '16 slides',
+  },
+  {
+    id: 8 as const,
+    title: 'Compressão',
+    subtitle: 'Controlando a Dinâmica do Som',
+    description: 'Entenda o que é um compressor, como usar Threshold, Ratio, Attack, Release e Make-up Gain. Aprenda na prática com simulador interativo e quiz.',
+    image: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?q=80&w=800&auto=format&fit=crop',
+    icon: <Waves className="w-8 h-8" />,
+    color: 'from-purple-600 to-pink-500',
     badge: '16 slides',
   },
 ];

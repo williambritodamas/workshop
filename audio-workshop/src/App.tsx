@@ -123,8 +123,26 @@ import { Slide14_Quiz as Aula7_Slide14_Quiz, slide14Notes as aula7Slide14Notes }
 import { Slide15_Review as Aula7_Slide15_Review, slide15Notes as aula7Slide15Notes } from './components/slides/aula7/Slide15_Review';
 import { Slide16_Closing as Aula7_Slide16_Closing, slide16Notes as aula7Slide16Notes } from './components/slides/aula7/Slide16_Closing';
 
+// Aula 8
+import { Slide01_Opening as Aula8_Slide01_Opening, slide01Notes as aula8Slide01Notes } from './components/slides/aula8/Slide01_Opening';
+import { Slide02_Problem, slide02Notes as aula8Slide02Notes } from './components/slides/aula8/Slide02_Problem';
+import { Slide03_Dynamics, slide03Notes as aula8Slide03Notes } from './components/slides/aula8/Slide03_Dynamics';
+import { Slide04_WhatItDoes as Aula8_Slide04_WhatItDoes, slide04Notes as aula8Slide04Notes } from './components/slides/aula8/Slide04_WhatItDoes';
+import { Slide05_Threshold, slide05Notes as aula8Slide05Notes } from './components/slides/aula8/Slide05_Threshold';
+import { Slide06_Ratio, slide06Notes as aula8Slide06Notes } from './components/slides/aula8/Slide06_Ratio';
+import { Slide07_AttackRelease, slide07Notes as aula8Slide07Notes } from './components/slides/aula8/Slide07_AttackRelease';
+import { Slide08_MakeupGain, slide08Notes as aula8Slide08Notes } from './components/slides/aula8/Slide08_MakeupGain';
+import { Slide09_Limiter, slide09Notes as aula8Slide09Notes } from './components/slides/aula8/Slide09_Limiter';
+import { Slide10_WhenToUse, slide10Notes as aula8Slide10Notes } from './components/slides/aula8/Slide10_WhenToUse';
+import { Slide11_DontExaggerate, slide11Notes as aula8Slide11Notes } from './components/slides/aula8/Slide11_DontExaggerate';
+import { Slide12_Simulator, slide12Notes as aula8Slide12Notes } from './components/slides/aula8/Slide12_Simulator';
+import { Slide13_Practice, slide13Notes as aula8Slide13Notes } from './components/slides/aula8/Slide13_Practice';
+import { Slide14_Quiz as Aula8_Slide14_Quiz, slide14Notes as aula8Slide14Notes } from './components/slides/aula8/Slide14_Quiz';
+import { Slide15_Review as Aula8_Slide15_Review, slide15Notes as aula8Slide15Notes } from './components/slides/aula8/Slide15_Review';
+import { Slide16_Closing as Aula8_Slide16_Closing, slide16Notes as aula8Slide16Notes } from './components/slides/aula8/Slide16_Closing';
+
 export function App() {
-  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7>(0);
+  const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const lesson1Slides = [
@@ -307,6 +325,25 @@ export function App() {
     <Aula7_Slide16_Closing key="l7-16" />,
   ];
 
+  const lesson8Slides = [
+    <Aula8_Slide01_Opening key="l8-1" />,
+    <Slide02_Problem key="l8-2" />,
+    <Slide03_Dynamics key="l8-3" />,
+    <Aula8_Slide04_WhatItDoes key="l8-4" />,
+    <Slide05_Threshold key="l8-5" />,
+    <Slide06_Ratio key="l8-6" />,
+    <Slide07_AttackRelease key="l8-7" />,
+    <Slide08_MakeupGain key="l8-8" />,
+    <Slide09_Limiter key="l8-9" />,
+    <Slide10_WhenToUse key="l8-10" />,
+    <Slide11_DontExaggerate key="l8-11" />,
+    <Slide12_Simulator key="l8-12" />,
+    <Slide13_Practice key="l8-13" />,
+    <Aula8_Slide14_Quiz key="l8-14" />,
+    <Aula8_Slide15_Review key="l8-15" />,
+    <Aula8_Slide16_Closing key="l8-16" />,
+  ];
+
   const lesson5Slides = [
     <Aula5_Slide01_Opening key="l5-1" />,
     <Slide02_WhatIsMixer key="l5-2" />,
@@ -398,6 +435,25 @@ export function App() {
     aula7Slide14Notes,
     aula7Slide15Notes,
     aula7Slide16Notes,
+  ];
+
+  const lesson8Notes = [
+    aula8Slide01Notes,
+    aula8Slide02Notes,
+    aula8Slide03Notes,
+    aula8Slide04Notes,
+    aula8Slide05Notes,
+    aula8Slide06Notes,
+    aula8Slide07Notes,
+    aula8Slide08Notes,
+    aula8Slide09Notes,
+    aula8Slide10Notes,
+    aula8Slide11Notes,
+    aula8Slide12Notes,
+    aula8Slide13Notes,
+    aula8Slide14Notes,
+    aula8Slide15Notes,
+    aula8Slide16Notes,
   ];
 
   const lesson5Notes = [
@@ -492,6 +548,25 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
+  const lesson8Titles = [
+    'Slide 1 — Abertura (Aula 8)',
+    'Slide 2 — O Problema',
+    'Slide 3 — O que é Dinâmica?',
+    'Slide 4 — O que faz o Compressor?',
+    'Slide 5 — Threshold',
+    'Slide 6 — Ratio',
+    'Slide 7 — Attack e Release',
+    'Slide 8 — Make-up Gain',
+    'Slide 9 — Limiter',
+    'Slide 10 — Quando usar?',
+    'Slide 11 — Quando NÃO exagerar?',
+    'Slide 12 — Simulador',
+    'Slide 13 — Demonstração Prática',
+    'Slide 14 — Quiz',
+    'Slide 15 — Revisão',
+    'Slide 16 — Encerramento',
+  ];
+
   const lesson3Titles = [
     'Slide 1 — Abertura (Aula 3)',
     'Slide 2 — Como minha voz chega até a caixa?',
@@ -511,14 +586,14 @@ export function App() {
     'Slide 16 — Encerramento',
   ];
 
-  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7) => {
+  const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => {
     setCurrentLesson(lesson);
     setCurrentSlide(0);
   };
 
-  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides };
-  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes };
-  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles };
+  const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides, 8: lesson8Slides };
+  const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes, 8: lesson8Notes };
+  const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles, 8: lesson8Titles };
   const activeSlides = slidesMap[currentLesson];
   const activeNotes = notesMap[currentLesson];
   const activeTitles = titlesMap[currentLesson];
