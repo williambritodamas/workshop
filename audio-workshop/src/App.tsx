@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { PresentationLayout } from './components/PresentationLayout';
 import LessonSelector from './components/LessonSelector';
+import { PresenterView } from './components/PresenterView';
+import PresentationSlidesView from './components/PresentationSlidesView';
+import { sendMessage } from './utils/presentationChannel';
 
 // Aula 1
 import { Slide01_Intro, slide01Notes } from './components/slides/aula1/Slide01_Intro';
@@ -214,8 +217,13 @@ import { Slide15_Certificate, slide15Notes as aula12Slide15Notes } from './compo
 import { Slide16_Closing as Aula12_Slide16_Closing, slide16Notes as aula12Slide16Notes } from './components/slides/aula12/Slide16_Closing';
 
 export function App() {
+  if (new URLSearchParams(window.location.search).get('mode') === 'presentation') {
+    return <PresentationSlidesView />;
+  }
+
   const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [presenterMode, setPresenterMode] = useState(false);
 
   const lesson1Slides = [
     <Slide01_Intro key="l1-1" />,
@@ -891,6 +899,17 @@ export function App() {
     setCurrentSlide(0);
   };
 
+  const handlePresenterMode = () => {
+    const url = window.location.origin + window.location.pathname + `?mode=presentation&lesson=${currentLesson}&slide=${currentSlide}`;
+    window.open(url, 'presentation-window', 'width=1280,height=720');
+    setPresenterMode(true);
+  };
+
+  const handleClosePresenter = () => {
+    sendMessage({ type: 'CLOSE', lesson: currentLesson, slide: currentSlide });
+    setPresenterMode(false);
+  };
+
   const slidesMap: Record<number, React.ReactNode[]> = { 1: lesson1Slides, 2: lesson2Slides, 3: lesson3Slides, 4: lesson4Slides, 5: lesson5Slides, 6: lesson6Slides, 7: lesson7Slides, 8: lesson8Slides, 9: lesson9Slides, 10: lesson10Slides, 11: lesson11Slides, 12: lesson12Slides };
   const notesMap: Record<number, typeof lesson1Notes> = { 1: lesson1Notes, 2: lesson2Notes, 3: lesson3Notes, 4: lesson4Notes, 5: lesson5Notes, 6: lesson6Notes, 7: lesson7Notes, 8: lesson8Notes, 9: lesson9Notes, 10: lesson10Notes, 11: lesson11Notes, 12: lesson12Notes };
   const titlesMap: Record<number, string[]> = { 1: lesson1Titles, 2: lesson2Titles, 3: lesson3Titles, 4: lesson4Titles, 5: lesson5Titles, 6: lesson6Titles, 7: lesson7Titles, 8: lesson8Titles, 9: lesson9Titles, 10: lesson10Titles, 11: lesson11Titles, 12: lesson12Titles };
@@ -898,7 +917,19 @@ export function App() {
   const activeNotes = notesMap[currentLesson];
   const activeTitles = titlesMap[currentLesson];
 
-  return (
+  return presenterMode ? (
+    <PresenterView
+      currentSlide={currentSlide}
+      onSlideChange={setCurrentSlide}
+      currentLesson={currentLesson}
+      onLessonChange={handleLessonChange}
+      slideNotes={activeNotes}
+      slideTitles={activeTitles}
+      onClose={handleClosePresenter}
+    >
+      {activeSlides}
+    </PresenterView>
+  ) : (
     currentLesson === 0 ? (
       <LessonSelector onSelect={handleLessonChange} />
     ) : (
@@ -909,6 +940,7 @@ export function App() {
         onLessonChange={handleLessonChange}
         slideNotes={activeNotes}
         slideTitles={activeTitles}
+        onPresenterMode={handlePresenterMode}
       >
         {activeSlides}
       </PresentationLayout>

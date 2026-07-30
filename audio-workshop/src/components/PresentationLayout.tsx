@@ -5,14 +5,14 @@ import type { PresenterNote } from '../types/presentation';
 import {
   ChevronLeft,
   ChevronRight,
-  Maximize,
-  Minimize,
+  Monitor,
   Volume2,
   FileText,
   ArrowLeft,
   Eye,
   EyeOff,
 } from 'lucide-react';
+import { sendMessage } from '../utils/presentationChannel';
 
 interface PresentationLayoutProps {
   children: React.ReactNode[];
@@ -22,6 +22,7 @@ interface PresentationLayoutProps {
   onLessonChange: (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12) => void;
   slideNotes?: PresenterNote[];
   slideTitles?: string[];
+  onPresenterMode?: () => void;
 }
 
 export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
@@ -32,8 +33,8 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
   onLessonChange,
   slideNotes,
   slideTitles,
+  onPresenterMode,
 }) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(true);
   const totalSlides = children.length;
@@ -41,14 +42,16 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
   const nextSlide = useCallback(() => {
     if (currentSlide < totalSlides - 1) {
       onSlideChange(currentSlide + 1);
+      sendMessage({ type: 'SLIDE_CHANGE', lesson: currentLesson, slide: currentSlide + 1 });
     }
-  }, [currentSlide, totalSlides, onSlideChange]);
+  }, [currentSlide, totalSlides, onSlideChange, currentLesson]);
 
   const prevSlide = useCallback(() => {
     if (currentSlide > 0) {
       onSlideChange(currentSlide - 1);
+      sendMessage({ type: 'SLIDE_CHANGE', lesson: currentLesson, slide: currentSlide - 1 });
     }
-  }, [currentSlide, onSlideChange]);
+  }, [currentSlide, onSlideChange, currentLesson]);
 
   // Suporte a teclas de navegação (Setas Esquerda, Direita, Espaço, N para notas)
   useEffect(() => {
@@ -71,32 +74,6 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, prevSlide]);
-
-  // Sincroniza estado fullscreen com eventos do navegador
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, []);
-
-  // Alternar Modo Fullscreen
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => {
-        setIsFullscreen(true);
-      }).catch((err: Error) => {
-        console.error(`Erro ao entrar em fullscreen: ${err.message}`);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsFullscreen(false);
-      }).catch((err: Error) => {
-        console.error(`Erro ao sair do fullscreen: ${err.message}`);
-      });
-    }
-  };
 
   return (
     <div className="relative w-screen h-screen bg-slate-950 text-slate-100 overflow-hidden select-none font-sans">
@@ -329,17 +306,14 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
             <span className="hidden md:inline">Notas</span>
           </button>
 
-          {/* Botão Fullscreen */}
+          {/* Modo Apresentador */}
           <button
-            onClick={toggleFullscreen}
-            className="p-2 rounded-full hover:bg-slate-800 transition-all text-slate-300 hover:text-white"
-            title="Alternar Tela Cheia"
+            onClick={onPresenterMode}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+            title="Abrir modo apresentador com duas telas"
           >
-            {isFullscreen ? (
-              <Minimize className="w-4 h-4 text-blue-400" />
-            ) : (
-              <Maximize className="w-4 h-4" />
-            )}
+            <Monitor className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">2 Telas</span>
           </button>
         </div>
       </motion.div>
