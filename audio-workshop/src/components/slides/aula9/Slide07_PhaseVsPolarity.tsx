@@ -7,7 +7,7 @@ export { slide07Notes };
 export const Slide07_PhaseVsPolarity: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://images.pexels.com/photos/3784169/pexels-photo-3784169.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som digital" className="w-full h-full object-cover opacity-10" />
+      <img src="https://images.pexels.com/photos/164680/pexels-photo-164680.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som digital" className="w-full h-full object-cover opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <SlideTitle title="Fase vs Polaridade" subtitle="Não confunda — são conceitos diferentes!" badge="Comparação" />

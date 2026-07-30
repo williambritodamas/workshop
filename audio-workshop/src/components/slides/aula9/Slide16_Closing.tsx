@@ -6,7 +6,7 @@ export { slide16Notes };
 export const Slide16_Closing: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://images.pexels.com/photos/158698/pexels-photo-158698.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Técnico ajustando microfones" className="w-full h-full object-cover opacity-25 scale-105" />
+      <img src="https://images.pexels.com/photos/167491/pexels-photo-167491.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Técnico ajustando microfones" className="w-full h-full object-cover opacity-25 scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40" />
     </div>
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
