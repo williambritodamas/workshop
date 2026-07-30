@@ -18,8 +18,8 @@ interface PresentationLayoutProps {
   children: React.ReactNode[];
   currentSlide: number;
   onSlideChange: (index: number) => void;
-  currentLesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-  onLessonChange: (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10) => void;
+  currentLesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+  onLessonChange: (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11) => void;
   slideNotes?: PresenterNote[];
   slideTitles?: string[];
 }
@@ -265,6 +265,16 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
               }`}
             >
               Aula 10
+            </button>
+            <button
+              onClick={() => onLessonChange(11)}
+              className={`px-2.5 py-1 rounded-full transition-all ${
+                currentLesson === 11
+                  ? 'bg-blue-600 text-white font-bold shadow-md'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Aula 11
             </button>
           </div>
         </div>
