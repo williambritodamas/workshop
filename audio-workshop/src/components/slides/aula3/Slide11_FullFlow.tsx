@@ -32,7 +32,7 @@ export const Slide11_FullFlow: React.FC = () => {
         clearInterval(timer);
         setIsPlaying(false);
       }
-    }, 600);
+    }, 1500);
   };
 
   return (

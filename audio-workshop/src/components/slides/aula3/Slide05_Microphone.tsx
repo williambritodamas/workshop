@@ -33,7 +33,7 @@ export const Slide05_Microphone: React.FC = () => {
           <img
             src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop"
             alt="Microfone profissional"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-bottom"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
         </motion.div>

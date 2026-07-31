@@ -22,7 +22,7 @@ export const Slide06_Cable: React.FC = () => {
           className="lg:col-span-6 h-72 md:h-96 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl relative"
         >
           <img
-            src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop"
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Xlrcables.jpg?width=1000"
             alt="Cabos XLR"
             className="w-full h-full object-cover"
           />
