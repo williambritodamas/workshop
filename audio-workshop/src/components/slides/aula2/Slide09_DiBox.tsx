@@ -34,8 +34,8 @@ export const Slide09_DiBox: React.FC = () => {
           className="lg:col-span-5 h-72 md:h-96 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl relative group"
         >
           <img
-            src="https://images.pexels.com/photos/8132991/pexels-photo-8132991.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Instrumento e caixa de som"
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/SAMSON-DI-Box.jpg?width=800"
+            alt="DI Box"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
