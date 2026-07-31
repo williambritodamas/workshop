@@ -16,9 +16,9 @@ export const Slide14_Closing: React.FC = () => {
 
   const nextTopics = [
     { title: 'Microfones', icon: <Mic className="w-6 h-6 text-blue-400" />, img: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=400&auto=format&fit=crop' },
-    { title: 'Mesa Analógica', icon: <Sliders className="w-6 h-6 text-cyan-400" />, img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=400&auto=format&fit=crop' },
-    { title: 'Mesa Digital', icon: <Sliders className="w-6 h-6 text-indigo-400" />, img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop' },
-    { title: 'Cabos & Conectores', icon: <Cable className="w-6 h-6 text-yellow-400" />, img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400&auto=format&fit=crop' },
+    { title: 'Mesa Analógica', icon: <Sliders className="w-6 h-6 text-cyan-400" />, img: 'https://images.pexels.com/photos/164927/pexels-photo-164927.jpeg?auto=compress&cs=tinysrgb&w=400' },
+    { title: 'Mesa Digital', icon: <Sliders className="w-6 h-6 text-indigo-400" />, img: 'https://images.pexels.com/photos/34228403/pexels-photo-34228403.jpeg?auto=compress&cs=tinysrgb&w=400' },
+    { title: 'Cabos & Conectores', icon: <Cable className="w-6 h-6 text-yellow-400" />, img: 'https://images.pexels.com/photos/7513422/pexels-photo-7513422.jpeg?auto=compress&cs=tinysrgb&w=400' },
     { title: 'Caixas de Som', icon: <Speaker className="w-6 h-6 text-emerald-400" />, img: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=400&auto=format&fit=crop' },
   ];
 
