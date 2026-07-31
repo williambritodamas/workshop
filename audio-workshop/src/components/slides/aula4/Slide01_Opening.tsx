@@ -5,7 +5,7 @@ export { slide01Notes };
 export const Slide01_Opening: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1920&auto=format&fit=crop" alt="Microfones profissionais" className="w-full h-full object-cover opacity-35 scale-105" />
+      <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1920&auto=format&fit=crop" alt="Microfones profissionais" className="w-full h-full object-cover object-bottom opacity-35 scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40" />
     </div>
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-medium">

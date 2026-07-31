@@ -4,10 +4,11 @@ import { slide08Notes } from './notes';
 export { slide08Notes };
 
 const patterns = [
-  { name: 'Cardioide', emoji: '❤️', description: 'Capta mais na frente, rejeita atrás. O padrão mais usado no mundo — palco, voz, gravadores.' },
   { name: 'Omnidirecional', emoji: '🌐', description: 'Capta igualmente de todos os lados. Ideal para ambientes naturais, corais e captação ambiente.' },
-  { name: 'Bidirecional', emoji: '↔️', description: 'Capta frente e trás, rejeita os lados. Usado em entrevistas frente-a-frente e gravação em dupla.' },
+  { name: 'Cardioide', emoji: '❤️', description: 'Capta mais na frente, rejeita atrás. O padrão mais usado no mundo — palco, voz, gravadores.' },
   { name: 'Supercardioide', emoji: '🎯', description: 'Mais direcional que o cardioide. Rejeita mais dos lados, mas capta um pouco atrás.' },
+  { name: 'Hipercardioide', emoji: '⚡', description: 'Ainda mais direcional que o supercardioide, com um pequeno lóbulo traseiro. Usado em ambientes muito ruidosos.' },
+  { name: 'Bidirecional (Figura 8)', emoji: '↔️', description: 'Capta igualmente da frente e de trás, rejeita os lados. Usado em entrevistas frente a frente e gravação em dupla.' },
 ];
 
 export const Slide08_PolarPatterns: React.FC = () => (

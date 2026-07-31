@@ -186,7 +186,7 @@ export default function LessonSelector({ onSelect }: LessonSelectorProps) {
                 <img
                   src={lesson.image}
                   alt={lesson.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 ${lesson.id === 4 ? 'object-bottom' : ''}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
               </div>

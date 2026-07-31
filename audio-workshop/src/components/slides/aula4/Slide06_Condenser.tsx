@@ -19,7 +19,7 @@ export const Slide06_Condenser: React.FC = () => (
     <SlideTitle title="Microfone Condensador" subtitle="O olho clínico do áudio" badge="Condensador" />
     <div className="relative z-10 w-full max-w-5xl my-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="rounded-3xl overflow-hidden border border-cyan-500/40 shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?q=80&w=800&auto=format&fit=crop" alt="Condensador" className="w-full h-64 md:h-80 object-cover" />
+        <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?q=80&w=800&auto=format&fit=crop" alt="Condensador" className="w-full h-64 md:h-80 object-cover object-left" />
       </motion.div>
       <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col gap-4">
         <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-sm">
