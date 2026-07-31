@@ -61,7 +61,7 @@ const lessons = [
     title: 'Gain, Volume e Clip',
     subtitle: 'O segredo do som profissional',
     description: 'Entenda de uma vez por todas a diferença entre Gain e Fader, o que é Clip, Headroom e como ajustar corretamente o nível de cada canal.',
-    image: 'https://images.pexels.com/photos/164680/pexels-photo-164680.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/11884526/pexels-photo-11884526.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: <Gauge className="w-8 h-8" />,
     color: 'from-amber-500 to-orange-500',
     badge: '16 slides',
