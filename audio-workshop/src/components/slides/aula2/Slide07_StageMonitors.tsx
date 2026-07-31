@@ -32,7 +32,7 @@ export const Slide07_StageMonitors: React.FC = () => {
           className="lg:col-span-7 h-72 md:h-96 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl relative group"
         >
           <img
-            src="https://images.pexels.com/photos/7715788/pexels-photo-7715788.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            src="https://images.pexels.com/photos/33565506/pexels-photo-33565506.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Cantor no palco com monitor no chão"
             className="w-full h-full object-cover"
           />
