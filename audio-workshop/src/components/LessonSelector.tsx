@@ -51,7 +51,7 @@ const lessons = [
     title: 'Mesas de Som',
     subtitle: 'O cérebro do sistema',
     description: 'Descubra como funciona uma mesa de som, seus canais, controles, caminho do sinal e as diferenças entre mesas analógicas e digitais.',
-    image: 'https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.pexels.com/photos/33379549/pexels-photo-33379549.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: <Sliders className="w-8 h-8" />,
     color: 'from-green-600 to-teal-500',
     badge: '15 slides',

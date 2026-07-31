@@ -6,10 +6,10 @@ export { slide15Notes };
 
 const refs = [
   { icon: <FileText className="w-4 h-4" />, label: 'Manual Behringer X32', url: 'https://www.behringer.com', color: 'from-blue-500 to-blue-600' },
-  { icon: <FileText className="w-4 h-4" />, label: 'Manual Yamaha MG16XU', url: 'https://www.yamaha.com', color: 'from-blue-500 to-blue-600' },
-  { icon: <Play className="w-4 h-4" />, label: '"Understanding Signal Flow" — Produce Like A Pro', url: '#', color: 'from-red-500 to-red-600' },
-  { icon: <Play className="w-4 h-4" />, label: '"Mixing Consoles 101" — The Recording Revolution', url: '#', color: 'from-red-500 to-red-600' },
-  { icon: <BookOpen className="w-4 h-4" />, label: '"Live Sound Reinforcement" — Scott Hunter Stark', url: '#', color: 'from-amber-500 to-amber-600' },
+  { icon: <FileText className="w-4 h-4" />, label: 'Manual Yamaha MG16XU', url: 'https://usa.yamaha.com/products/proaudio/mixers/mg_series_xu_model/downloads.html', color: 'from-blue-500 to-blue-600' },
+  { icon: <Play className="w-4 h-4" />, label: '"Understanding Signal Flow" — Produce Like A Pro', url: 'https://producelikeapro.com/blog/signal-flow/', color: 'from-red-500 to-red-600' },
+  { icon: <Play className="w-4 h-4" />, label: '"Mixing Consoles 101" — The Recording Revolution', url: 'https://www.youtube.com/@RecordingRevolution', color: 'from-red-500 to-red-600' },
+  { icon: <BookOpen className="w-4 h-4" />, label: '"Live Sound Reinforcement" — Scott Hunter Stark', url: 'https://www.amazon.com/Sound-Reinforcement-Scott-Hunter-Stark/dp/1931140154', color: 'from-amber-500 to-amber-600' },
   { icon: <Play className="w-4 h-4" />, label: 'Canal: "Audio University" (inglês)', url: 'https://youtube.com/@audiouniversity', color: 'from-red-500 to-red-600' },
   { icon: <Play className="w-4 h-4" />, label: 'Canal: "Dicas de Áudio" (português)', url: '#', color: 'from-red-500 to-red-600' },
   { icon: <ExternalLink className="w-4 h-4" />, label: 'PDF resumo: material.audiosemmisterio.com.br', url: '#', color: 'from-emerald-500 to-emerald-600' },
