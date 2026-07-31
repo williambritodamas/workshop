@@ -19,19 +19,19 @@ export const Slide13_Quiz: React.FC = () => {
   const quizItems = [
     {
       question: 'Qual equipamento é este?',
-      img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
+      img: 'https://images.pexels.com/photos/8132999/pexels-photo-8132999.jpeg?auto=compress&cs=tinysrgb&w=800',
       title: 'Cabo XLR (Cannon)',
       desc: 'Utilizado principalmente para conectar microfones à mesa de som com sinal balanceado e trava de segurança.',
     },
     {
       question: 'Qual equipamento é este?',
-      img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop',
+      img: 'https://images.pexels.com/photos/15320041/pexels-photo-15320041.jpeg?auto=compress&cs=tinysrgb&w=800',
       title: 'Mesa de Som (Console de Mixagem)',
       desc: 'Central que recebe múltiplos canais de som, permite misturar, equalizar e controlar o volume individual de cada um.',
     },
     {
       question: 'Qual equipamento é este?',
-      img: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800&auto=format&fit=crop',
+      img: 'https://images.pexels.com/photos/9941174/pexels-photo-9941174.jpeg?auto=compress&cs=tinysrgb&w=800',
       title: 'Caixa de Som (Alto-falante)',
       desc: 'Transforma energia elétrica em movimento no cone para gerar as ondas de pressão sonora no ar.',
     },

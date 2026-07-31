@@ -25,7 +25,7 @@ export const Slide07_Microphone: React.FC = () => {
           className="lg:col-span-5 h-72 md:h-96 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl relative"
         >
           <img
-            src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop"
+            src="https://images.pexels.com/photos/586416/pexels-photo-586416.jpeg?auto=compress&cs=tinysrgb&w=800"
             alt="Microfone profissional"
             className="w-full h-full object-cover"
           />

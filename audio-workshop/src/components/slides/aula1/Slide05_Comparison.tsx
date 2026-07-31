@@ -25,7 +25,7 @@ export const Slide05_Comparison: React.FC = () => {
         >
           <div className="relative w-full h-56 md:h-64 rounded-2xl overflow-hidden mb-6">
             <img
-              src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=800&auto=format&fit=crop"
+              src="https://images.pexels.com/photos/21134470/pexels-photo-21134470.jpeg?auto=compress&cs=tinysrgb&w=800"
               alt="Pedra caindo na água"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />

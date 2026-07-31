@@ -34,7 +34,7 @@ export const Slide09_DiBox: React.FC = () => {
           className="lg:col-span-5 h-72 md:h-96 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl relative group"
         >
           <img
-            src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?q=80&w=800&auto=format&fit=crop"
+            src="https://images.pexels.com/photos/33693666/pexels-photo-33693666.jpeg?auto=compress&cs=tinysrgb&w=800"
             alt="Instrumento e caixa de som"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />

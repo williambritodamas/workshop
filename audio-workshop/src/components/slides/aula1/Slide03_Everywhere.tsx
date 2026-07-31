@@ -11,7 +11,7 @@ export const Slide03_Everywhere: React.FC = () => {
     {
       title: 'Palmas',
       icon: <Clapperboard className="w-8 h-8" />,
-      imageSrc: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop',
+      imageSrc: 'https://images.pexels.com/photos/4124316/pexels-photo-4124316.jpeg?auto=compress&cs=tinysrgb&w=800',
       delay: 0.1,
     },
     {
@@ -29,7 +29,7 @@ export const Slide03_Everywhere: React.FC = () => {
     {
       title: 'Voz humana',
       icon: <Mic className="w-8 h-8" />,
-      imageSrc: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=800&auto=format&fit=crop',
+      imageSrc: 'https://images.pexels.com/photos/16108227/pexels-photo-16108227.jpeg?auto=compress&cs=tinysrgb&w=800',
       delay: 0.4,
     },
   ];

@@ -43,7 +43,7 @@ export const Slide05_MixerConsole: React.FC = () => {
           className="lg:col-span-7 relative h-72 md:h-96 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl group"
         >
           <img
-            src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop"
+            src="https://images.pexels.com/photos/33434894/pexels-photo-33434894.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Mesa de Som em detalhes"
             className="w-full h-full object-cover"
           />
