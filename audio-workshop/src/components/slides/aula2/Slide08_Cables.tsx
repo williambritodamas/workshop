@@ -50,7 +50,7 @@ export const Slide08_Cables: React.FC = () => {
       badge: '🔊 Trava de Caixa',
       tags: ['Caixas de Som', 'Alta Potência'],
       desc: 'Conector de pressão especial para ligação segura de caixas acústicas.',
-      img: 'https://images.pexels.com/photos/24245332/pexels-photo-24245332.jpeg?auto=compress&cs=tinysrgb&w=600',
+      img: 'https://images.pexels.com/photos/4089492/pexels-photo-4089492.jpeg?auto=compress&cs=tinysrgb&w=600',
       icon: <Cable className="w-6 h-6 text-emerald-400" />,
       delay: 0.4,
     },
