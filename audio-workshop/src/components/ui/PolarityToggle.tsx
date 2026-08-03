@@ -23,8 +23,8 @@ export const PolarityToggle: React.FC = () => {
 
       <motion.div
         key={inverted ? 'inv' : 'norm'}
-        initial={{ opacity: 0.6, scaleY: inverted ? -1 : 1 }}
-        animate={{ opacity: 1, scaleY: inverted ? -1 : 1 }}
+        initial={{ opacity: 0.6 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="relative h-28 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden mb-4"
       >

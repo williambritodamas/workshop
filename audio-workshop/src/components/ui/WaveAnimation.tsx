@@ -18,7 +18,7 @@ export const WaveAnimation: React.FC<WaveAnimationProps> = ({ color = '#3B82F6',
     let rafId: number;
 
     const tick = () => {
-      start = (start + 0.3 * speed) % length;
+      start = (start - 0.3 * speed + length) % length;
       path.style.strokeDasharray = `${length}`;
       path.style.strokeDashoffset = `${start}`;
       rafId = requestAnimationFrame(tick);

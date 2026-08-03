@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mic, User, Ruler } from 'lucide-react';
 
-function wavePoints(offset: number, inverted: boolean): string {
+function wavePoints(offset: number): string {
   const pts: string[] = [];
   for (let i = 0; i <= 80; i++) {
     const x = (i / 80) * 100;
     const rad = (i / 80) * Math.PI * 4 + offset;
-    const y = inverted ? 50 + Math.sin(rad) * 30 : 50 - Math.sin(rad) * 30;
+    const y = 50 - Math.sin(rad) * 30;
     pts.push(`${x},${y}`);
   }
   return pts.join(' ');
@@ -15,12 +15,13 @@ function wavePoints(offset: number, inverted: boolean): string {
 
 export const MicrophoneDistanceDemo: React.FC = () => {
   const [distance, setDistance] = useState(0);
-  const phaseOffset = (distance / 100) * Math.PI * 2;
+  // A distância máxima (100) torna os microfones 180° defasados → cancelamento severo
+  const phaseOffset = (distance / 100) * Math.PI;
 
   const status =
-    distance < 20
+    distance < 25
       ? { label: 'Alinhado', color: 'text-emerald-400', dot: '🟢' }
-      : distance < 60
+      : distance < 75
         ? { label: 'Parcialmente defasado', color: 'text-amber-400', dot: '🟡' }
         : { label: 'Cancelamento severo', color: 'text-red-400', dot: '🔴' };
 
@@ -64,13 +65,13 @@ export const MicrophoneDistanceDemo: React.FC = () => {
 
       <div className="relative h-20 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden mb-3">
         <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
-          <polyline fill="none" stroke="#3B82F6" strokeWidth="1.5" opacity={0.4} points={wavePoints(0, false)} />
+          <polyline fill="none" stroke="#3B82F6" strokeWidth="1.5" opacity={0.4} points={wavePoints(0)} />
           <motion.polyline
             fill="none"
-            stroke={distance > 60 ? '#ef4444' : distance > 20 ? '#f59e0b' : '#22c55e'}
+            stroke={distance > 75 ? '#ef4444' : distance > 25 ? '#f59e0b' : '#22c55e'}
             strokeWidth="1.5"
             animate={{ opacity: 1 }}
-            points={wavePoints(phaseOffset, true)}
+            points={wavePoints(phaseOffset)}
           />
         </svg>
       </div>
