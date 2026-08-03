@@ -71,7 +71,7 @@ const lessons = [
     title: 'Equalização',
     subtitle: 'Moldando o Som',
     description: 'Aprenda a equilibrar graves, médios e agudos. Entenda o HPF, como ouvir as diferenças e por que cortar frequências é melhor que aumentar.',
-    image: 'https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/34068712/pexels-photo-34068712.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: <SlidersHorizontal className="w-8 h-8" />,
     color: 'from-blue-600 to-cyan-500',
     badge: '16 slides',
