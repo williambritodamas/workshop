@@ -40,18 +40,15 @@ export const AudioEscapeRoom: React.FC = () => {
 
     if (item.isProblem) {
       setScore((s) => s + 1);
-      setMessage('Encontrou o problema! Passe para o próximo.');
+      setMessage('Problema encontrado: ' + item.label + '. ' + item.explanation);
     } else {
       setMessage(item.explanation + ' Não era o problema.');
     }
 
-    setTimeout(() => {
-      setCurrentItem((prev) => prev + 1);
-      setMessage('');
-      if (currentItem >= checklist.length - 1) {
-        setFinished(true);
-      }
-    }, 1500);
+    setCurrentItem((prev) => prev + 1);
+    if (idx >= checklist.length - 1) {
+      setFinished(true);
+    }
   };
 
   return (

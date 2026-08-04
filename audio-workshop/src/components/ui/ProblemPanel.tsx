@@ -25,9 +25,13 @@ const problemItems: ProblemItem[] = [
 
 export const ProblemPanel: React.FC = () => {
   const [items, setItems] = useState<ProblemItem[]>(problemItems);
+  const [selected, setSelected] = useState<ProblemItem | null>(null);
 
   const handleClick = (id: string) => {
-    setItems((prev) => prev.map((i) => (i.id === id && !i.checked ? { ...i, checked: true } : i)));
+    const item = problemItems.find((i) => i.id === id);
+    if (!item || item.checked) return;
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, checked: true } : i)));
+    setSelected(item);
   };
 
   const allChecked = items.every((i) => i.checked);
@@ -63,6 +67,20 @@ export const ProblemPanel: React.FC = () => {
           </button>
         ))}
       </div>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.div key={selected.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            className={`mt-4 p-4 rounded-2xl border ${selected.isIssue ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}
+          >
+            <p className={`text-sm font-bold ${selected.isIssue ? 'text-emerald-400' : 'text-blue-300'}`}>
+              {selected.isIssue ? '✅ Problema encontrado!' : '❌ Verificado'}
+            </p>
+            <p className="text-slate-300 text-xs mt-1">{selected.explanation}</p>
+            <p className="text-slate-500 text-[10px] mt-2">Clique em outro item para continuar o diagnóstico.</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {allChecked && (

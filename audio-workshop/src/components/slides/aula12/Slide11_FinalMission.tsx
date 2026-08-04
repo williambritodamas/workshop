@@ -1,13 +1,32 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, AlertTriangle, Shirt } from 'lucide-react';
+import { Clock, AlertTriangle, Shirt, Mic, Speaker, MonitorSpeaker, Disc3, Laptop, Cable } from 'lucide-react';
 import { SlideTitle } from '../../ui/SlideTitle';
-import { InteractiveStageBuilder } from '../../ui/InteractiveStageBuilder';
+import { ScenarioBuilder } from '../../ui/ScenarioBuilder';
 import { SystemSimulator } from '../../ui/SystemSimulator';
 import { slide11Notes } from './notes';
 export { slide11Notes };
 
 const equipmentList = ['1 Mesa', '2 Caixas', '2 Microfones', 'Notebook', 'Cabos', 'Pedestais'];
+
+const palcoZones = [
+  { id: 'front', label: 'Frente do Palco', hint: 'Caixas principais direcionadas ao público', className: '' },
+  { id: 'stage', label: 'Palco', hint: 'Microfones, pedestais e monitores', className: '' },
+  { id: 'control', label: 'Controle', hint: 'Mesa, notebook e cabos', className: '' },
+];
+
+const palcoItems = [
+  { id: 'spk1', label: 'Caixa 1', icon: <Speaker className="w-3.5 h-3.5" />, zone: 'front' },
+  { id: 'spk2', label: 'Caixa 2', icon: <Speaker className="w-3.5 h-3.5" />, zone: 'front' },
+  { id: 'mon1', label: 'Monitor 1', icon: <MonitorSpeaker className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mon2', label: 'Monitor 2', icon: <MonitorSpeaker className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mic1', label: 'Microfone 1', icon: <Mic className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mic2', label: 'Microfone 2', icon: <Mic className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'stands', label: 'Pedestais', icon: <Shirt className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mixer', label: 'Mesa', icon: <Disc3 className="w-3.5 h-3.5" />, zone: 'control' },
+  { id: 'notebook', label: 'Notebook', icon: <Laptop className="w-3.5 h-3.5" />, zone: 'control' },
+  { id: 'cables', label: 'Cabos', icon: <Cable className="w-3.5 h-3.5" />, zone: 'control' },
+];
 
 const problems = [
   { id: 'feedback', label: 'Microfonia', icon: '🔊' },
@@ -35,7 +54,7 @@ export const Slide11_FinalMission: React.FC = () => {
   return (
     <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img src="https://images.pexels.com/photos/1726050/pexels-photo-1726050.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Evento" className="w-full h-full object-cover opacity-10" />
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Wall_of_Sound_(QuadFest).jpg?width=1920" alt="Evento" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
       </div>
       <SlideTitle title="Missão Final" subtitle="15 minutos antes do evento — monte o sistema e resolva os problemas" badge="Desafio Final" />
@@ -74,7 +93,12 @@ export const Slide11_FinalMission: React.FC = () => {
               ))}
             </div>
             {phase === 'setup' ? (
-              <InteractiveStageBuilder />
+              <ScenarioBuilder
+                title="Monte o Palco"
+                zones={palcoZones}
+                items={palcoItems}
+                accent="amber"
+              />
             ) : (
               <AnimatePresence mode="wait">
                 <motion.div key="problems" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2">

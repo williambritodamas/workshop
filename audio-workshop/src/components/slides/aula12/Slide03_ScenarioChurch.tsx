@@ -1,14 +1,31 @@
 import { motion } from 'framer-motion';
-import { Church, Target } from 'lucide-react';
+import { Church, Target, Mic, Speaker, Disc3, Laptop, MonitorSpeaker } from 'lucide-react';
 import { ScenarioCard } from '../../ui/ScenarioCard';
-import { InteractiveStageBuilder } from '../../ui/InteractiveStageBuilder';
+import { ScenarioBuilder } from '../../ui/ScenarioBuilder';
 import { slide03Notes } from './notes';
 export { slide03Notes };
+
+const zones = [
+  { id: 'front', label: 'Frente do Palco', hint: 'Onde o público ouve — caixas principais', className: '' },
+  { id: 'stage', label: 'Palco', hint: 'Onde cantores/falantes atuam — mics e monitores', className: '' },
+  { id: 'control', label: 'Área de Controle', hint: 'Atrás — mesa, notebook e cabos', className: '' },
+];
+
+const items = [
+  { id: 'spk1', label: 'Caixa 1', icon: <Speaker className="w-3.5 h-3.5" />, zone: 'front' },
+  { id: 'spk2', label: 'Caixa 2', icon: <Speaker className="w-3.5 h-3.5" />, zone: 'front' },
+  { id: 'mon1', label: 'Monitor 1', icon: <MonitorSpeaker className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mon2', label: 'Monitor 2', icon: <MonitorSpeaker className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mic1', label: 'Microfone 1', icon: <Mic className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mic2', label: 'Microfone 2', icon: <Mic className="w-3.5 h-3.5" />, zone: 'stage' },
+  { id: 'mixer', label: 'Mesa', icon: <Disc3 className="w-3.5 h-3.5" />, zone: 'control' },
+  { id: 'notebook', label: 'Notebook', icon: <Laptop className="w-3.5 h-3.5" />, zone: 'control' },
+];
 
 export const Slide03_ScenarioChurch: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://images.pexels.com/photos/1726050/pexels-photo-1726050.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Igreja" className="w-full h-full object-cover opacity-20" />
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sound_reinforcement_system.jpg?width=1920" alt="Igreja" className="w-full h-full object-cover opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
@@ -20,8 +37,8 @@ export const Slide03_ScenarioChurch: React.FC = () => (
       <div className="flex flex-col gap-4">
         <ScenarioCard
           title="Igreja"
-          description="Culto/reunião com equipamento básico"
-          equipment={['2 Microfones', '2 Caixas Ativas', '1 Mesa de Som', 'Notebook', 'Projetor', 'Monitores de Palco']}
+          description="Culto/reunião com equipamento básico — o som precisa cobrir todos e chegar a quem fala ao vivo."
+          equipment={['2 Microfones', '2 Caixas Ativas', 'Monitores de Palco', '1 Mesa de Som', 'Notebook']}
           icon={<Church className="w-5 h-5" />}
           color="amber"
         />
@@ -29,11 +46,16 @@ export const Slide03_ScenarioChurch: React.FC = () => (
           className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 backdrop-blur-sm flex items-center gap-3"
         >
           <Target className="w-5 h-5 text-amber-400 shrink-0" />
-          <span className="text-sm text-slate-300 font-medium">Objetivo: Montar tudo corretamente.</span>
+          <span className="text-sm text-slate-300 font-medium">Coloque cada equipamento na zona correta e valide a montagem.</span>
         </motion.div>
       </div>
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }}>
-        <InteractiveStageBuilder />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+        <ScenarioBuilder
+          title="Montagem do Palco"
+          zones={zones}
+          items={items}
+          accent="amber"
+        />
       </motion.div>
     </div>
   </div>
