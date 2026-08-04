@@ -101,7 +101,7 @@ const lessons = [
     title: 'Microfonia',
     subtitle: 'O inimigo nº 1 do áudio ao vivo',
     description: 'Entenda o que causa a microfonia, como evitá-la, como resolvê-la rapidamente e como posicionar caixas e microfones corretamente.',
-    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Microphone.JPG?width=800',
     icon: <Waves className="w-8 h-8" />,
     color: 'from-red-600 to-rose-500',
     badge: '16 slides',

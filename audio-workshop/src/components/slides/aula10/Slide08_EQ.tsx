@@ -5,10 +5,14 @@ import { SlideTitle } from '../../ui/SlideTitle';
 import { slide08Notes } from './notes';
 export { slide08Notes };
 
-const frequencies = [
-  { range: '200-400 Hz', source: 'Ressonância de graves', tip: 'Corte estreito em torno de 250 Hz se a sala tem eco de graves.' },
-  { range: '800-2 kHz', source: 'Voz e médios', tip: 'Região mais comum. Corte entre 1-2 kHz com Q alto.' },
-  { range: '3-6 kHz', source: 'Agudos e sibilância', tip: 'Corte suave em 4 kHz se necessário. Cuidado para não abrir o som.' },
+const eqBands = [200, 500, 1000, 2000, 4000, 8000];
+
+type CutMap = Partial<Record<number, number>>;
+
+const frequencies: { range: string; source: string; tip: string; cutLabel: string; cuts: CutMap }[] = [
+  { range: '200-400 Hz', source: 'Ressonância de graves', tip: 'Corte estreito em torno de 250 Hz se a sala tem eco de graves.', cutLabel: 'corte em 250 Hz', cuts: { 200: 22 } },
+  { range: '800-2 kHz', source: 'Voz e médios', tip: 'Região mais comum. Corte entre 1-2 kHz com Q alto.', cutLabel: 'corte em 1-2 kHz', cuts: { 1000: 18, 2000: 26 } },
+  { range: '3-6 kHz', source: 'Agudos e sibilância', tip: 'Corte suave em 4 kHz se necessário. Cuidado para não abrir o som.', cutLabel: 'corte em 4 kHz', cuts: { 4000: 18 } },
 ];
 
 export const Slide08_EQ: React.FC = () => {
@@ -28,18 +32,29 @@ export const Slide08_EQ: React.FC = () => {
             <span className="text-white text-sm font-bold">Equalizador Paramétrico</span>
           </div>
           <div className="space-y-3">
-            {[200, 500, 1000, 2000, 4000, 8000].map((freq) => (
-              <div key={freq} className="flex items-center gap-2">
-                <div className="w-16 text-[10px] text-slate-500 text-right">{freq} Hz</div>
-                <div className="flex-1 h-4 rounded-full bg-slate-800 overflow-hidden">
-                  <motion.div initial={{ width: '60%' }} animate={{ width: selected === 1 ? `${Math.random() * 30 + 10}%` : '60%' }}
-                    className="h-full rounded-full bg-purple-500/30" />
+            {eqBands.map((freq) => {
+              const cut = selected !== null ? frequencies[selected].cuts[freq] : undefined;
+              return (
+                <div key={freq} className="flex items-center gap-2">
+                  <div className="w-16 text-[10px] text-slate-500 text-right">{freq} Hz</div>
+                  <div className="flex-1 h-4 rounded-full bg-slate-800 overflow-hidden">
+                    <motion.div
+                      animate={{ width: cut !== undefined ? `${100 - cut}%` : '100%' }}
+                      transition={{ duration: 0.3 }}
+                      className={`h-full rounded-full ${cut !== undefined ? 'bg-red-500/50' : 'bg-purple-500/30'}`}
+                    />
+                  </div>
+                  <span className={`w-10 text-[10px] text-right ${cut !== undefined ? 'text-red-400 font-bold' : 'text-slate-600'}`}>
+                    {cut !== undefined ? `-${cut} dB` : '0 dB'}
+                  </span>
                 </div>
-              </div>
-            ))}
-            <div className="mt-2 flex justify-center">
-              <Scissors className="w-5 h-5 text-red-400" />
-              <span className="text-red-400 text-[10px] ml-1">Corte estreito (Q alto)</span>
+              );
+            })}
+            <div className="mt-2 flex justify-center items-center gap-1">
+              <Scissors className="w-4 h-4 text-red-400" />
+              <span className="text-red-400 text-[10px]">
+                {selected !== null ? `Corte estreito (Q alto) — ${frequencies[selected].cutLabel}` : 'Corte estreito (Q alto) — clique em uma faixa'}
+              </span>
             </div>
           </div>
         </motion.div>
