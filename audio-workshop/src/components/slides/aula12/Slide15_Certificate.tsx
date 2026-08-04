@@ -14,7 +14,7 @@ export const Slide15_Certificate: React.FC = () => {
     <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
       <ConfettiEffect active={showConfetti} />
       <div className="absolute inset-0 z-0">
-        <img src="https://images.pexels.com/photos/164680/pexels-photo-164680.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Audio_mixer_faders.jpg?width=1920" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
       </div>
       <SlideTitle title="Certificado" subtitle="Parabéns! Você concluiu o workshop." badge="Conclusão" />

@@ -121,7 +121,7 @@ const lessons = [
     title: 'Desafio Final',
     subtitle: 'Agora você é o operador de áudio',
     description: 'A última aula do workshop. Coloque em prática tudo o que aprendeu em situações reais: cenários, diagnóstico de problemas, quiz final, missão e certificado.',
-    image: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wall_of_Sound_(QuadFest).jpg?width=800',
     icon: <Sparkles className="w-8 h-8" />,
     color: 'from-yellow-500 to-amber-500',
     badge: '16 slides',

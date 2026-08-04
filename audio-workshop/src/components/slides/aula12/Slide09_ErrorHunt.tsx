@@ -31,7 +31,7 @@ export const Slide09_ErrorHunt: React.FC = () => {
   return (
     <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Palco" className="w-full h-full object-cover opacity-10" />
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Wall_of_Sound_(QuadFest).jpg?width=1920" alt="Palco" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
       </div>
       <SlideTitle title="Caça aos Erros" subtitle="Encontre todos os 8 erros no palco" badge="Desafio" />
