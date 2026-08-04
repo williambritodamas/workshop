@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, Cable, GripVertical, Tag, ArrowRight, Check } from 'lucide-react';
 
 interface CableLine {
@@ -107,7 +108,17 @@ export const CableOrganizer: React.FC = () => {
             </div>
             <svg viewBox="0 0 100 100" className="w-full h-40">
               <rect x="0" y="0" width="100" height="100" fill="#0F172A" rx="8" />
-              <OrganizedView />
+              <AnimatePresence mode="wait">
+                {organized ? (
+                  <motion.g key="org" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.35 }}>
+                    <OrganizedView />
+                  </motion.g>
+                ) : (
+                  <motion.g key="messy" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+                    <MessyView />
+                  </motion.g>
+                )}
+              </AnimatePresence>
             </svg>
           </div>
         </div>

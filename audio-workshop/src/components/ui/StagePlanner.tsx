@@ -12,14 +12,14 @@ interface EquipmentItem {
 }
 
 const initialEquipment: EquipmentItem[] = [
-  { id: 'mic-stand-1', label: 'Microfone 1', icon: <Mic className="w-5 h-5" />, x: 60, y: 50, placed: true },
-  { id: 'mic-stand-2', label: 'Microfone 2', icon: <Mic className="w-5 h-5" />, x: 280, y: 50, placed: true },
-  { id: 'speaker-l', label: 'Caixa L', icon: <Speaker className="w-5 h-5" />, x: 20, y: 130, placed: true },
-  { id: 'speaker-r', label: 'Caixa R', icon: <Speaker className="w-5 h-5" />, x: 320, y: 130, placed: true },
-  { id: 'monitor-1', label: 'Monitor 1', icon: <Monitor className="w-5 h-5" />, x: 100, y: 140, placed: true },
-  { id: 'monitor-2', label: 'Monitor 2', icon: <Monitor className="w-5 h-5" />, x: 240, y: 140, placed: true },
-  { id: 'mixer', label: 'Mesa', icon: <Disc3 className="w-5 h-5" />, x: 170, y: 90, placed: true },
-  { id: 'sub', label: 'Sub', icon: <Speaker className="w-5 h-5" />, x: 170, y: 130, placed: true },
+  { id: 'mic-stand-1', label: 'Microfone 1', icon: <Mic className="w-5 h-5" />, x: 60, y: 95, placed: true },
+  { id: 'mic-stand-2', label: 'Microfone 2', icon: <Mic className="w-5 h-5" />, x: 280, y: 95, placed: true },
+  { id: 'monitor-1', label: 'Monitor 1', icon: <Monitor className="w-5 h-5" />, x: 80, y: 118, placed: true },
+  { id: 'monitor-2', label: 'Monitor 2', icon: <Monitor className="w-5 h-5" />, x: 240, y: 118, placed: true },
+  { id: 'speaker-l', label: 'Caixa L', icon: <Speaker className="w-5 h-5" />, x: 10, y: 150, placed: true },
+  { id: 'speaker-r', label: 'Caixa R', icon: <Speaker className="w-5 h-5" />, x: 310, y: 150, placed: true },
+  { id: 'sub', label: 'Sub', icon: <Speaker className="w-5 h-5" />, x: 165, y: 156, placed: true },
+  { id: 'mixer', label: 'Mesa', icon: <Disc3 className="w-5 h-5" />, x: 160, y: 178, placed: true },
 ];
 
 export const StagePlanner: React.FC = () => {
@@ -32,12 +32,12 @@ export const StagePlanner: React.FC = () => {
     if (!svg) return;
     const svgRect = svg.getBoundingClientRect();
     const scaleX = 340 / svgRect.width;
-    const scaleY = 180 / svgRect.height;
+    const scaleY = 200 / svgRect.height;
     const x = Math.round((e.clientX - svgRect.left) * scaleX);
     const y = Math.round((e.clientY - svgRect.top) * scaleY);
     setEquipment((prev) =>
       prev.map((item) =>
-        item.id === selectedId ? { ...item, x: Math.max(5, Math.min(335, x - 20)), y: Math.max(5, Math.min(175, y - 20)), placed: true } : item
+        item.id === selectedId ? { ...item, x: Math.max(5, Math.min(335, x - 20)), y: Math.max(5, Math.min(195, y - 20)), placed: true } : item
       )
     );
     setSelectedId(null);
@@ -58,23 +58,34 @@ export const StagePlanner: React.FC = () => {
       </div>
 
       <div className="relative p-4 rounded-3xl bg-slate-900/90 border border-slate-800 backdrop-blur-sm">
-        <svg viewBox="0 0 340 180" className="w-full">
+        <svg viewBox="0 0 340 200" className="w-full">
           <defs>
             <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
               <rect width="20" height="20" fill="none" />
               <circle cx="10" cy="10" r="0.8" fill="#1E293B" />
             </pattern>
           </defs>
-          <rect x="0" y="0" width="340" height="180" fill="url(#grid)" rx="12" />
-          <rect x="0" y="155" width="340" height="25" fill="#1E293B" rx="3" />
-          <text x="170" y="170" textAnchor="middle" fill="#64748B" fontSize="9" fontWeight="bold">PALCO</text>
-          <rect x="0" y="153" width="340" height="2" fill="#334155" />
+          <rect x="0" y="0" width="340" height="200" fill="url(#grid)" rx="12" />
+
+          <rect x="0" y="0" width="340" height="30" fill="#0F172A" opacity="0.6" rx="3" />
+          <text x="170" y="19" textAnchor="middle" fill="#475569" fontSize="8" fontWeight="bold">FUNDO DO PALCO</text>
+
+          <rect x="0" y="30" width="340" height="105" fill="#1E293B" opacity="0.4" />
+          <text x="8" y="42" fill="#334155" fontSize="7" fontWeight="bold">PALCO</text>
+
+          <line x1="0" y1="135" x2="340" y2="135" stroke="#F59E0B" strokeWidth="2" strokeDasharray="6,3" />
+          <text x="170" y="130" textAnchor="middle" fill="#F59E0B" fontSize="8" fontWeight="bold">▲ FRENTE DO PALCO ▲</text>
+
+          <rect x="0" y="135" width="340" height="65" fill="#0F172A" opacity="0.5" />
+          <text x="170" y="197" textAnchor="middle" fill="#475569" fontSize="8" fontWeight="bold">PÚBLICO</text>
+
           <rect
-            x="0" y="0" width="340" height="153"
+            x="0" y="0" width="340" height="200"
             fill="transparent"
             className="cursor-crosshair"
             onClick={handleGridClick}
           />
+
           {equipment.map((item) => (
             <g key={item.id} onClick={() => setSelectedId(item.id)} className="cursor-pointer">
               <motion.rect

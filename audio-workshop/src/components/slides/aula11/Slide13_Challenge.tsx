@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mic, Speaker, Disc3, Laptop, Cable, Music, Timer, Award, Star } from 'lucide-react';
+import { Mic, Speaker, Disc3, Laptop, Cable, Music, Timer, Award, Star, CheckCircle2, Circle } from 'lucide-react';
 import { SlideTitle } from '../../ui/SlideTitle';
 import { slide13Notes } from './notes';
 export { slide13Notes };
@@ -14,6 +14,13 @@ const challengeItems = [
   { icon: <Music className="w-5 h-5" />, label: '2 Stands' },
 ];
 
+const steps = [
+  { id: 'place', label: 'Posicione as caixas e stands no palco' },
+  { id: 'connect', label: 'Conecte os microfones e cabos XLR à mesa' },
+  { id: 'power', label: 'Energize na ordem: fontes → mesa → amplificador → caixas' },
+  { id: 'test', label: 'Ajuste o gain e teste o som em cada microfone' },
+];
+
 const scoring = [
   { label: 'Conexões corretas', points: 3 },
   { label: 'Cabos organizados', points: 2 },
@@ -24,6 +31,7 @@ const scoring = [
 export const Slide13_Challenge: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(300);
+  const [done, setDone] = useState<string[]>([]);
 
   useEffect(() => {
     if (!started || timeLeft <= 0) return;
@@ -31,29 +39,105 @@ export const Slide13_Challenge: React.FC = () => {
     return () => clearInterval(timer);
   }, [started, timeLeft]);
 
+  const toggleStep = (id: string) => {
+    setDone((prev) => (prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]));
+  };
+
+  const allDone = done.length === steps.length;
+
   return (
     <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img src="https://images.pexels.com/photos/1726050/pexels-photo-1726050.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Água" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
       </div>
-      <SlideTitle title="Desafio de Montagem" subtitle="Monte o sistema para uma palestra em 5 minutos" badge="Desafio Prático" />
+      <SlideTitle title="Desafio de Montagem" subtitle="Monte o sistema para uma palestra em 5 minutos. Marque cada etapa ao concluir." badge="Desafio Prático" />
       <div className="relative z-10 w-full max-w-4xl my-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-          className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm"
-        >
-          <p className="text-sm font-bold text-white mb-3 flex items-center gap-2">
-            <Star className="w-4 h-4 text-amber-400" /> Equipamentos disponíveis
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {challengeItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 p-2 rounded-lg bg-slate-800/50 text-slate-300">
-                <span className="text-purple-400">{item.icon}</span>
-                <span className="text-xs font-medium">{item.label}</span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
+        <div className="space-y-4">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+            className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm"
+          >
+            <p className="text-sm font-bold text-white mb-3 flex items-center gap-2">
+              <Star className="w-4 h-4 text-amber-400" /> Equipamentos disponíveis
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {challengeItems.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 p-2 rounded-lg bg-slate-800/50 text-slate-300">
+                  <span className="text-purple-400">{item.icon}</span>
+                  <span className="text-xs font-medium">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
+            className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm"
+          >
+            <p className="text-sm font-bold text-white mb-3 flex items-center gap-2">
+              <Award className="w-4 h-4 text-emerald-400" /> Etapas da montagem
+            </p>
+            <div className="space-y-2">
+              {steps.map((s, i) => {
+                const isDone = done.includes(s.id);
+                return (
+                  <button key={s.id} onClick={() => started && toggleStep(s.id)} disabled={!started}
+                    className={`w-full flex items-start gap-2 p-2 rounded-lg text-left transition-all cursor-pointer ${
+                      isDone ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-slate-800/50 border border-slate-700/50 hover:border-slate-600'
+                    } ${!started ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  >
+                    {isDone ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    ) : (
+                      <Circle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    )}
+                    <span className={`text-xs ${isDone ? 'text-emerald-200' : 'text-slate-300'}`}>
+                      <span className="font-bold text-slate-500">{i + 1}.</span> {s.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-[10px] text-slate-500 mt-2">
+              {!started ? 'Clique em "Iniciar Desafio" para começar e liberar as etapas.' : `${done.length} de ${steps.length} etapas concluídas`}
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
+            className="flex flex-col items-center justify-center p-6 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm"
+          >
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-600/30 to-pink-600/30 border-2 border-purple-500/30 flex items-center justify-center mb-4">
+              <Timer className="w-10 h-10 text-purple-400" />
+            </div>
+            <p className="text-3xl font-black text-white font-mono">
+              {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+            </p>
+            <p className="text-xs text-slate-400 mt-1">tempo restante</p>
+            {!started ? (
+              <button onClick={() => setStarted(true)}
+                className="mt-4 px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm hover:from-purple-500 hover:to-pink-500 transition-all"
+              >
+                Iniciar Desafio
+              </button>
+            ) : allDone ? (
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
+                className="mt-4 flex items-center gap-2 text-emerald-400 text-sm font-bold"
+              >
+                <Award className="w-5 h-5" /> Sistema montado! Parabéns!
+              </motion.div>
+            ) : (
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
+                className="mt-4 flex items-center gap-2 text-emerald-400 text-sm font-bold"
+              >
+                <Award className="w-5 h-5" /> Mãos à obra!
+              </motion.div>
+            )}
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
+            className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 backdrop-blur-sm"
+          >
             <p className="text-xs font-bold text-amber-400 mb-2 flex items-center gap-1"><Timer className="w-3 h-3" /> Pontuação</p>
             <div className="space-y-1">
               {scoring.map((s, i) => (
@@ -67,32 +151,8 @@ export const Slide13_Challenge: React.FC = () => {
                 <span className="text-emerald-400">10 pts</span>
               </div>
             </div>
-          </div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-          className="flex flex-col items-center justify-center p-6 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm"
-        >
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-600/30 to-pink-600/30 border-2 border-purple-500/30 flex items-center justify-center mb-4">
-            <Timer className="w-10 h-10 text-purple-400" />
-          </div>
-          <p className="text-3xl font-black text-white font-mono">
-            {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-          </p>
-          <p className="text-xs text-slate-400 mt-1">tempo restante</p>
-          {!started ? (
-            <button onClick={() => setStarted(true)}
-              className="mt-4 px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm hover:from-purple-500 hover:to-pink-500 transition-all"
-            >
-              Iniciar Desafio
-            </button>
-          ) : (
-            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
-              className="mt-4 flex items-center gap-2 text-emerald-400 text-sm font-bold"
-            >
-              <Award className="w-5 h-5" /> Mãos à obra!
-            </motion.div>
-          )}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
