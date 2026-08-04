@@ -32,7 +32,6 @@ export const InteractiveStage: React.FC = () => {
       const p = prev.find((x) => x.id === id);
       if (!p || p.found) return prev;
       setMessage(p.explanation);
-      setTimeout(() => setMessage(''), 3000);
       return prev.map((x) => (x.id === id ? { ...x, found: true } : x));
     });
   }, []);
