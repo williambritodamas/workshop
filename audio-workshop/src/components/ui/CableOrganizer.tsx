@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { X, Cable, GripVertical, Tag, ArrowRight, Check } from 'lucide-react';
 
 interface CableLine {
@@ -98,17 +97,7 @@ export const CableOrganizer: React.FC = () => {
             </div>
             <svg viewBox="0 0 100 100" className="w-full h-40">
               <rect x="0" y="0" width="100" height="100" fill="#0F172A" rx="8" />
-              <AnimatePresence mode="wait">
-                {!organized ? (
-                  <motion.g key="messy" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
-                    <MessyView />
-                  </motion.g>
-                ) : (
-                  <motion.g key="organized" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
-                    <OrganizedView />
-                  </motion.g>
-                )}
-              </AnimatePresence>
+              <MessyView />
             </svg>
           </div>
 
@@ -118,17 +107,7 @@ export const CableOrganizer: React.FC = () => {
             </div>
             <svg viewBox="0 0 100 100" className="w-full h-40">
               <rect x="0" y="0" width="100" height="100" fill="#0F172A" rx="8" />
-              <AnimatePresence mode="wait">
-                {organized ? (
-                  <motion.g key="org2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
-                    <OrganizedView />
-                  </motion.g>
-                ) : (
-                  <motion.g key="mess2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
-                    <MessyView />
-                  </motion.g>
-                )}
-              </AnimatePresence>
+              <OrganizedView />
             </svg>
           </div>
         </div>

@@ -33,7 +33,7 @@ const flowTree: FlowNode = {
             yes: {
               id: 'check-main',
               question: 'Main out ligado?',
-              yes: { id: 'check-speaker', question: 'Caixa ligada e com volume?', result: 'error', isEnd: true },
+              yes: { id: 'check-speaker', question: 'Caixa ligada e com volume?', result: 'ok', isEnd: true },
               no: { id: 'fix-main', question: 'Ative o Main Out', isEnd: true, result: 'error' },
             },
             no: { id: 'fix-gain', question: 'Ajuste o Gain (pré-fader)', isEnd: true, result: 'error' },
@@ -47,7 +47,7 @@ const flowTree: FlowNode = {
     no: {
       id: 'check-power',
       question: 'Equipamento ligado na tomada?',
-      yes: { id: 'check-power-cable', question: 'Cabo de energia funcionando?', result: 'error', isEnd: true },
+      yes: { id: 'check-power-cable', question: 'Cabo de energia com problema?', isEnd: true, result: 'error' },
       no: { id: 'fix-power', question: 'Conecte o equipamento na tomada', isEnd: true, result: 'error' },
     },
   },

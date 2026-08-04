@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mic, Speaker, Disc3, Laptop, Cable, Music, Timer, Award, Star } from 'lucide-react';
 import { SlideTitle } from '../../ui/SlideTitle';
@@ -23,7 +23,13 @@ const scoring = [
 
 export const Slide13_Challenge: React.FC = () => {
   const [started, setStarted] = useState(false);
-  const [timeLeft] = useState(300);
+  const [timeLeft, setTimeLeft] = useState(300);
+
+  useEffect(() => {
+    if (!started || timeLeft <= 0) return;
+    const timer = setInterval(() => setTimeLeft((t) => (t > 0 ? t - 1 : 0)), 1000);
+    return () => clearInterval(timer);
+  }, [started, timeLeft]);
 
   return (
     <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
