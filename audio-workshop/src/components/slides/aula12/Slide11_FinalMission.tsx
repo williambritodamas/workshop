@@ -52,7 +52,7 @@ export const Slide11_FinalMission: React.FC = () => {
   const pct = (timeLeft / 900) * 100;
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 pb-[80px] overflow-y-auto">
       <div className="absolute inset-0 z-0">
         <img src="/images/wall-of-sound.jpg" alt="Evento" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
