@@ -19,7 +19,7 @@ export const Slide16_Closing: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-12 overflow-y-auto">
+    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-12 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1920&auto=format&fit=crop"
@@ -68,7 +68,7 @@ export const Slide16_Closing: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
             whileHover={{ scale: 1.08, y: -5 }}
-            className="flex flex-col items-center p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 overflow-y-auto shadow-xl"
+            className="flex flex-col items-center p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 overflow-hidden shadow-xl"
           >
             <div className={`p-3 rounded-xl bg-slate-800 ${item.color} mb-2`}>
               {item.icon}
@@ -103,4 +103,5 @@ export const Slide16_Closing: React.FC = () => {
     </div>
   );
 };
+
 
