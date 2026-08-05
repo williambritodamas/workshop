@@ -6,13 +6,13 @@ import { slide16Notes } from './notes';
 export { slide16Notes };
 
 export const Slide16_Closing: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+  <div className="relative w-full h-screen flex flex-col justify-between items-center text-center overflow-hidden">
     <ConfettiEffect active={true} />
     <div className="absolute inset-0 z-0">
       <img src="/images/sound-reinforcement.jpg" alt="Operador durante evento" className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-950/60 to-slate-950/80" />
     </div>
-    <div className="relative z-10 w-full max-w-4xl my-auto space-y-8">
+    <div className="relative z-10 w-full max-w-4xl my-auto space-y-8 p-8 md:p-16">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
