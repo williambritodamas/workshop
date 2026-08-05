@@ -25,7 +25,7 @@ const items = [
 export const Slide05_ScenarioAuditorium: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Wall_of_Sound_%28QuadFest%29.jpg/1280px-Wall_of_Sound_%28QuadFest%29.jpg" alt="Auditório" className="w-full h-full object-cover opacity-20" />
+      <img src="/images/wall-of-sound.jpg" alt="Auditório" className="w-full h-full object-cover opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
