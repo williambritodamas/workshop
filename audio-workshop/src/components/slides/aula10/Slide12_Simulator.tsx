@@ -7,7 +7,7 @@ export { slide12Notes };
 export const Slide12_Simulator: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Mixing_console.jpg/1280px-Mixing_console.jpg" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
+      <img src="/images/mixing-console.jpg" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <SlideTitle title="Simulador de Microfonia" subtitle="Experimente ajustes e veja o risco de feedback em tempo real" badge="Interativo" />
