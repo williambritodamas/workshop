@@ -65,11 +65,11 @@ export const AudioEscapeRoom: React.FC = () => {
             <p className="text-slate-400 text-xs text-center mt-1">Verifique os itens um por um.</p>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1 overflow-y-auto max-h-[30vh] md:max-h-[40vh] hide-scrollbars">
             {checklist.map((item, i) => (
               <button key={item.id} onClick={() => handleCheck(item.id)}
                 disabled={item.checked || i !== currentItem}
-                className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
+                className={`w-full flex items-center gap-2 p-2 rounded-xl border transition-all cursor-pointer ${
                   item.checked
                     ? 'border-slate-700 bg-slate-800/50 opacity-60'
                     : i === currentItem

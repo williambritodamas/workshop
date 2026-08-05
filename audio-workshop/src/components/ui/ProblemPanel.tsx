@@ -43,11 +43,11 @@ export const ProblemPanel: React.FC = () => {
         <span className="text-white font-bold text-sm">Diagnóstico — Não sai som</span>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-1 overflow-y-auto max-h-[30vh] md:max-h-[40vh] hide-scrollbars">
         {items.map((item) => (
           <button key={item.id} onClick={() => handleClick(item.id)}
             disabled={item.checked}
-            className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
+            className={`w-full flex items-center gap-2 p-2 rounded-xl border transition-all cursor-pointer ${
               item.checked
                 ? 'border-slate-700 bg-slate-800/50'
                 : 'border-slate-800 bg-slate-900/60 hover:bg-slate-800/60'

@@ -139,7 +139,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
       </button>
 
       {/* Conteúdo do Slide Ativo */}
-      <div className={`w-full relative overflow-hidden transition-all duration-300 ${menuVisible ? 'h-[calc(100%-80px)]' : 'h-full'}`}>
+      <div className={`w-full h-full relative overflow-hidden transition-all duration-300 ${menuVisible ? 'pb-[80px]' : 'pb-0'}`}>
         <AnimatePresence mode="wait">
           <motion.div
             key={`${currentLesson}-${currentSlide}`}
@@ -147,7 +147,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 1.02, x: -20 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="w-full h-full overflow-y-auto overflow-x-hidden hide-scrollbars"
+            className="w-full h-full overflow-hidden hide-scrollbars"
           >
             {children[currentSlide]}
           </motion.div>
