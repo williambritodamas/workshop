@@ -53,6 +53,33 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
     }
   }, [currentSlide, onSlideChange, currentLesson]);
 
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
   // Suporte a teclas de navegação (Setas Esquerda, Direita, Espaço, N para notas)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -76,7 +103,12 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
   }, [nextSlide, prevSlide]);
 
   return (
-    <div className="relative w-screen h-screen bg-slate-950 text-slate-100 overflow-hidden select-none font-sans">
+    <div 
+      className="relative w-screen h-screen bg-slate-950 text-slate-100 overflow-hidden select-none font-sans"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       {/* Barra de Progresso Superior */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-slate-800 z-50">
         <motion.div
@@ -107,7 +139,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
       </button>
 
       {/* Conteúdo do Slide Ativo */}
-      <div className="w-full h-full relative">
+      <div className="w-full h-full relative overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={`${currentLesson}-${currentSlide}`}
@@ -115,7 +147,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 1.02, x: -20 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="w-full h-full"
+            className="w-full h-full overflow-y-auto overflow-x-hidden hide-scrollbars"
           >
             {children[currentSlide]}
           </motion.div>
@@ -138,131 +170,24 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 60, scale: 0.9 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/90 border border-slate-800 backdrop-blur-xl shadow-2xl">
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 md:gap-3 px-3 md:px-4 py-2 rounded-full bg-slate-900/90 border border-slate-800 backdrop-blur-xl shadow-2xl w-max max-w-[95vw]">
         {/* Seletor de Aula */}
-        <div className="flex items-center gap-1.5 pr-3 border-r border-slate-800 text-xs font-semibold">
-          <Volume2 className="w-4 h-4 text-blue-400 hidden sm:block" />
-          <div className="flex bg-slate-950 p-1 rounded-full border border-slate-800">
-            <button
-              onClick={() => onLessonChange(1)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 1
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 1
-            </button>
-            <button
-              onClick={() => onLessonChange(2)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 2
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 2
-            </button>
-            <button
-              onClick={() => onLessonChange(3)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 3
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 3
-            </button>
-            <button
-              onClick={() => onLessonChange(4)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 4
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 4
-            </button>
-            <button
-              onClick={() => onLessonChange(5)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 5
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 5
-            </button>
-            <button
-              onClick={() => onLessonChange(6)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 6
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 6
-            </button>
-            <button
-              onClick={() => onLessonChange(7)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 7
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 7
-            </button>
-            <button
-              onClick={() => onLessonChange(8)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 8
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 8
-            </button>
-            <button
-              onClick={() => onLessonChange(9)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 9
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 9
-            </button>
-            <button
-              onClick={() => onLessonChange(10)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 10
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 10
-            </button>
-            <button
-              onClick={() => onLessonChange(11)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 11
-                  ? 'bg-blue-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 11
-            </button>
-            <button
-              onClick={() => onLessonChange(12)}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                currentLesson === 12
-                  ? 'bg-amber-600 text-white font-bold shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Aula 12
-            </button>
+        <div className="flex items-center gap-1.5 pr-2 md:pr-3 border-r border-slate-800 text-xs font-semibold shrink-0">
+          <Volume2 className="w-4 h-4 text-blue-400 hidden sm:block shrink-0" />
+          <div className="flex bg-slate-950 p-1 rounded-full border border-slate-800 overflow-x-auto snap-x snap-mandatory hide-scrollbars max-w-[100px] sm:max-w-[200px] md:max-w-[400px]">
+            {[1,2,3,4,5,6,7,8,9,10,11,12].map((num) => (
+              <button
+                key={num}
+                onClick={() => onLessonChange(num as any)}
+                className={`px-2.5 py-1 rounded-full transition-all whitespace-nowrap shrink-0 snap-center ${
+                  currentLesson === num
+                    ? (num === 12 ? 'bg-amber-600 text-white font-bold shadow-md' : 'bg-blue-600 text-white font-bold shadow-md')
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                Aula {num}
+              </button>
+            ))}
           </div>
         </div>
 
