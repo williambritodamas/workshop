@@ -4,7 +4,7 @@ import { slide16Notes } from './notes';
 export { slide16Notes };
 
 export const Slide16_Closing: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img src="https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Operador ajustando equalizador" className="w-full h-full object-cover opacity-25 scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40" />
@@ -45,3 +45,4 @@ export const Slide16_Closing: React.FC = () => (
     </motion.div>
   </div>
 );
+
