@@ -23,7 +23,7 @@ export const Slide14_Closing: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-12 overflow-y-auto">
       {/* Background de Palco com Iluminação */}
       <div className="absolute inset-0 z-0">
         <img
@@ -73,9 +73,9 @@ export const Slide14_Closing: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="flex flex-col items-center p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 overflow-hidden shadow-xl"
+            className="flex flex-col items-center p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 overflow-y-auto shadow-xl"
           >
-            <div className="w-full h-24 rounded-xl overflow-hidden mb-3 relative">
+            <div className="w-full h-24 rounded-xl overflow-y-auto mb-3 relative">
               <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-slate-950/20" />
             </div>
@@ -111,3 +111,4 @@ export const Slide14_Closing: React.FC = () => {
     </div>
   );
 };
+

@@ -15,7 +15,7 @@ export const Slide09_AudioFlow: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Fluxo do Sinal de Áudio"
         subtitle="O caminho fundamental de qualquer sistema de sonorização profissional"
@@ -78,3 +78,4 @@ export const Slide09_AudioFlow: React.FC = () => {
     </div>
   );
 };
+

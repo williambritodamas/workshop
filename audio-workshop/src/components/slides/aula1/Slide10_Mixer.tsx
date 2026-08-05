@@ -7,7 +7,7 @@ import { slide10Notes } from './notes';
 export { slide10Notes };
 export const Slide10_Mixer: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Coração do Sistema"
         subtitle="Onde todos os sons se encontram e são moldados"
@@ -15,7 +15,7 @@ export const Slide10_Mixer: React.FC = () => {
       />
 
       {/* Conteúdo com Imagem da Mesa de Som e Efeito de Mistério */}
-      <div className="w-full max-w-5xl my-auto relative rounded-3xl overflow-hidden border border-slate-800 shadow-2xl group flex flex-col items-center justify-center p-8 md:p-16">
+      <div className="w-full max-w-5xl my-auto relative rounded-3xl overflow-y-auto border border-slate-800 shadow-2xl group flex flex-col items-center justify-center p-8 md:p-16 pb-[80px]">
         {/* Imagem de Fundo de uma Mesa de Som Pro */}
         <div className="absolute inset-0 z-0">
           <img
@@ -71,3 +71,4 @@ export const Slide10_Mixer: React.FC = () => {
     </div>
   );
 };
+

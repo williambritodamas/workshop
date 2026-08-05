@@ -7,7 +7,7 @@ import { slide08Notes } from './notes';
 export { slide08Notes };
 export const Slide08_Duality: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Duas faces da mesma moeda"
         subtitle="A simetria perfeita entre captação e reprodução sonora"
@@ -21,7 +21,7 @@ export const Slide08_Duality: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9, x: -30 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col items-center justify-center p-8 md:p-12 rounded-3xl bg-slate-900/90 border border-blue-500/40 relative overflow-hidden group shadow-2xl"
+          className="flex flex-col items-center justify-center p-8 md:p-12 rounded-3xl bg-slate-900/90 border border-blue-500/40 relative overflow-y-auto group shadow-2xl"
         >
           <div className="p-5 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-400 mb-6 group-hover:scale-110 transition-transform">
             <Volume2 className="w-16 h-16" />
@@ -58,7 +58,7 @@ export const Slide08_Duality: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9, x: 30 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col items-center justify-center p-8 md:p-12 rounded-3xl bg-slate-900/90 border border-cyan-500/40 relative overflow-hidden group shadow-2xl"
+          className="flex flex-col items-center justify-center p-8 md:p-12 rounded-3xl bg-slate-900/90 border border-cyan-500/40 relative overflow-y-auto group shadow-2xl"
         >
           <div className="p-5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
             <Mic className="w-16 h-16" />
@@ -106,3 +106,4 @@ export const Slide08_Duality: React.FC = () => {
     </div>
   );
 };
+

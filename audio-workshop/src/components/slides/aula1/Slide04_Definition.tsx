@@ -8,7 +8,7 @@ import { slide04Notes } from './notes';
 export { slide04Notes };
 export const Slide04_Definition: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Conceito Fundamental"
         subtitle="Como o som realmente viaja do emissor até quem ouve"
@@ -96,3 +96,4 @@ export const Slide04_Definition: React.FC = () => {
     </div>
   );
 };
+

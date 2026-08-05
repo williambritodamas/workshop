@@ -6,7 +6,7 @@ import { slide02Notes } from './notes';
 export { slide02Notes };
 export const Slide02_Question: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-center items-center text-center p-8 md:p-16 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-center items-center text-center p-8 md:p-16 overflow-y-auto">
       {/* Imagem de Fundo de Ondas Sonoras */}
       <div className="absolute inset-0 z-0">
         <img
@@ -59,3 +59,4 @@ export const Slide02_Question: React.FC = () => {
     </div>
   );
 };
+

@@ -35,7 +35,7 @@ export const Slide03_Everywhere: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O som está em todos os lugares"
         subtitle="Diferentes fontes, a mesma física por trás"
@@ -67,3 +67,4 @@ export const Slide03_Everywhere: React.FC = () => {
     </div>
   );
 };
+

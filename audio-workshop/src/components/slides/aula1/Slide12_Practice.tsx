@@ -25,7 +25,7 @@ export const Slide12_Practice: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Demonstração Prática"
         subtitle="Hora de experimentar e sentir a física do som em ação"
@@ -69,7 +69,7 @@ export const Slide12_Practice: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="lg:col-span-5 flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-b from-blue-900/40 via-slate-900 to-slate-950 border border-blue-500/40 text-center shadow-2xl relative overflow-hidden"
+          className="lg:col-span-5 flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-b from-blue-900/40 via-slate-900 to-slate-950 border border-blue-500/40 text-center shadow-2xl relative overflow-y-auto"
         >
           <div className="p-4 rounded-2xl bg-blue-500/10 text-blue-400 mb-4">
             <HelpCircle className="w-12 h-12" />
@@ -107,3 +107,4 @@ export const Slide12_Practice: React.FC = () => {
     </div>
   );
 };
+
