@@ -1,83 +1,91 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, CheckCircle, Lightbulb, SearchX, RotateCcw, Trophy } from 'lucide-react';
+import { Search, CheckCircle2, Lightbulb, RotateCcw, Trophy, Mic, Speaker, Disc3, Cable, MonitorSpeaker, Laptop, Bell, SlidersHorizontal, SearchCheck } from 'lucide-react';
 import { SlideTitle } from '../../ui/SlideTitle';
 import { slide09Notes } from './notes';
 export { slide09Notes };
 
-const errorInfo: Record<string, { label: string; icon: string; spot: number }> = {
-  mic:      { label: 'Microfone apontado para a caixa', icon: '🎤', spot: 0 },
-  gain:     { label: 'Gain clipando', icon: '📊', spot: 2 },
-  desk:     { label: 'Mesa desligada', icon: '🎚️', spot: 3 },
-  monitor:  { label: 'Monitor mal posicionado', icon: '📺', spot: 5 },
-  mute:     { label: 'Canal mutado', icon: '🔇', spot: 6 },
-  speaker:  { label: 'Caixa desligada', icon: '🔊', spot: 7 },
-  cables:   { label: 'Cabos cruzados', icon: '🔌', spot: 9 },
-  notebook: { label: 'Notebook desconectado', icon: '💻', spot: 10 },
-};
+interface Gear {
+  id: string;
+  label: string;
+  icon: React.FC<{ className?: string }>;
+  zone: 'front' | 'stage' | 'control';
+  correct: boolean;
+  result: string;
+}
 
-const errorIds = Object.keys(errorInfo);
-const emptySpots = [1, 4, 8, 11];
-const totalSpots = 12;
-
-const hints = [
-  'Olhe quem está apontado diretamente para a caixa.',
-  'Verifique cada botão de liga/desliga.',
-  'Repare no nível do ganho e se algo está no mute.',
-  'Confira os cabos e conexões em volta da mesa.',
+const gearList: Gear[] = [
+  { id: 'spk1', label: 'Caixa Principal', icon: Speaker, zone: 'front', correct: true, result: 'Tudo certo! Sinal saindo limpo.' },
+  { id: 'mic', label: 'Microfone', icon: Mic, zone: 'front', correct: false, result: 'Erro: apontado para a caixa (microfonia).' },
+  { id: 'spk2', label: 'Caixa Retorno 2', icon: Speaker, zone: 'front', correct: false, result: 'Erro: desligada, sem energia.' },
+  { id: 'mon1', label: 'Monitor 1', icon: MonitorSpeaker, zone: 'stage', correct: false, result: 'Erro: mal posicionado, apontando para o mic.' },
+  { id: 'mic2', label: 'Mic. Sem Fio', icon: Mic, zone: 'stage', correct: true, result: 'Tudo certo! Sinal estável.' },
+  { id: 'mixer', label: 'Mesa de Som', icon: Disc3, zone: 'stage', correct: false, result: 'Erro: canal está no mute.' },
+  { id: 'gain', label: 'Gain', icon: SlidersHorizontal, zone: 'stage', correct: false, result: 'Erro: gain no máximo, sinal clipando.' },
+  { id: 'mon2', label: 'Monitor 2', icon: MonitorSpeaker, zone: 'stage', correct: false, result: 'Erro: fio desencapado, conexão falha.' },
+  { id: 'notebook', label: 'Notebook', icon: Laptop, zone: 'control', correct: false, result: 'Erro: desconectado da mesa (sem USB).' },
+  { id: 'cable', label: 'Cabos', icon: Cable, zone: 'control', correct: true, result: 'Tudo certo! Conexões firmes.' },
+  { id: 'mute', label: 'Mute Master', icon: Bell, zone: 'control', correct: true, result: 'Tudo certo! Master no nível ideal.' },
+  { id: 'master', label: 'Fader Master', icon: SlidersHorizontal, zone: 'control', correct: false, result: 'Erro: master lá embaixo.' },
 ];
 
-const spotLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+const zoneMeta = {
+  front: { label: 'Frente do Palco', hint: 'Público / caixas principais' },
+  stage: { label: 'Palco', hint: 'Microfones, monitores, mesa' },
+  control: { label: 'Área de Controle', hint: 'Notebook, cabos, master' },
+} as const;
+
+const zoneColor: Record<Gear['zone'], string> = {
+  front: 'border-slate-600 bg-slate-800/90',
+  stage: 'border-purple-500/40 bg-slate-900/80',
+  control: 'border-cyan-500/40 bg-slate-900/80',
+};
+
+const errorCount = gearList.filter((g) => !g.correct).length;
 
 export const Slide09_ErrorHunt: React.FC = () => {
-  const [inspected, setInspected] = useState<Set<number>>(new Set());
-  const [attempts, setAttempts] = useState(0);
-  const [hintIdx, setHintIdx] = useState(-1);
+  const [inspected, setInspected] = useState<Set<string>>(new Set());
+  const [revealAll, setRevealAll] = useState(false);
 
-  const foundCount = Object.values(errorInfo).filter((e) => inspected.has(e.spot)).length;
-  const won = foundCount === errorIds.length;
+  const foundSet = new Set(gearList.filter((g) => !g.correct && inspected.has(g.id)).map((g) => g.id));
+  const foundCount = foundSet.size;
+  const allInspected = inspected.size === gearList.length;
+  const won = foundCount === errorCount;
 
-  const inspect = (spot: number) => {
-    if (inspected.has(spot) || won) return;
-    setInspected((prev) => new Set(prev).add(spot));
-    if (emptySpots.includes(spot)) {
-      setAttempts((a) => a + 1);
-      setHintIdx(-1);
-    }
-  };
-
-  const showHint = () => {
-    setHintIdx((prev) => (prev + 1) % hints.length);
+  const inspect = (id: string) => {
+    if (inspected.has(id) || revealAll) return;
+    setInspected((prev) => new Set(prev).add(id));
   };
 
   const reset = () => {
     setInspected(new Set());
-    setAttempts(0);
-    setHintIdx(-1);
+    setRevealAll(false);
   };
 
+  const isRevealed = (g: Gear) => revealAll || inspected.has(g.id);
+
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+    <div className="relative w-full h-full flex flex-col justify-between items-center p-6 md:p-12 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Wall_of_Sound_(QuadFest).jpg?width=1920" alt="Palco" className="w-full h-full object-cover opacity-10" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Wall_of_Sound_%28QuadFest%29.jpg/1280px-Wall_of_Sound_%28QuadFest%29.jpg" alt="Palco" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
       </div>
-      <SlideTitle title="Caça aos Erros" subtitle="Inspecione o palco e encontre todos os 8 erros" badge="Desafio" />
+      <SlideTitle title="Caça aos Erros" subtitle="Inspecione cada equipamento do palco e encontre os 8 problemas" badge="Desafio" />
 
-      <div className="relative z-10 w-full max-w-3xl space-y-5">
+      <div className="relative z-10 w-full max-w-4xl space-y-4">
         <div className="flex flex-wrap items-center justify-center gap-2">
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
-            <Search className="w-3.5 h-3.5" /> {foundCount}/{errorIds.length} encontrados
+            <Search className="w-3.5 h-3.5" /> {foundCount}/{errorCount} problemas encontrados
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/70 border border-slate-700 text-slate-300 text-xs font-bold">
-            <SearchX className="w-3.5 h-3.5" /> {attempts} locais vazios inspecionados
+            {inspected.size}/{gearList.length} itens inspecionados
           </div>
-          <button onClick={showHint}
+          <button onClick={() => setRevealAll(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold hover:bg-amber-500/20 transition-colors cursor-pointer"
           >
-            <Lightbulb className="w-3.5 h-3.5" /> Dica
+            <SearchCheck className="w-3.5 h-3.5" /> Revelar erros
           </button>
-          {inspected.size > 0 && (
+          {(inspected.size > 0 || revealAll) && (
             <button onClick={reset}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/70 border border-slate-700 text-slate-300 text-xs font-bold hover:text-white transition-colors cursor-pointer"
             >
@@ -86,76 +94,86 @@ export const Slide09_ErrorHunt: React.FC = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
-          {Array.from({ length: totalSpots }).map((_, spot) => {
-            const isInspected = inspected.has(spot);
-            const err = errorIds.find((id) => errorInfo[id].spot === spot);
-            const row = Math.floor(spot / 4);
-            return (
-              <motion.button
-                key={spot}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: (row + spot % 4) * 0.05 }}
-                onClick={() => inspect(spot)}
-                disabled={isInspected || won}
-                className={`relative aspect-square rounded-xl border-2 transition-all cursor-pointer ${
-                  row === 0
-                    ? 'border-slate-700 bg-slate-900/80'
-                    : row === 1
-                    ? 'border-purple-500/40 bg-slate-900/70'
-                    : row === 2
-                    ? 'border-slate-600 bg-slate-800/90'
-                    : 'border-slate-500 bg-slate-700/90'
-                } ${!isInspected && !won ? 'hover:border-amber-400/70 hover:scale-105' : ''}`}
-                title={row === 0 ? 'Frente do palco' : row === 1 ? 'Centro / microfones' : row === 2 ? 'Mesa e cabos' : 'Público / acesso'}
-              >
-                {row === 0 && <span className="absolute top-1 left-1 text-[8px] text-slate-500 font-bold">FRENTE</span>}
-                {row === 3 && <span className="absolute bottom-1 left-1 text-[8px] text-slate-500 font-bold">CONTROLE</span>}
-                {isInspected ? (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
-                    {err ? (
-                      <>
-                        <span className="text-2xl">{errorInfo[err].icon}</span>
-                        <span className="text-[8px] sm:text-[9px] font-bold px-1 text-emerald-300 leading-tight">{errorInfo[err].label}</span>
-                        <span className="absolute top-1 right-1 text-emerald-400"><CheckCircle className="w-3.5 h-3.5" /></span>
-                      </>
-                    ) : (
-                      <span className="text-slate-600 text-xs font-bold">—</span>
-                    )}
-                  </div>
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-slate-600 text-sm font-black">{spotLabels[spot]}</span>
-                    <span className="text-[8px] text-slate-600">inspecionar</span>
-                  </div>
-                )}
-              </motion.button>
-            );
-          })}
+        <div className="grid grid-rows-3 gap-3">
+          {(['front', 'stage', 'control'] as const).map((zone) => (
+            <div key={zone} className={`rounded-2xl border p-3 ${zoneColor[zone]}`}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  {zoneMeta[zone].label}
+                </span>
+                <span className="text-[9px] text-slate-500">{zoneMeta[zone].hint}</span>
+              </div>
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+                {gearList.filter((g) => g.zone === zone).map((g) => {
+                  const Icon = g.icon;
+                  const revealed = isRevealed(g);
+                  const isProblem = !g.correct;
+                  return (
+                    <motion.button
+                      key={g.id}
+                      whileHover={!revealed ? { scale: 1.04 } : {}}
+                      whileTap={!revealed ? { scale: 0.97 } : {}}
+                      onClick={() => inspect(g.id)}
+                      disabled={revealed}
+                      className={`relative flex flex-col items-center gap-2 rounded-xl border p-3 text-center transition-all cursor-pointer ${
+                        revealed
+                          ? isProblem
+                            ? 'bg-red-500/15 border-red-500/50'
+                            : 'bg-emerald-500/10 border-emerald-500/40'
+                          : 'border-slate-700 bg-slate-900/70 hover:border-amber-400/60'
+                      }`}
+                      title="Clique para inspecionar"
+                    >
+                      {!revealed && (
+                        <motion.div
+                          className="absolute inset-0 rounded-xl flex items-center justify-center bg-slate-950/70"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                        >
+                          <Search className="w-5 h-5 text-slate-500" />
+                        </motion.div>
+                      )}
+                      <Icon className={`w-6 h-6 ${revealed ? (isProblem ? 'text-red-400' : 'text-emerald-400') : 'text-slate-300'}`} />
+                      <span className={`text-[11px] font-bold leading-tight ${revealed ? (isProblem ? 'text-red-200' : 'text-emerald-200') : 'text-slate-200'}`}>
+                        {g.label}
+                      </span>
+                      {revealed && (
+                        <span className={`text-[9px] font-semibold leading-tight ${isProblem ? 'text-red-300' : 'text-emerald-300'}`}>
+                          {isProblem ? 'PROBLEMA' : 'OK'}
+                        </span>
+                      )}
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="min-h-[44px]">
+        <div className="min-h-[64px]">
           <AnimatePresence mode="wait">
-            {hintIdx >= 0 && !won && (
-              <motion.div key={hintIdx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm"
-              >
-                <Lightbulb className="w-4 h-4 shrink-0 text-amber-400" />
-                {hints[hintIdx]}
-              </motion.div>
-            )}
             {won && (
               <motion.div key="won" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center gap-2 p-5 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-400/40"
+                className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-400/40"
               >
-                <div className="flex items-center gap-2 text-xl font-black text-emerald-400">
-                  <Trophy className="w-6 h-6" /> Todos os erros encontrados!
-                </div>
-                <p className="text-slate-200 text-sm">
-                  {attempts === 0 ? 'Perfeito, sem erros de inspeção!' : `Você inspecionou ${attempts} locais sem erro${attempts > 1 ? 's' : ''} antes de concluir.`}
-                  {' '}Olho clínico para problemas de áudio!
-                </p>
+                <Trophy className="w-6 h-6 text-emerald-400" />
+                <span className="text-lg font-black text-emerald-400">Todos os problemas encontrados!</span>
+              </motion.div>
+            )}
+            {!won && allInspected && !revealAll && (
+              <motion.div key="hint" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm"
+              >
+                <Lightbulb className="w-4 h-4 shrink-0" />
+                Nem todos os itens estão OK — use "Revelar erros" para conferir quais falharam.
+              </motion.div>
+            )}
+            {!won && revealAll && (
+              <motion.div key="reveal" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/70 border border-slate-700 text-slate-300 text-sm"
+              >
+                <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+                Os itens verificados revelam se cada equipamento passou ou falhou na inspeção.
               </motion.div>
             )}
           </AnimatePresence>

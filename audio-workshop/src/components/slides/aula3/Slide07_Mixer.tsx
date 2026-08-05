@@ -30,7 +30,7 @@ export const Slide07_Mixer: React.FC = () => {
           className="lg:col-span-6 h-72 md:h-96 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl relative"
         >
           <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Mixing_console.jpg?width=1000"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Mixing_console.jpg/1280px-Mixing_console.jpg"
             alt="Mesa de som de 16 canais"
             className="w-full h-full object-cover"
           />

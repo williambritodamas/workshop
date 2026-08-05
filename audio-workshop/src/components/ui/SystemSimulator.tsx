@@ -5,11 +5,11 @@ import { Volume2, Mic, Speaker, SlidersHorizontal, Waves, Gauge, ArrowLeftRight 
 const baseAmp = [0.45, 0.58, 0.7, 0.8, 0.86, 0.82, 0.75, 0.66, 0.56, 0.46, 0.38, 0.32];
 
 const palette = {
-  blue: { icon: 'text-blue-400', track: 'bg-blue-500', thumb: 'bg-blue-400', chip: 'bg-blue-500/10' },
-  red: { icon: 'text-red-400', track: 'bg-red-500', thumb: 'bg-red-400', chip: 'bg-red-500/10' },
-  purple: { icon: 'text-purple-400', track: 'bg-purple-500', thumb: 'bg-purple-400', chip: 'bg-purple-500/10' },
-  amber: { icon: 'text-amber-400', track: 'bg-amber-500', thumb: 'bg-amber-400', chip: 'bg-amber-500/10' },
-  cyan: { icon: 'text-cyan-400', track: 'bg-cyan-500', thumb: 'bg-cyan-400', chip: 'bg-cyan-500/10' },
+  blue: { icon: 'text-blue-400', slider: 'accent-blue-500 [&::-webkit-slider-thumb]:bg-blue-400', chip: 'bg-blue-500/10' },
+  red: { icon: 'text-red-400', slider: 'accent-red-500 [&::-webkit-slider-thumb]:bg-red-400', chip: 'bg-red-500/10' },
+  purple: { icon: 'text-purple-400', slider: 'accent-purple-500 [&::-webkit-slider-thumb]:bg-purple-400', chip: 'bg-purple-500/10' },
+  amber: { icon: 'text-amber-400', slider: 'accent-amber-500 [&::-webkit-slider-thumb]:bg-amber-400', chip: 'bg-amber-500/10' },
+  cyan: { icon: 'text-cyan-400', slider: 'accent-cyan-500 [&::-webkit-slider-thumb]:bg-cyan-400', chip: 'bg-cyan-500/10' },
 };
 
 export const SystemSimulator: React.FC = () => {
@@ -178,7 +178,7 @@ function Slider({ label, value, onChange, icon, color }: {
           <span className={`${p.icon} font-bold`}>{value}</span>
         </div>
         <input type="range" min={0} max={10} value={value} onChange={(e) => onChange(Number(e.target.value))}
-          className={`w-full h-1.5 appearance-none rounded-full cursor-pointer accent-${color}-500 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:${p.thumb}`}
+          className={`w-full h-1.5 appearance-none bg-slate-800 rounded-full cursor-pointer ${p.slider} [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-none`}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ export const Slide16_Closing: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
     <ConfettiEffect active={true} />
     <div className="absolute inset-0 z-0">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sound_reinforcement_system.jpg?width=1920" alt="Operador durante evento" className="w-full h-full object-cover" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sound_reinforcement_system.jpg/1280px-Sound_reinforcement_system.jpg" alt="Operador durante evento" className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-950/60 to-slate-950/80" />
     </div>
     <div className="relative z-10 w-full max-w-4xl my-auto space-y-8">

@@ -25,7 +25,7 @@ const items = [
 export const Slide03_ScenarioChurch: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sound_reinforcement_system.jpg?width=1920" alt="Igreja" className="w-full h-full object-cover opacity-20" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sound_reinforcement_system.jpg/1280px-Sound_reinforcement_system.jpg" alt="Igreja" className="w-full h-full object-cover opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
