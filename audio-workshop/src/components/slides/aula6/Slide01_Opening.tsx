@@ -3,7 +3,7 @@ import { slide01Notes } from './notes';
 export { slide01Notes };
 
 export const Slide01_Opening: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img src="https://images.pexels.com/photos/11884526/pexels-photo-11884526.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som com faders" className="w-full h-full object-cover opacity-35 scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40" />
@@ -34,3 +34,4 @@ export const Slide01_Opening: React.FC = () => (
     </motion.div>
   </div>
 );
+
