@@ -14,7 +14,7 @@ export const Slide07_Mixer: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="A Mesa de Som"
         subtitle="Onde todo o áudio se encontra"
@@ -27,7 +27,7 @@ export const Slide07_Mixer: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-6 h-72 md:h-96 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl relative"
+          className="lg:col-span-6 h-72 md:h-96 rounded-3xl overflow-y-auto border border-blue-500/30 shadow-2xl relative"
         >
           <img
             src="/images/mixing-console.jpg"
@@ -98,3 +98,4 @@ export const Slide07_Mixer: React.FC = () => {
     </div>
   );
 };
+

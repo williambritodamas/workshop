@@ -33,7 +33,7 @@ export const Slide13_Exercise: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Organize os Equipamentos"
         subtitle="Coloque na ordem correta do fluxo de áudio"
@@ -139,3 +139,4 @@ export const Slide13_Exercise: React.FC = () => {
     </div>
   );
 };
+

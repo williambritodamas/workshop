@@ -10,7 +10,7 @@ export const Slide10_Speaker: React.FC = () => {
   const [view, setView] = useState<'speaker' | 'compare'>('speaker');
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Caixa de Som"
         subtitle="O exato contrário do microfone"
@@ -43,7 +43,7 @@ export const Slide10_Speaker: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="relative h-72 md:h-80 rounded-3xl overflow-hidden border border-emerald-500/30 shadow-2xl"
+              className="relative h-72 md:h-80 rounded-3xl overflow-y-auto border border-emerald-500/30 shadow-2xl"
             >
               <img
                 src="https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=1000&auto=format&fit=crop"
@@ -137,3 +137,4 @@ export const Slide10_Speaker: React.FC = () => {
     </div>
   );
 };
+

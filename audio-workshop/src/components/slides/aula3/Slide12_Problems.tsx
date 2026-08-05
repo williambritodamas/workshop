@@ -39,7 +39,7 @@ export const Slide12_Problems: React.FC = () => {
   const [showSearchTip, setShowSearchTip] = useState(false);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Onde podem acontecer problemas?"
         subtitle="Cada ponto do fluxo pode falhar"
@@ -94,3 +94,4 @@ export const Slide12_Problems: React.FC = () => {
     </div>
   );
 };
+

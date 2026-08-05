@@ -10,7 +10,7 @@ export const Slide09_Amplifier: React.FC = () => {
   const [activeSystem, setActiveSystem] = useState<'ativa' | 'passiva'>('ativa');
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Amplificador"
         subtitle="Dando força ao sinal"
@@ -142,3 +142,4 @@ export const Slide09_Amplifier: React.FC = () => {
     </div>
   );
 };
+

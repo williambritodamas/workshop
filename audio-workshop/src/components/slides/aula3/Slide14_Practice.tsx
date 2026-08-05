@@ -17,7 +17,7 @@ const demoItems = [
 
 export const Slide14_Practice: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Demonstração Prática"
         subtitle="Hora de experimentar na prática!"
@@ -52,3 +52,4 @@ export const Slide14_Practice: React.FC = () => {
     </div>
   );
 };
+

@@ -6,7 +6,7 @@ export { slide02Notes };
 
 export const Slide02_Question: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-center items-center text-center p-8 md:p-16 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-center items-center text-center p-8 md:p-16 overflow-y-auto">
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1920&auto=format&fit=crop"
@@ -67,3 +67,4 @@ export const Slide02_Question: React.FC = () => {
     </div>
   );
 };
+
