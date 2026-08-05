@@ -139,7 +139,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
       </button>
 
       {/* Conteúdo do Slide Ativo */}
-      <div className="w-full h-full relative overflow-hidden">
+      <div className={`w-full relative overflow-hidden transition-all duration-300 ${menuVisible ? 'h-[calc(100%-80px)]' : 'h-full'}`}>
         <AnimatePresence mode="wait">
           <motion.div
             key={`${currentLesson}-${currentSlide}`}
@@ -174,21 +174,17 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
         {/* Seletor de Aula */}
         <div className="flex items-center gap-1.5 pr-2 md:pr-3 border-r border-slate-800 text-xs font-semibold shrink-0">
           <Volume2 className="w-4 h-4 text-blue-400 hidden sm:block shrink-0" />
-          <div className="flex bg-slate-950 p-1 rounded-full border border-slate-800 overflow-x-auto snap-x snap-mandatory hide-scrollbars max-w-[100px] sm:max-w-[200px] md:max-w-[400px]">
-            {[1,2,3,4,5,6,7,8,9,10,11,12].map((num) => (
-              <button
-                key={num}
-                onClick={() => onLessonChange(num as any)}
-                className={`px-2.5 py-1 rounded-full transition-all whitespace-nowrap shrink-0 snap-center ${
-                  currentLesson === num
-                    ? (num === 12 ? 'bg-amber-600 text-white font-bold shadow-md' : 'bg-blue-600 text-white font-bold shadow-md')
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
+          <select
+            value={currentLesson}
+            onChange={(e) => onLessonChange(Number(e.target.value) as any)}
+            className="bg-slate-950 border border-slate-800 rounded-full px-3 py-1.5 text-xs font-semibold text-slate-200 cursor-pointer focus:outline-none focus:border-blue-500 hover:bg-slate-900 transition-colors"
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
+              <option key={num} value={num}>
                 Aula {num}
-              </button>
+              </option>
             ))}
-          </div>
+          </select>
         </div>
 
         {/* Botão Anterior */}
