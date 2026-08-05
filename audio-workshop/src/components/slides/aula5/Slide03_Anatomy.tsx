@@ -4,7 +4,7 @@ import { slide03Notes } from './notes';
 export { slide03Notes };
 
 export const Slide03_Anatomy: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img src="https://images.pexels.com/photos/33379549/pexels-photo-33379549.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
@@ -15,3 +15,4 @@ export const Slide03_Anatomy: React.FC = () => (
     </div>
   </div>
 );
+

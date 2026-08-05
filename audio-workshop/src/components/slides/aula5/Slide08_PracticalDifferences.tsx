@@ -18,14 +18,14 @@ const icons = [
 ];
 
 export const Slide08_PracticalDifferences: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img src="https://images.pexels.com/photos/33379549/pexels-photo-33379549.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
     </div>
     <SlideTitle title="O que muda na prática?" subtitle="Comparação direta entre os dois mundos" badge="Comparação" />
     <div className="relative z-10 w-full max-w-4xl my-auto">
-      <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 backdrop-blur-sm">
+      <div className="overflow-y-auto rounded-3xl border border-slate-800 bg-slate-900/80 backdrop-blur-sm">
         <div className="grid grid-cols-3 gap-0">
           <div className="p-4 bg-slate-800/50 text-slate-400 text-xs font-bold uppercase tracking-wider border-b border-slate-800">Característica</div>
           <div className="p-4 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider border-b border-slate-800 text-center">Analógica</div>
@@ -55,3 +55,4 @@ export const Slide08_PracticalDifferences: React.FC = () => (
     </div>
   </div>
 );
+
