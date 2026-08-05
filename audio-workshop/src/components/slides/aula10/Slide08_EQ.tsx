@@ -19,7 +19,7 @@ export const Slide08_EQ: React.FC = () => {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <div className="absolute inset-0 z-0">
         <img src="/images/mixing-console.jpg" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
@@ -37,7 +37,7 @@ export const Slide08_EQ: React.FC = () => {
               return (
                 <div key={freq} className="flex items-center gap-2">
                   <div className="w-16 text-[10px] text-slate-500 text-right">{freq} Hz</div>
-                  <div className="flex-1 h-4 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="flex-1 h-4 rounded-full bg-slate-800 overflow-y-auto">
                     <motion.div
                       animate={{ width: cut !== undefined ? `${100 - cut}%` : '100%' }}
                       transition={{ duration: 0.3 }}
@@ -82,3 +82,4 @@ export const Slide08_EQ: React.FC = () => {
     </div>
   );
 };
+

@@ -13,7 +13,7 @@ export const Slide02_Hearing: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-center items-center text-center p-8 md:p-16 overflow-hidden bg-slate-950">
+    <div className="relative w-full flex-1 flex flex-col justify-center items-center text-center p-8 md:p-16 overflow-y-auto bg-slate-950">
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950" />
       {phase === 'scream' && (
         <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}
@@ -51,3 +51,4 @@ export const Slide02_Hearing: React.FC = () => {
     </div>
   );
 };
+
