@@ -139,7 +139,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
       </button>
 
       {/* Conteúdo do Slide Ativo */}
-      <div className={`w-full h-full relative overflow-hidden transition-all duration-300 ${menuVisible ? 'pb-[80px]' : 'pb-0'}`}>
+      <div className={`w-full relative overflow-hidden transition-all duration-300 ${menuVisible ? 'pb-[80px]' : ''}`}>
         <AnimatePresence mode="wait">
           <motion.div
             key={`${currentLesson}-${currentSlide}`}
