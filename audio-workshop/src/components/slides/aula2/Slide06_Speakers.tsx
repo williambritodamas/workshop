@@ -52,7 +52,7 @@ export const Slide06_Speakers: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Caixas de Som"
         subtitle="Transformando a energia elétrica de volta em pressão acústica para os ouvidos"
@@ -86,3 +86,4 @@ export const Slide06_Speakers: React.FC = () => {
     </div>
   );
 };
+

@@ -26,7 +26,7 @@ export const Slide05_MixerConsole: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="A Mesa de Som"
         subtitle="O cérebro central onde todos os sons são combinados e ajustados"
@@ -40,7 +40,7 @@ export const Slide05_MixerConsole: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-7 relative h-72 md:h-96 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl group"
+          className="lg:col-span-7 relative h-72 md:h-96 rounded-3xl overflow-y-auto border border-slate-800 shadow-2xl group"
         >
           <img
             src="https://images.pexels.com/photos/33434894/pexels-photo-33434894.jpeg?auto=compress&cs=tinysrgb&w=1200"
@@ -138,3 +138,4 @@ export const Slide05_MixerConsole: React.FC = () => {
     </div>
   );
 };
+

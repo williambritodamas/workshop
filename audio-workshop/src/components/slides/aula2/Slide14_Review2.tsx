@@ -24,7 +24,7 @@ export const Slide14_Review2: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Revisão da Aula 2"
         subtitle="Os 5 pilares dos equipamentos de sonorização profissional"
@@ -65,3 +65,4 @@ export const Slide14_Review2: React.FC = () => {
     </div>
   );
 };
+

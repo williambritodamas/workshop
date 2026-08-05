@@ -19,7 +19,7 @@ export const Slide03_MicrophoneIntro: React.FC = () => {
   const sources = ['Voz', 'Violão', 'Bateria', 'Coral'];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Microfone"
         subtitle="A porta de entrada primária de todo sistema de áudio"
@@ -33,7 +33,7 @@ export const Slide03_MicrophoneIntro: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-6 h-72 md:h-96 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl relative group"
+          className="lg:col-span-6 h-72 md:h-96 rounded-3xl overflow-y-auto border border-blue-500/30 shadow-2xl relative group"
         >
           <img
             src="https://images.pexels.com/photos/10165653/pexels-photo-10165653.jpeg?auto=compress&cs=tinysrgb&w=1000"
@@ -117,3 +117,4 @@ export const Slide03_MicrophoneIntro: React.FC = () => {
     </div>
   );
 };
+

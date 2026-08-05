@@ -33,7 +33,7 @@ export const Slide15_Closing2: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-12 overflow-y-auto">
       {/* Background Operador de Áudio */}
       <div className="absolute inset-0 z-0">
         <img
@@ -120,3 +120,4 @@ export const Slide15_Closing2: React.FC = () => {
     </div>
   );
 };
+

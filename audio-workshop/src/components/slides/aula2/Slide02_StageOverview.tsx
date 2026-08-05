@@ -28,7 +28,7 @@ export const Slide02_StageOverview: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O que existe em um sistema de áudio?"
         subtitle="Explore o palco e identifique os equipamentos fundamentais"
@@ -36,7 +36,7 @@ export const Slide02_StageOverview: React.FC = () => {
       />
 
       {/* Palco Interativo com Hotspots */}
-      <div className="w-full max-w-5xl my-auto relative h-[55vh] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl group">
+      <div className="w-full max-w-5xl my-auto relative h-[55vh] rounded-3xl overflow-y-auto border border-slate-800 shadow-2xl group">
         <img
           src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200&auto=format&fit=crop"
           alt="Palco de show completo"
@@ -91,3 +91,4 @@ export const Slide02_StageOverview: React.FC = () => {
     </div>
   );
 };
+

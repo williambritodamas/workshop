@@ -17,7 +17,7 @@ export const slide09Notes: PresenterNote = {
 
 export const Slide09_DiBox: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Direct Box (DI Box)"
         subtitle="O adaptador e protetor do sinal de instrumentos musicais"
@@ -31,7 +31,7 @@ export const Slide09_DiBox: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-5 h-72 md:h-96 rounded-3xl overflow-hidden border border-blue-500/30 shadow-2xl relative group"
+          className="lg:col-span-5 h-72 md:h-96 rounded-3xl overflow-y-auto border border-blue-500/30 shadow-2xl relative group"
         >
           <img
             src="/images/samson-dibox.jpg"
@@ -121,3 +121,4 @@ export const Slide09_DiBox: React.FC = () => {
     </div>
   );
 };
+

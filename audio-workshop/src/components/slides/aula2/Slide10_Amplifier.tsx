@@ -17,7 +17,7 @@ export const slide10Notes: PresenterNote = {
 
 export const Slide10_Amplifier: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Amplificador de Potência"
         subtitle="Fornecendo a energia bruta necessária para mover as caixas acústicas"
@@ -90,7 +90,7 @@ export const Slide10_Amplifier: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-5 flex flex-col items-center text-center p-8 rounded-3xl bg-gradient-to-b from-yellow-500/10 via-slate-900 to-slate-950 border border-yellow-500/30 shadow-2xl relative overflow-hidden"
+          className="lg:col-span-5 flex flex-col items-center text-center p-8 rounded-3xl bg-gradient-to-b from-yellow-500/10 via-slate-900 to-slate-950 border border-yellow-500/30 shadow-2xl relative overflow-y-auto"
         >
           <div className="p-4 rounded-2xl bg-yellow-500/20 text-yellow-400 mb-4">
             <Gauge className="w-12 h-12" />
@@ -122,3 +122,4 @@ export const Slide10_Amplifier: React.FC = () => {
     </div>
   );
 };
+

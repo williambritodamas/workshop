@@ -20,7 +20,7 @@ export const slide01Notes: PresenterNote = {
 
 export const Slide01_Intro2: React.FC = () => {
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
       {/* Background Image com Overlay Gradient */}
       <div className="absolute inset-0 z-0">
         <img
@@ -83,3 +83,4 @@ export const Slide01_Intro2: React.FC = () => {
     </div>
   );
 };
+

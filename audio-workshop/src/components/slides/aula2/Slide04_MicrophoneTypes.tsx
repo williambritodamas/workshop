@@ -66,7 +66,7 @@ export const Slide04_MicrophoneTypes: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Tipos de Microfone"
         subtitle="Cada modelo foi desenhado para uma necessidade específica"
@@ -104,3 +104,4 @@ export const Slide04_MicrophoneTypes: React.FC = () => {
     </div>
   );
 };
+

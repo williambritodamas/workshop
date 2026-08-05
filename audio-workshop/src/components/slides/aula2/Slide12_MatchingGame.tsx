@@ -38,7 +38,7 @@ export const Slide12_MatchingGame: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="Vamos brincar?"
         subtitle="Qual equipamento executa cada uma das funções vitais do áudio?"
@@ -56,7 +56,7 @@ export const Slide12_MatchingGame: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
               onClick={() => toggleReveal(idx)}
-              className={`p-6 rounded-3xl border cursor-pointer transition-all flex flex-col justify-between h-48 relative overflow-hidden group ${
+              className={`p-6 rounded-3xl border cursor-pointer transition-all flex flex-col justify-between h-48 relative overflow-y-auto group ${
                 isRevealed
                   ? 'bg-blue-500/20 border-blue-500 shadow-xl shadow-blue-500/20'
                   : 'bg-slate-900/80 border-slate-800 hover:border-blue-500/40 hover:bg-slate-800/60'
@@ -112,3 +112,4 @@ export const Slide12_MatchingGame: React.FC = () => {
     </div>
   );
 };
+

@@ -27,7 +27,7 @@ export const Slide11_FullAudioPath: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle
         title="O Caminho do Som (Fluxo de Sinal)"
         subtitle="A jornada completa da vibração vocal até a percepção no ouvido"
@@ -90,3 +90,4 @@ export const Slide11_FullAudioPath: React.FC = () => {
     </div>
   );
 };
+
