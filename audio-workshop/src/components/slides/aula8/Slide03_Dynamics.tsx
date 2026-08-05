@@ -5,7 +5,7 @@ import { slide03Notes } from './notes';
 export { slide03Notes };
 
 export const Slide03_Dynamics: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img src="https://images.pexels.com/photos/164680/pexels-photo-164680.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
@@ -29,7 +29,7 @@ export const Slide03_Dynamics: React.FC = () => (
             <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
               <span className={item.color}>{item.icon}</span>
               <span className="text-slate-300 text-xs w-20">{item.label}</span>
-              <div className="flex-1 h-3 bg-slate-800 rounded-full overflow-hidden">
+              <div className="flex-1 h-3 bg-slate-800 rounded-full overflow-y-auto">
                 <div className={`h-full rounded-full ${item.color.replace('text-', 'bg-')}`} style={{ width: item.bar === 'w-full' ? '100%' : item.bar === 'w-1/2' ? '50%' : '25%' }} />
               </div>
             </div>
@@ -52,3 +52,4 @@ export const Slide03_Dynamics: React.FC = () => (
     </div>
   </div>
 );
+
