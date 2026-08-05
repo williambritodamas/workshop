@@ -12,10 +12,11 @@ const questions = [
 ];
 
 export const Slide13_Quiz: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Quiz rápido" subtitle="Consegue identificar o microfone pela foto?" badge="Quiz" />
     <div className="w-full max-w-3xl my-auto">
       <QuizMicrophone questions={questions} />
     </div>
   </div>
 );
+

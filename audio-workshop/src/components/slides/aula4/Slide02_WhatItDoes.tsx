@@ -16,7 +16,7 @@ export const Slide02_WhatItDoes: React.FC = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle title="O que faz um microfone?" subtitle="Transforma vibrações do ar em sinais elétricos" badge="Conceito" />
       <div className="w-full max-w-5xl my-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2 p-6 md:p-10 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl">
         {stages.map((s, idx) => (
@@ -48,3 +48,4 @@ export const Slide02_WhatItDoes: React.FC = () => {
     </div>
   );
 };
+

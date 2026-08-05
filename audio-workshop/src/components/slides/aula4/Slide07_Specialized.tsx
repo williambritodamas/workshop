@@ -29,7 +29,7 @@ const cards = [
 ];
 
 export const Slide07_Specialized: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Microfones especializados" subtitle="Headset, Lapela e Shotgun — cada um com sua vocação" badge="Especiais" />
     <div className="w-full max-w-6xl my-auto grid grid-cols-1 md:grid-cols-3 gap-6">
       {cards.map((c, i) => (
@@ -48,3 +48,4 @@ export const Slide07_Specialized: React.FC = () => (
     </div>
   </div>
 );
+

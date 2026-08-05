@@ -12,7 +12,7 @@ const patterns = [
 ];
 
 export const Slide08_PolarPatterns: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Padrões Polares" subtitle='Como cada microfone "enxerga" o som ao redor' badge="Padrões" />
     <div className="w-full max-w-6xl my-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
       <PolarPatternAnimation />
@@ -27,3 +27,4 @@ export const Slide08_PolarPatterns: React.FC = () => (
     </div>
   </div>
 );
+

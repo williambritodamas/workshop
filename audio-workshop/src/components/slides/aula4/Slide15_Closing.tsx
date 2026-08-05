@@ -4,7 +4,7 @@ import { ChevronRight, Sparkles } from 'lucide-react';
 export { slide15Notes };
 
 export const Slide15_Closing: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
     <motion.div
       animate={{ scale: [1, 1.1, 1], rotate: [0, 3, -3, 0] }}
       transition={{ duration: 3, repeat: Infinity, repeatType: 'mirror' }}
@@ -36,3 +36,4 @@ export const Slide15_Closing: React.FC = () => (
     </div>
   </div>
 );
+

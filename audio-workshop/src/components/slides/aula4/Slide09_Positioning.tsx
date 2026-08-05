@@ -12,7 +12,7 @@ const tips = [
 ];
 
 export const Slide09_Positioning: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Posicionamento" subtitle="Como usar o microfone corretamente" badge="Técnica" />
     <div className="w-full max-w-5xl my-auto grid grid-cols-1 md:grid-cols-2 gap-6">
       {tips.map((t, i) => (
@@ -38,3 +38,4 @@ export const Slide09_Positioning: React.FC = () => (
     </motion.div>
   </div>
 );
+

@@ -14,7 +14,7 @@ const mistakes = [
 ];
 
 export const Slide10_Mistakes: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Erros comuns" subtitle="O que NÃO fazer com um microfone" badge="Atenção" />
     <div className="w-full max-w-5xl my-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {mistakes.map((m, i) => (
@@ -36,3 +36,4 @@ export const Slide10_Mistakes: React.FC = () => (
     </div>
   </div>
 );
+

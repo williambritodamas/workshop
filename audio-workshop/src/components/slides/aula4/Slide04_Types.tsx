@@ -13,10 +13,11 @@ const mics = [
 ];
 
 export const Slide04_Types: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Principais tipos de microfone" subtitle="Cada um tem seu melhor uso" badge="Tipos" />
     <div className="w-full max-w-6xl my-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
       {mics.map((m, i) => <MicrophoneCard key={i} {...m} delay={i * 0.1} />)}
     </div>
   </div>
 );
+

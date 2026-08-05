@@ -5,7 +5,7 @@ import { Ear, Mic } from 'lucide-react';
 export { slide03Notes };
 
 export const Slide03_Analogy: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="O microfone é como..." subtitle="Uma comparação com o nosso corpo" badge="Analogia" />
     <div className="w-full max-w-5xl my-auto grid grid-cols-1 md:grid-cols-2 gap-8">
       <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center p-8 md:p-12 rounded-3xl bg-slate-900/90 border border-cyan-500/40 shadow-2xl">
@@ -26,3 +26,4 @@ export const Slide03_Analogy: React.FC = () => (
     </motion.div>
   </div>
 );
+

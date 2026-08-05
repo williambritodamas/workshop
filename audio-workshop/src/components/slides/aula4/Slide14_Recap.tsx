@@ -15,7 +15,7 @@ const pillars = [
 const colors: Record<string, string> = { blue: 'border-blue-500/40 bg-blue-500/10 text-blue-400', cyan: 'border-cyan-500/40 bg-cyan-500/10 text-cyan-400', purple: 'border-purple-500/40 bg-purple-500/10 text-purple-400', emerald: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400', amber: 'border-amber-500/40 bg-amber-500/10 text-amber-400' };
 
 export const Slide14_Recap: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
     <SlideTitle title="Resumo da Aula 4" subtitle="Os 5 pilares — e não existe microfone perfeito" badge="Recap" />
     <div className="w-full max-w-5xl my-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
       {pillars.map((p, i) => (
@@ -31,3 +31,4 @@ export const Slide14_Recap: React.FC = () => (
     </motion.div>
   </div>
 );
+

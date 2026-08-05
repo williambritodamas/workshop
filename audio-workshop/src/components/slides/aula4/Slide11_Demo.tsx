@@ -18,7 +18,7 @@ export const Slide11_Demo: React.FC = () => {
   const [step, setStep] = useState(0);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <SlideTitle title="Demonstração prática" subtitle="Experimente com seu microfone" badge="Prática" />
       <div className="w-full max-w-5xl my-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <AnimatePresence mode="wait">
@@ -47,3 +47,4 @@ export const Slide11_Demo: React.FC = () => {
     </div>
   );
 };
+
