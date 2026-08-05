@@ -66,7 +66,7 @@ export const Slide11_FinalMission: React.FC = () => {
             <Clock className="w-4 h-4" />
             <span>{mins}:{secs.toString().padStart(2, '0')}</span>
           </div>
-          <div className="w-48 h-2 bg-slate-800 rounded-full overflow-hidden">
+          <div className="w-48 h-2 bg-slate-800 rounded-full overflow-y-auto">
             <motion.div
               animate={{ width: `${pct}%` }}
               className={`h-full rounded-full ${timeLeft < 120 ? 'bg-red-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'}`}
@@ -138,3 +138,4 @@ export const Slide11_FinalMission: React.FC = () => {
     </div>
   );
 };
+

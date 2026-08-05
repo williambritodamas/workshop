@@ -6,7 +6,7 @@ import { slide16Notes } from './notes';
 export { slide16Notes };
 
 export const Slide16_Closing: React.FC = () => (
-  <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+  <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
     <ConfettiEffect active={true} />
     <div className="absolute inset-0 z-0">
       <img src="/images/sound-reinforcement.jpg" alt="Operador durante evento" className="w-full h-full object-cover" />
@@ -47,3 +47,4 @@ export const Slide16_Closing: React.FC = () => (
     </div>
   </div>
 );
+

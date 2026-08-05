@@ -11,7 +11,7 @@ export const Slide15_Certificate: React.FC = () => {
   const [showConfetti, setShowConfetti] = useState(false);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
       <ConfettiEffect active={showConfetti} />
       <div className="absolute inset-0 z-0">
         <img src="/images/audio-mixer-faders.jpg" alt="Mesa de som" className="w-full h-full object-cover opacity-10" />
@@ -33,3 +33,4 @@ export const Slide15_Certificate: React.FC = () => {
     </div>
   );
 };
+

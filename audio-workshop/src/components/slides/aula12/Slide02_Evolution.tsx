@@ -37,7 +37,7 @@ export const Slide02_Evolution: React.FC = () => {
   const currentIndex = Math.min(dotCur, aulas.length - 1);
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between items-center p-8 md:p-12 overflow-hidden">
+    <div className="relative w-full flex-1 flex flex-col justify-between items-center p-8 md:p-12 overflow-y-auto">
       <div className="absolute inset-0 z-0">
         <img src="/images/sound-reinforcement.jpg" alt="Sistema de som" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
@@ -91,7 +91,7 @@ export const Slide02_Evolution: React.FC = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-5xl space-y-2">
-        <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+        <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-y-auto">
           <motion.div
             animate={{ width: `${(revealed / aulas.length) * 100}%` }}
             transition={{ duration: 0.8 }}
