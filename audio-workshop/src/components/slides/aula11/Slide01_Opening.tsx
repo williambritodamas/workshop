@@ -5,7 +5,7 @@ export { slide01Notes };
 export const Slide01_Opening: React.FC = () => (
   <div className="relative w-full h-full flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sound_reinforcement_system.jpg/1280px-Sound_reinforcement_system.jpg" alt="Sistema de som" className="w-full h-full object-cover opacity-35 scale-105" />
+      <img src="/images/sound-reinforcement.jpg" alt="Sistema de som" className="w-full h-full object-cover opacity-35 scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40" />
     </div>
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
