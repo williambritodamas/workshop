@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { Usuario, LoginCredenciais, RegistroCadastro, ContextoAutenticacao } from '../types/auth';
 
 const ContextoAutenticacao = createContext<ContextoAutenticacao | undefined>(undefined);
@@ -23,47 +23,24 @@ export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ 
     ];
   });
 
-  // Carregar usuário logado do localStorage
+  // Carregar usuário logado do localStorage ao montar
   useEffect(() => {
     const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
     if (usuarioLogado) {
       try {
         const dados = JSON.parse(usuarioLogado);
-        const usuario = usuarios.find((u) => u.id === dados.id);
+        const usuariosArmazenados = JSON.parse(
+          localStorage.getItem('usuarios_audio_workshop') || '[]'
+        );
+        const usuario = usuariosArmazenados.find((u: Usuario) => u.id === dados.id);
         if (usuario) {
           setUsuarioAtual(usuario);
+          setUsuarios(usuariosArmazenados);
         }
       } catch (e) {
         console.error('Erro ao carregar usuário logado:', e);
       }
     }
-  }, [usuarios]);
-
-  // Sincronizar usuário quando dados mudam no localStorage (ex: quando admin modifica aulas)
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
-      if (usuarioLogado) {
-        try {
-          const dados = JSON.parse(usuarioLogado);
-          const usuariosAtualizados = JSON.parse(
-            localStorage.getItem('usuarios_audio_workshop') || '[]'
-          );
-          const usuarioAtualizado = usuariosAtualizados.find(
-            (u: Usuario) => u.id === dados.id
-          );
-          if (usuarioAtualizado) {
-            setUsuarioAtual(usuarioAtualizado);
-            setUsuarios(usuariosAtualizados);
-          }
-        } catch (e) {
-          console.error('Erro ao sincronizar usuário:', e);
-        }
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const salvarUsuarios = (novosUsuarios: Usuario[]) => {
@@ -147,10 +124,29 @@ export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ 
   const podeAcesar = (aulaId: number): boolean => {
     if (!usuarioAtual) return false;
     if (usuarioAtual.role === 'admin') return true;
+    
+    // Verificar localStorage primeiro para pegar dados atualizados (caso admin tenha modificado)
+    try {
+      const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
+      if (usuarioLogado) {
+        const dados = JSON.parse(usuarioLogado);
+        const usuarios = JSON.parse(
+          localStorage.getItem('usuarios_audio_workshop') || '[]'
+        );
+        const usuarioAtualizado = usuarios.find((u: Usuario) => u.id === dados.id);
+        if (usuarioAtualizado) {
+          return usuarioAtualizado.aulasLiberadas.includes(aulaId);
+        }
+      }
+    } catch (e) {
+      console.error('Erro ao verificar acesso:', e);
+    }
+    
+    // Fallback para usuário atual
     return usuarioAtual.aulasLiberadas.includes(aulaId);
   };
 
-  const recarregarUsuario = () => {
+  const recarregarUsuario = useCallback(() => {
     const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
     if (usuarioLogado) {
       try {
@@ -168,7 +164,7 @@ export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ 
         console.error('Erro ao recarregar usuário:', e);
       }
     }
-  };
+  }, []);
 
   const valor: ContextoAutenticacao = {
     usuarioAtual,
