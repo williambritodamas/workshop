@@ -3,6 +3,7 @@ import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizon
 
 interface LessonSelectorProps {
   onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12) => void;
+  filtroAulas?: (aulaId: number) => boolean;
 }
 
 const lessons = [
@@ -128,7 +129,9 @@ const lessons = [
   },
 ];
 
-export default function LessonSelector({ onSelect }: LessonSelectorProps) {
+export default function LessonSelector({ onSelect, filtroAulas }: LessonSelectorProps) {
+  const aulasDisponiveis = filtroAulas ? lessons.filter(l => filtroAulas(l.id)) : lessons;
+
   return (
     <div className="relative min-h-screen bg-slate-950 text-white">
       {/* Background com gradiente e efeito de ondas */}
@@ -170,7 +173,7 @@ export default function LessonSelector({ onSelect }: LessonSelectorProps) {
 
         {/* Grid de Cards das Aulas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-6xl">
-          {lessons.map((lesson, idx) => (
+          {aulasDisponiveis.map((lesson, idx) => (
             <motion.button
               key={lesson.id}
               initial={{ opacity: 0, y: 40, scale: 0.95 }}

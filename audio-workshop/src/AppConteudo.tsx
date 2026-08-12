@@ -1024,7 +1024,7 @@ export const AppConteudo: React.FC<AppConteudoProps> = ({ onSairLogin, onAbrirAd
 
         {/* Conteúdo Principal */}
         <div className="mt-20">
-          <LessonSelector onSelect={handleSelectLeson} />
+          <LessonSelector onSelect={handleSelectLeson} filtroAulas={podeAcesar} />
         </div>
       </div>
     );
