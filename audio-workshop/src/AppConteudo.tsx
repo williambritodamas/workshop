@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LogOut, Shield, User } from 'lucide-react';
 import { useAutenticacao } from './contexts/AutenticacaoContext';
@@ -225,7 +225,7 @@ interface AppConteudoProps {
 }
 
 export const AppConteudo: React.FC<AppConteudoProps> = ({ onSairLogin, onAbrirAdmin }) => {
-  const { usuarioAtual, podeAcesar, logout, isAdmin } = useAutenticacao();
+  const { usuarioAtual, podeAcesar, logout, isAdmin, recarregarUsuario } = useAutenticacao();
 
   if (new URLSearchParams(window.location.search).get('mode') === 'presentation') {
     return <PresentationSlidesView />;
@@ -234,6 +234,13 @@ export const AppConteudo: React.FC<AppConteudoProps> = ({ onSairLogin, onAbrirAd
   const [currentLesson, setCurrentLesson] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12>(0);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [presenterMode, setPresenterMode] = useState(false);
+
+  // Recarregar usuário quando voltar ao seletor de aulas (pode ter mudanças do painel admin)
+  useEffect(() => {
+    if (currentLesson === 0) {
+      recarregarUsuario();
+    }
+  }, [currentLesson, recarregarUsuario]);
 
   const handleLessonChange = (lesson: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12) => {
     // Verificar acesso à aula

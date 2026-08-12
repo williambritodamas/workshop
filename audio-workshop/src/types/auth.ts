@@ -31,6 +31,7 @@ export interface ContextoAutenticacao {
   logout: () => void;
   registrar: (dados: RegistroCadastro) => Promise<void>;
   podeAcesar: (aulaId: number) => boolean;
+  recarregarUsuario: () => void;
 }
 
 export interface DadosCertificado {

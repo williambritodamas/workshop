@@ -7,6 +7,8 @@ import {
   ChevronUp,
   Shield,
   Check,
+  Plus,
+  X,
 } from 'lucide-react';
 import { useGerenciadorUsuarios } from '../contexts/AutenticacaoContext';
 import type { Usuario } from '../types/auth';
@@ -26,6 +28,13 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
   const [usuarios, setUsuarios] = useState<Usuario[]>(obterUsuarios());
   const [usuarioExpandido, setUsuarioExpandido] = useState<string | null>(null);
   const [filtro, setFiltro] = useState<'todos' | 'admin' | 'user'>('todos');
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [novoUsuario, setNovoUsuario] = useState({
+    nome: '',
+    email: '',
+    role: 'user' as 'admin' | 'user',
+  });
+  const [erroFormulario, setErroFormulario] = useState<string | null>(null);
 
   const usuariosFilatrados = usuarios.filter((u) => {
     if (filtro === 'todos') return true;
@@ -46,6 +55,35 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
       liberarAula(usuarioId, aulaId);
     }
     setUsuarios(obterUsuarios());
+  };
+
+  const handleCriarUsuario = () => {
+    setErroFormulario(null);
+
+    if (!novoUsuario.nome || !novoUsuario.email) {
+      setErroFormulario('Nome e email são obrigatórios');
+      return;
+    }
+
+    if (usuarios.some((u) => u.email === novoUsuario.email)) {
+      setErroFormulario('Email já cadastrado');
+      return;
+    }
+
+    const usuarioParaCriar: Usuario = {
+      id: `user-${Date.now()}`,
+      nome: novoUsuario.nome,
+      email: novoUsuario.email,
+      role: novoUsuario.role,
+      aulasLiberadas: novoUsuario.role === 'admin' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [1],
+      dataCriacao: new Date().toISOString(),
+    };
+
+    const usuariosAtualizados = [...usuarios, usuarioParaCriar];
+    localStorage.setItem('usuarios_audio_workshop', JSON.stringify(usuariosAtualizados));
+    setUsuarios(usuariosAtualizados);
+    setMostrarFormulario(false);
+    setNovoUsuario({ nome: '', email: '', role: 'user' });
   };
 
   return (
@@ -77,7 +115,7 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
         </div>
 
         {/* Filtros */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap items-center">
           {(['todos', 'admin', 'user'] as const).map((f) => (
             <motion.button
               key={f}
@@ -93,6 +131,15 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
               {f === 'todos' ? 'Todos' : f === 'admin' ? 'Administradores' : 'Usuários'}
             </motion.button>
           ))}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setMostrarFormulario(true)}
+            className="px-4 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-semibold transition-all flex items-center gap-2 ml-auto"
+          >
+            <Plus className="w-5 h-5" />
+            Novo Usuário
+          </motion.button>
         </div>
       </motion.div>
 
@@ -238,7 +285,120 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
         </AnimatePresence>
       </div>
 
-      {/* Resumo */}
+      {/* Modal de Criar Novo Usuário */}
+      <AnimatePresence>
+        {mostrarFormulario && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+            onClick={() => setMostrarFormulario(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black/50 p-8"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-white">Criar Novo Usuário</h2>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setMostrarFormulario(false)}
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-all"
+                >
+                  <X className="w-5 h-5 text-slate-300" />
+                </motion.button>
+              </div>
+
+              {erroFormulario && (
+                <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
+                  {erroFormulario}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                {/* Nome */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Nome</label>
+                  <input
+                    type="text"
+                    value={novoUsuario.nome}
+                    onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })}
+                    placeholder="Nome completo"
+                    className="w-full px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Email</label>
+                  <input
+                    type="email"
+                    value={novoUsuario.email}
+                    onChange={(e) => setNovoUsuario({ ...novoUsuario, email: e.target.value })}
+                    placeholder="usuario@email.com"
+                    className="w-full px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                  />
+                </div>
+
+                {/* Role */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Tipo de Perfil</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setNovoUsuario({ ...novoUsuario, role: 'user' })}
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        novoUsuario.role === 'user'
+                          ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white'
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      }`}
+                    >
+                      Aluno
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setNovoUsuario({ ...novoUsuario, role: 'admin' })}
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        novoUsuario.role === 'admin'
+                          ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      }`}
+                    >
+                      Admin
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-8">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setMostrarFormulario(false)}
+                  className="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white font-semibold hover:bg-slate-700 transition-all"
+                >
+                  Cancelar
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleCriarUsuario}
+                  className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-semibold hover:from-emerald-500 hover:to-teal-400 transition-all"
+                >
+                  Criar Usuário
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

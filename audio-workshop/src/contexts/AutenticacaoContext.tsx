@@ -39,6 +39,33 @@ export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ 
     }
   }, [usuarios]);
 
+  // Sincronizar usuário quando dados mudam no localStorage (ex: quando admin modifica aulas)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
+      if (usuarioLogado) {
+        try {
+          const dados = JSON.parse(usuarioLogado);
+          const usuariosAtualizados = JSON.parse(
+            localStorage.getItem('usuarios_audio_workshop') || '[]'
+          );
+          const usuarioAtualizado = usuariosAtualizados.find(
+            (u: Usuario) => u.id === dados.id
+          );
+          if (usuarioAtualizado) {
+            setUsuarioAtual(usuarioAtualizado);
+            setUsuarios(usuariosAtualizados);
+          }
+        } catch (e) {
+          console.error('Erro ao sincronizar usuário:', e);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   const salvarUsuarios = (novosUsuarios: Usuario[]) => {
     setUsuarios(novosUsuarios);
     localStorage.setItem('usuarios_audio_workshop', JSON.stringify(novosUsuarios));
@@ -123,6 +150,26 @@ export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ 
     return usuarioAtual.aulasLiberadas.includes(aulaId);
   };
 
+  const recarregarUsuario = () => {
+    const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
+    if (usuarioLogado) {
+      try {
+        const dados = JSON.parse(usuarioLogado);
+        const usuariosAtualizados = JSON.parse(
+          localStorage.getItem('usuarios_audio_workshop') || '[]'
+        );
+        const usuarioAtualizado = usuariosAtualizados.find(
+          (u: Usuario) => u.id === dados.id
+        );
+        if (usuarioAtualizado) {
+          setUsuarioAtual(usuarioAtualizado);
+        }
+      } catch (e) {
+        console.error('Erro ao recarregar usuário:', e);
+      }
+    }
+  };
+
   const valor: ContextoAutenticacao = {
     usuarioAtual,
     isAutenticado: !!usuarioAtual,
@@ -131,6 +178,7 @@ export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ 
     logout,
     registrar,
     podeAcesar,
+    recarregarUsuario,
   };
 
   return (

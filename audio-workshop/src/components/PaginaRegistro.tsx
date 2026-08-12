@@ -46,9 +46,10 @@ export const PaginaRegistro: React.FC<PaginaRegistroProps> = ({ onLoginClick }) 
       await registrar(dados);
       setSucesso(true);
 
+      // O App.tsx vai redirecionar automaticamente para 'app' quando isAutenticado ficar true
       setTimeout(() => {
-        onLoginClick();
-      }, 1500);
+        setSucesso(false);
+      }, 3000);
     } catch (err) {
       setErro(
         err instanceof Error ? err.message : 'Erro ao registrar. Tente novamente.',
