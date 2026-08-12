@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { LogOut, Shield, User } from 'lucide-react';
 import { useAutenticacao } from './contexts/AutenticacaoContext';
-import { PaginaLogin } from './components/PaginaLogin';
-import { PaginaRegistro } from './components/PaginaRegistro';
-import { PainelAdmin } from './components/PainelAdmin';
 import { PresentationLayout } from './components/PresentationLayout';
 import LessonSelector from './components/LessonSelector';
 import { PresenterView } from './components/PresenterView';
@@ -221,21 +218,6 @@ import { Slide13_GoldenRules, slide13Notes as aula12Slide13Notes } from './compo
 import { Slide14_ContinueJourney, slide14Notes as aula12Slide14Notes } from './components/slides/aula12/Slide14_ContinueJourney';
 import { Slide15_Certificate, slide15Notes as aula12Slide15Notes } from './components/slides/aula12/Slide15_Certificate';
 import { Slide16_Closing as Aula12_Slide16_Closing, slide16Notes as aula12Slide16Notes } from './components/slides/aula12/Slide16_Closing';
-
-const LESSONS_META = [
-  { id: 1, titulo: 'O que é Som?' },
-  { id: 2, titulo: 'Conhecendo os Equipamentos' },
-  { id: 3, titulo: 'O Caminho do Som' },
-  { id: 4, titulo: 'Microfones' },
-  { id: 5, titulo: 'Mesas de Som' },
-  { id: 6, titulo: 'Ganho' },
-  { id: 7, titulo: 'Equalização' },
-  { id: 8, titulo: 'Compressão' },
-  { id: 9, titulo: 'Fase' },
-  { id: 10, titulo: 'Feedback' },
-  { id: 11, titulo: 'Montagem de Sistemas' },
-  { id: 12, titulo: 'Prática Completa' },
-];
 
 interface AppConteudoProps {
   onSairLogin: () => void;
@@ -996,8 +978,6 @@ export const AppConteudo: React.FC<AppConteudoProps> = ({ onSairLogin, onAbrirAd
   };
 
   const LessonSelectorComAutenticacao = () => {
-    const aulasFiltradas = LESSONS_META.filter(aula => podeAcesar(aula.id));
-
     return (
       <div className="min-h-screen w-full p-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         {/* Header com usuário e logout */}

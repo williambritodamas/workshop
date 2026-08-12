@@ -14,7 +14,6 @@ export const CertificadoComplete: React.FC<CertificadoCompleteProps> = ({
   nomeAluno,
   dataAtual = new Date().toLocaleDateString('pt-BR'),
   aulasCompletadas = 12,
-  totalAulas = 12,
 }) => {
   const gerarPDF = async () => {
     const elemento = document.getElementById('certificado-para-pdf');

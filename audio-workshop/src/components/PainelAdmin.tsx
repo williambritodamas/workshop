@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
-  Lock,
   Trash2,
-  Plus,
   ChevronDown,
   ChevronUp,
   Shield,
   Check,
-  X,
 } from 'lucide-react';
 import { useGerenciadorUsuarios } from '../contexts/AutenticacaoContext';
 import type { Usuario } from '../types/auth';

@@ -46,10 +46,12 @@ const AppInterno: React.FC = () => {
   );
 };
 
-export function App() {
+function App() {
   return (
     <ProvedorAutenticacao>
       <AppInterno />
     </ProvedorAutenticacao>
   );
 }
+
+export default App;

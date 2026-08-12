@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award } from 'lucide-react';
 import { SlideTitle } from '../../ui/SlideTitle';
-import { CertificatePreview } from '../../ui/CertificatePreview';
+import { CertificadoComplete } from '../../ui/CertificadoComplete';
 import { ConfettiEffect } from '../../ui/ConfettiEffect';
+import { useAutenticacao } from '../../../contexts/AutenticacaoContext';
 import { slide15Notes } from './notes';
 export { slide15Notes };
 
 export const Slide15_Certificate: React.FC = () => {
   const [showConfetti, setShowConfetti] = useState(false);
+  const { usuarioAtual } = useAutenticacao();
+
+  const nomeAluno = usuarioAtual?.nome || 'Aluno do Workshop';
 
   return (
     <div className="relative w-full flex-1 flex flex-col justify-between items-center text-center p-8 md:p-16 overflow-y-auto">
@@ -18,8 +22,13 @@ export const Slide15_Certificate: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950 to-slate-950/90" />
       </div>
       <SlideTitle title="Certificado" subtitle="Parabéns! Você concluiu o workshop." badge="Conclusão" />
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-xl my-auto space-y-6">
-        <CertificatePreview />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-4xl my-auto space-y-6">
+        <CertificadoComplete
+          nomeAluno={nomeAluno}
+          dataAtual={new Date().toLocaleDateString('pt-BR')}
+          aulasCompletadas={12}
+          totalAulas={12}
+        />
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -27,7 +36,7 @@ export const Slide15_Certificate: React.FC = () => {
           className="inline-flex items-center gap-2 px-8 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-sm hover:from-amber-400 hover:to-orange-500 transition-all cursor-pointer shadow-lg shadow-amber-500/20"
         >
           <Award className="w-4 h-4" />
-          Gerar Certificado
+          Ativar Confete
         </motion.button>
       </motion.div>
     </div>
