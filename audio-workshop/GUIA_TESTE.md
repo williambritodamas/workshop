@@ -185,7 +185,7 @@
 - [ ] Verificar se há block de popup (permitir popups)
 
 ### Se o novo usuário não aparecer
-- [ ] Verificar se a API está rodando: `npm run server` (http://localhost:3001)
+- [ ] Verificar se a API está rodando: `npm run server` (http://localhost:3007)
 - [ ] Verificar console: `fetch('/api/usuarios')` deve retornar 200 com token de admin
 - [ ] Verificar se email é único (duplicado retorna 409)
 - [ ] Tentar recarregar o app

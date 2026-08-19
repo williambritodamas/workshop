@@ -148,7 +148,7 @@ const { obterUsuarios, liberarAula, ocultarAula, removerUsuario } = useGerenciad
 - Banco em `server/data/audio-workshop.db` (gitignored; use volume no Docker para persistir)
 - Admin seed: `admin@audioworkshop.com` / `admin123` (env `ADMIN_SENHA`)
 - JWT secret via env `JWT_SECRET`; token fica no localStorage (melhoria futura: cookie httpOnly)
-- Em dev, o Vite faz proxy de `/api` para `http://localhost:3001`
+- Em dev, o Vite faz proxy de `/api` para `http://localhost:3007`
 
 ### Fluxo de Aula
 1. Usuário seleciona aula no LessonSelector

@@ -7,7 +7,7 @@ import rotasUsuarios from './rotas/usuarios.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3007;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.use(cors());

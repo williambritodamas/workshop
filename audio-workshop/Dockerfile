@@ -20,8 +20,8 @@ COPY server ./server
 COPY --from=build /app/dist ./dist
 
 ENV NODE_ENV=production
-ENV PORT=3001
-EXPOSE 3001
+ENV PORT=3007
+EXPOSE 3007
 
 VOLUME /app/server/data
 

@@ -7,7 +7,7 @@ Este documento descreve o sistema completo de autenticação do Audio Workshop: 
 ## ✅ Funcionalidades Implementadas
 
 ### 1. **Backend** (`server/`)
-- ✅ API REST com Express (`server/index.js`, porta `PORT || 3001`)
+- ✅ API REST com Express (`server/index.js`, porta `PORT || 3007`)
 - ✅ Banco SQLite via `better-sqlite3` (`server/db.js`, arquivo em `server/data/audio-workshop.db`)
 - ✅ Senhas com hash bcrypt (`bcryptjs`) — `senha_hash` nunca retorna nas respostas
 - ✅ JWT com expiração de 7 dias (`server/auth.js`, secret via env `JWT_SECRET`)
@@ -21,7 +21,7 @@ Este documento descreve o sistema completo de autenticação do Audio Workshop: 
 - Senha: `admin123`
 
 ### 2. **Cliente HTTP** (`src/lib/api.ts`)
-- ✅ Base URL de `VITE_API_URL || '/api'` (proxy do Vite para `http://localhost:3001` em dev)
+- ✅ Base URL de `VITE_API_URL || '/api'` (proxy do Vite para `http://localhost:3007` em dev)
 - ✅ Token JWT armazenado em `localStorage` (key `token_audio_workshop`)
 - ✅ Helpers `apiGet`, `apiPost`, `apiPatch`, `apiDelete` com `Authorization: Bearer`
 
@@ -165,14 +165,14 @@ Total de 12 aulas (registro central em `src/components/slides/registroAulas.tsx`
 cd audio-workshop
 npm install
 npm run install:server   # instala deps do server/
-npm run dev:all          # roda API (3001) + Vite (5173) juntos
+npm run dev:all          # roda API (3007) + Vite (3006) juntos
 ```
-Acesse `http://localhost:5173/`
+Acesse `http://localhost:3006/`
 
 Ou em dois terminais:
 ```bash
-npm run server   # API em http://localhost:3001
-npm run dev      # Vite em http://localhost:5173
+npm run server   # API em http://localhost:3007
+npm run dev      # Vite em http://localhost:3006
 ```
 
 ### Testar como Admin:
@@ -190,16 +190,16 @@ npm run dev      # Vite em http://localhost:5173
 ```bash
 npm run build
 docker build -t audio-workshop .
-docker run -p 3001:3001 -v audio-workshop-data:/app/server/data audio-workshop
+docker run -p 3007:3007 -v audio-workshop-data:/app/server/data audio-workshop
 ```
-Acesse `http://localhost:3001/`
+Acesse `http://localhost:3007/`
 
 ### Variáveis de Ambiente:
 | variável | default | uso |
 | --- | --- | --- |
-| `PORT` | `3001` | Porta da API |
-| `FRONTEND_PORT` | `5173` | Porta do Vite (dev) |
-| `BACKEND_URL` | `http://localhost:3001` | Alvo do proxy do Vite |
+| `PORT` | `3007` | Porta da API |
+| `FRONTEND_PORT` | `3006` | Porta do Vite (dev) |
+| `BACKEND_URL` | `http://localhost:3007` | Alvo do proxy do Vite |
 | `JWT_SECRET` | valor de dev | Secret do JWT |
 | `ADMIN_SENHA` | `admin123` | Senha inicial do admin (1º boot) |
 | `VITE_API_URL` | `/api` | Base URL da API no frontend |
