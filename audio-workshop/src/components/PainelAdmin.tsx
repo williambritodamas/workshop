@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -9,6 +9,9 @@ import {
   Check,
   Plus,
   X,
+  Loader2,
+  Lock,
+  AlertCircle,
 } from 'lucide-react';
 import { useGerenciadorUsuarios } from '../contexts/AutenticacaoContext';
 import type { Usuario } from '../types/auth';
@@ -23,67 +26,92 @@ const AULAS = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
-  const { obterUsuarios, removerUsuario, liberarAula, ocultarAula } =
+  const { obterUsuarios, removerUsuario, liberarAula, ocultarAula, criarUsuario } =
     useGerenciadorUsuarios();
-  const [usuarios, setUsuarios] = useState<Usuario[]>(obterUsuarios());
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState<string | null>(null);
   const [usuarioExpandido, setUsuarioExpandido] = useState<string | null>(null);
   const [filtro, setFiltro] = useState<'todos' | 'admin' | 'user'>('todos');
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [novoUsuario, setNovoUsuario] = useState({
     nome: '',
     email: '',
+    senha: '',
     role: 'user' as 'admin' | 'user',
   });
   const [erroFormulario, setErroFormulario] = useState<string | null>(null);
+  const [criando, setCriando] = useState(false);
+
+  const carregarUsuarios = async () => {
+    try {
+      setUsuarios(await obterUsuarios());
+      setErro(null);
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : 'Erro ao carregar usuários');
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  useEffect(() => {
+    carregarUsuarios();
+  }, []);
 
   const usuariosFilatrados = usuarios.filter((u) => {
     if (filtro === 'todos') return true;
     return u.role === filtro;
   });
 
-  const handleRemoverUsuario = (usuarioId: string) => {
-    if (confirm('Tem certeza que deseja remover este usuário?')) {
-      removerUsuario(usuarioId);
-      setUsuarios(obterUsuarios());
+  const handleRemoverUsuario = async (usuarioId: string) => {
+    if (!confirm('Tem certeza que deseja remover este usuário?')) return;
+    try {
+      setUsuarios(await removerUsuario(usuarioId));
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Erro ao remover usuário');
     }
   };
 
-  const handleToggleAula = (usuarioId: string, aulaId: number, liberada: boolean) => {
-    if (liberada) {
-      ocultarAula(usuarioId, aulaId);
-    } else {
-      liberarAula(usuarioId, aulaId);
+  const handleToggleAula = async (usuarioId: string, aulaId: number, liberada: boolean) => {
+    try {
+      const atualizados = liberada
+        ? await ocultarAula(usuarioId, aulaId)
+        : await liberarAula(usuarioId, aulaId);
+      setUsuarios(atualizados);
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Erro ao alterar aula');
     }
-    setUsuarios(obterUsuarios());
   };
 
-  const handleCriarUsuario = () => {
+  const handleCriarUsuario = async () => {
     setErroFormulario(null);
 
-    if (!novoUsuario.nome || !novoUsuario.email) {
-      setErroFormulario('Nome e email são obrigatórios');
+    if (!novoUsuario.nome || !novoUsuario.email || !novoUsuario.senha) {
+      setErroFormulario('Nome, email e senha são obrigatórios');
       return;
     }
 
-    if (usuarios.some((u) => u.email === novoUsuario.email)) {
-      setErroFormulario('Email já cadastrado');
+    if (novoUsuario.senha.length < 6) {
+      setErroFormulario('A senha deve ter pelo menos 6 caracteres');
       return;
     }
 
-    const usuarioParaCriar: Usuario = {
-      id: `user-${Date.now()}`,
-      nome: novoUsuario.nome,
-      email: novoUsuario.email,
-      role: novoUsuario.role,
-      aulasLiberadas: novoUsuario.role === 'admin' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [1],
-      dataCriacao: new Date().toISOString(),
-    };
-
-    const usuariosAtualizados = [...usuarios, usuarioParaCriar];
-    localStorage.setItem('usuarios_audio_workshop', JSON.stringify(usuariosAtualizados));
-    setUsuarios(usuariosAtualizados);
-    setMostrarFormulario(false);
-    setNovoUsuario({ nome: '', email: '', role: 'user' });
+    setCriando(true);
+    try {
+      await criarUsuario({
+        nome: novoUsuario.nome,
+        email: novoUsuario.email,
+        senha: novoUsuario.senha,
+        role: novoUsuario.role,
+      });
+      await carregarUsuarios();
+      setMostrarFormulario(false);
+      setNovoUsuario({ nome: '', email: '', senha: '', role: 'user' });
+    } catch (e) {
+      setErroFormulario(e instanceof Error ? e.message : 'Erro ao criar usuário');
+    } finally {
+      setCriando(false);
+    }
   };
 
   return (
@@ -143,7 +171,21 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
         </div>
       </motion.div>
 
-      {/* Lista de Usuários */}
+      {/* Estado de carregamento / erro / lista */}
+      {carregando ? (
+        <div className="flex items-center justify-center gap-3 py-16 text-slate-400">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span>Carregando usuários...</span>
+        </div>
+      ) : erro ? (
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 max-w-6xl">
+          <AlertCircle className="w-5 h-5 shrink-0" />
+          <span>{erro}</span>
+          <button onClick={carregarUsuarios} className="ml-auto text-sm font-bold underline">
+            Tentar novamente
+          </button>
+        </div>
+      ) : (
       <div className="space-y-3 max-w-6xl">
         <AnimatePresence mode="popLayout">
           {usuariosFilatrados.length === 0 ? (
@@ -283,7 +325,8 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
             ))
           )}
         </AnimatePresence>
-      </div>
+        </div>
+      )}
 
       {/* Modal de Criar Novo Usuário */}
       <AnimatePresence>
@@ -345,6 +388,22 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
                   />
                 </div>
 
+                {/* Senha */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Senha</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <input
+                      type="password"
+                      value={novoUsuario.senha}
+                      onChange={(e) => setNovoUsuario({ ...novoUsuario, senha: e.target.value })}
+                      placeholder="Senha do usuário"
+                      className="w-full pl-9 pr-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                    />
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">Mínimo 6 caracteres</p>
+                </div>
+
                 {/* Role */}
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Tipo de Perfil</label>
@@ -387,12 +446,13 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
                   Cancelar
                 </motion.button>
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={criando ? undefined : { scale: 1.02 }}
+                  whileTap={criando ? undefined : { scale: 0.98 }}
                   onClick={handleCriarUsuario}
-                  className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-semibold hover:from-emerald-500 hover:to-teal-400 transition-all"
+                  disabled={criando}
+                  className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-semibold hover:from-emerald-500 hover:to-teal-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Criar Usuário
+                  {criando ? 'Criando...' : 'Criar Usuário'}
                 </motion.button>
               </div>
             </motion.div>

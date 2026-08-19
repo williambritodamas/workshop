@@ -121,7 +121,7 @@ export const PaginaLogin: React.FC<PaginaLoginProps> = ({ onRegistroClick }) => 
                   required
                 />
               </div>
-              <p className="text-xs text-slate-500 mt-1">Demo: qualquer senha</p>
+              <p className="text-xs text-slate-500 mt-1">Demo: senha admin123</p>
             </div>
 
             {/* Botão Login */}

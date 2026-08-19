@@ -4,7 +4,6 @@ export interface Usuario {
   id: string;
   nome: string;
   email: string;
-  senha?: string; // Não deve ser armazenado
   role: UserRole;
   aulasLiberadas: number[]; // IDs das aulas liberadas (1-12)
   dataCriacao: string;
@@ -23,6 +22,11 @@ export interface RegistroCadastro {
   confirmarSenha: string;
 }
 
+export interface RespostaAutenticacao {
+  token: string;
+  usuario: Usuario;
+}
+
 export interface ContextoAutenticacao {
   usuarioAtual: Usuario | null;
   isAutenticado: boolean;
@@ -31,7 +35,7 @@ export interface ContextoAutenticacao {
   logout: () => void;
   registrar: (dados: RegistroCadastro) => Promise<void>;
   podeAcesar: (aulaId: number) => boolean;
-  recarregarUsuario: () => void;
+  recarregarUsuario: () => Promise<void>;
 }
 
 export interface DadosCertificado {

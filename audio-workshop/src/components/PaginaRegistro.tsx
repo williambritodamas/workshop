@@ -79,7 +79,7 @@ export const PaginaRegistro: React.FC<PaginaRegistroProps> = ({ onLoginClick }) 
           </motion.div>
           <h2 className="text-2xl font-bold text-white mb-2">Cadastro Realizado!</h2>
           <p className="text-slate-400 mb-6">
-            Sua conta foi criada com sucesso. Redirecionando para login...
+            Sua conta foi criada com sucesso. Redirecionando para o workshop...
           </p>
         </motion.div>
       </div>

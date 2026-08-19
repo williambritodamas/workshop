@@ -1,168 +1,72 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import type { Usuario, LoginCredenciais, RegistroCadastro, ContextoAutenticacao } from '../types/auth';
+import type {
+  Usuario,
+  LoginCredenciais,
+  RegistroCadastro,
+  ContextoAutenticacao,
+  RespostaAutenticacao,
+} from '../types/auth';
+import { apiGet, apiPost, apiPatch, apiDelete, getToken, setToken } from '../lib/api';
 
 const ContextoAutenticacao = createContext<ContextoAutenticacao | undefined>(undefined);
 
 export const ProvedorAutenticacao: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [usuarioAtual, setUsuarioAtual] = useState<Usuario | null>(null);
-  const [usuarios, setUsuarios] = useState<Usuario[]>(() => {
-    const dados = localStorage.getItem('usuarios_audio_workshop');
-    if (dados) {
-      return JSON.parse(dados);
-    }
-    // Usuário admin padrão
-    return [
-      {
-        id: 'admin-default',
-        nome: 'Administrador',
-        email: 'admin@audioworkshop.com',
-        role: 'admin',
-        aulasLiberadas: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        dataCriacao: new Date().toISOString(),
-      },
-    ];
-  });
 
-  // Carregar usuário logado do localStorage ao montar
+  // Restaurar sessão ao montar (se houver token válido)
   useEffect(() => {
-    const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
-    if (usuarioLogado) {
+    const restaurarSessao = async () => {
+      if (!getToken()) return;
       try {
-        const dados = JSON.parse(usuarioLogado);
-        const usuariosArmazenados = JSON.parse(
-          localStorage.getItem('usuarios_audio_workshop') || '[]'
-        );
-        const usuario = usuariosArmazenados.find((u: Usuario) => u.id === dados.id);
-        if (usuario) {
-          setUsuarioAtual(usuario);
-          setUsuarios(usuariosArmazenados);
-        }
-      } catch (e) {
-        console.error('Erro ao carregar usuário logado:', e);
+        const { usuario } = await apiGet<{ usuario: Usuario }>('/auth/me');
+        setUsuarioAtual(usuario);
+      } catch {
+        setToken(null);
+        setUsuarioAtual(null);
       }
-    }
+    };
+    restaurarSessao();
   }, []);
 
-  const salvarUsuarios = (novosUsuarios: Usuario[]) => {
-    setUsuarios(novosUsuarios);
-    localStorage.setItem('usuarios_audio_workshop', JSON.stringify(novosUsuarios));
-  };
-
   const login = async (credenciais: LoginCredenciais): Promise<void> => {
-    // Buscar usuário por email (em produção, fazer chamada ao backend)
-    const usuario = usuarios.find((u) => u.email === credenciais.email);
-
-    if (!usuario) {
-      throw new Error('Usuário não encontrado');
-    }
-
-    // Verificação simples de senha (em produção, usar hash e backend)
-    // Para demo, aceitar qualquer senha para usuário admin
-    if (usuario.email === 'admin@audioworkshop.com' || credenciais.senha === 'senha123') {
-      // Atualizar último acesso
-      const usuarioAtualizado = {
-        ...usuario,
-        ultimoAcesso: new Date().toISOString(),
-      };
-
-      const novosUsuarios = usuarios.map((u) => (u.id === usuario.id ? usuarioAtualizado : u));
-      salvarUsuarios(novosUsuarios);
-      setUsuarioAtual(usuarioAtualizado);
-
-      // Salvar sessão
-      localStorage.setItem(
-        'usuario_logado_audio_workshop',
-        JSON.stringify({
-          id: usuarioAtualizado.id,
-          email: usuarioAtualizado.email,
-          nome: usuarioAtualizado.nome,
-        }),
-      );
-    } else {
-      throw new Error('Email ou senha inválidos');
-    }
+    const { token, usuario } = await apiPost<RespostaAutenticacao>(
+      '/auth/login',
+      credenciais,
+      false,
+    );
+    setToken(token);
+    setUsuarioAtual(usuario);
   };
 
   const logout = () => {
+    setToken(null);
     setUsuarioAtual(null);
-    localStorage.removeItem('usuario_logado_audio_workshop');
   };
 
   const registrar = async (dados: RegistroCadastro): Promise<void> => {
-    if (dados.senha !== dados.confirmarSenha) {
-      throw new Error('As senhas não correspondem');
-    }
-
-    if (usuarios.some((u) => u.email === dados.email)) {
-      throw new Error('Email já cadastrado');
-    }
-
-    const novoUsuario: Usuario = {
-      id: `user-${Date.now()}`,
-      nome: dados.nome,
-      email: dados.email,
-      role: 'user',
-      aulasLiberadas: [1], // Começar com aula 1 liberada
-      dataCriacao: new Date().toISOString(),
-    };
-
-    const novosUsuarios = [...usuarios, novoUsuario];
-    salvarUsuarios(novosUsuarios);
-    setUsuarioAtual(novoUsuario);
-
-    // Salvar sessão
-    localStorage.setItem(
-      'usuario_logado_audio_workshop',
-      JSON.stringify({
-        id: novoUsuario.id,
-        email: novoUsuario.email,
-        nome: novoUsuario.nome,
-      }),
+    const { token, usuario } = await apiPost<RespostaAutenticacao>(
+      '/auth/registro',
+      { nome: dados.nome, email: dados.email, senha: dados.senha },
+      false,
     );
+    setToken(token);
+    setUsuarioAtual(usuario);
   };
 
   const podeAcesar = (aulaId: number): boolean => {
     if (!usuarioAtual) return false;
     if (usuarioAtual.role === 'admin') return true;
-    
-    // Verificar localStorage primeiro para pegar dados atualizados (caso admin tenha modificado)
-    try {
-      const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
-      if (usuarioLogado) {
-        const dados = JSON.parse(usuarioLogado);
-        const usuarios = JSON.parse(
-          localStorage.getItem('usuarios_audio_workshop') || '[]'
-        );
-        const usuarioAtualizado = usuarios.find((u: Usuario) => u.id === dados.id);
-        if (usuarioAtualizado) {
-          return usuarioAtualizado.aulasLiberadas.includes(aulaId);
-        }
-      }
-    } catch (e) {
-      console.error('Erro ao verificar acesso:', e);
-    }
-    
-    // Fallback para usuário atual
     return usuarioAtual.aulasLiberadas.includes(aulaId);
   };
 
-  const recarregarUsuario = useCallback(() => {
-    const usuarioLogado = localStorage.getItem('usuario_logado_audio_workshop');
-    if (usuarioLogado) {
-      try {
-        const dados = JSON.parse(usuarioLogado);
-        const usuariosAtualizados = JSON.parse(
-          localStorage.getItem('usuarios_audio_workshop') || '[]'
-        );
-        const usuarioAtualizado = usuariosAtualizados.find(
-          (u: Usuario) => u.id === dados.id
-        );
-        if (usuarioAtualizado) {
-          setUsuarioAtual(usuarioAtualizado);
-        }
-      } catch (e) {
-        console.error('Erro ao recarregar usuário:', e);
-      }
+  const recarregarUsuario = useCallback(async (): Promise<void> => {
+    if (!getToken()) return;
+    try {
+      const { usuario } = await apiGet<{ usuario: Usuario }>('/auth/me');
+      setUsuarioAtual(usuario);
+    } catch {
+      setToken(null);
+      setUsuarioAtual(null);
     }
   }, []);
 
@@ -192,55 +96,61 @@ export const useAutenticacao = () => {
   return contexto;
 };
 
-// Função para atualizar usuários (para admin)
+// Função para atualizar usuários (para admin) via API
 export const useGerenciadorUsuarios = () => {
-  const salvarUsuarios = (usuarios: Usuario[]) => {
-    localStorage.setItem('usuarios_audio_workshop', JSON.stringify(usuarios));
-  };
-
-  const obterUsuarios = (): Usuario[] => {
-    const dados = localStorage.getItem('usuarios_audio_workshop');
-    return dados ? JSON.parse(dados) : [];
-  };
-
-  const atualizarUsuario = (usuarioAtualizado: Usuario) => {
-    const usuarios = obterUsuarios();
-    const novosUsuarios = usuarios.map((u) =>
-      u.id === usuarioAtualizado.id ? usuarioAtualizado : u,
-    );
-    salvarUsuarios(novosUsuarios);
-    return novosUsuarios;
-  };
-
-  const removerUsuario = (usuarioId: string) => {
-    const usuarios = obterUsuarios();
-    const novosUsuarios = usuarios.filter((u) => u.id !== usuarioId);
-    salvarUsuarios(novosUsuarios);
-    return novosUsuarios;
-  };
-
-  const liberarAula = (usuarioId: string, aulaId: number) => {
-    const usuarios = obterUsuarios();
-    const usuario = usuarios.find((u) => u.id === usuarioId);
-    if (usuario && !usuario.aulasLiberadas.includes(aulaId)) {
-      usuario.aulasLiberadas.push(aulaId);
-      return atualizarUsuario(usuario);
-    }
+  const obterUsuarios = async (): Promise<Usuario[]> => {
+    const { usuarios } = await apiGet<{ usuarios: Usuario[] }>('/usuarios');
     return usuarios;
   };
 
-  const ocultarAula = (usuarioId: string, aulaId: number) => {
-    const usuarios = obterUsuarios();
-    const usuario = usuarios.find((u) => u.id === usuarioId);
-    if (usuario) {
-      usuario.aulasLiberadas = usuario.aulasLiberadas.filter((id) => id !== aulaId);
-      return atualizarUsuario(usuario);
+  const criarUsuario = async (dados: {
+    nome: string;
+    email: string;
+    senha: string;
+    role: 'admin' | 'user';
+  }): Promise<Usuario> => {
+    const { usuario } = await apiPost<{ usuario: Usuario }>('/usuarios', dados);
+    return usuario;
+  };
+
+  const atualizarUsuario = async (usuarioAtualizado: Usuario): Promise<Usuario[]> => {
+    await apiPatch(`/usuarios/${usuarioAtualizado.id}`, {
+      role: usuarioAtualizado.role,
+      aulasLiberadas: usuarioAtualizado.aulasLiberadas,
+    });
+    return obterUsuarios();
+  };
+
+  const removerUsuario = async (usuarioId: string): Promise<Usuario[]> => {
+    await apiDelete(`/usuarios/${usuarioId}`);
+    return obterUsuarios();
+  };
+
+  const liberarAula = async (usuarioId: string, aulaId: number): Promise<Usuario[]> => {
+    const usuarios = await obterUsuarios();
+    const alvo = usuarios.find((u) => u.id === usuarioId);
+    if (alvo && !alvo.aulasLiberadas.includes(aulaId)) {
+      await apiPatch(`/usuarios/${usuarioId}`, {
+        aulasLiberadas: [...alvo.aulasLiberadas, aulaId],
+      });
     }
-    return usuarios;
+    return obterUsuarios();
+  };
+
+  const ocultarAula = async (usuarioId: string, aulaId: number): Promise<Usuario[]> => {
+    const usuarios = await obterUsuarios();
+    const alvo = usuarios.find((u) => u.id === usuarioId);
+    if (alvo) {
+      await apiPatch(`/usuarios/${usuarioId}`, {
+        aulasLiberadas: alvo.aulasLiberadas.filter((id) => id !== aulaId),
+      });
+    }
+    return obterUsuarios();
   };
 
   return {
     obterUsuarios,
+    criarUsuario,
     atualizarUsuario,
     removerUsuario,
     liberarAula,
