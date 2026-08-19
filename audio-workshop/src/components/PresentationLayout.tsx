@@ -23,6 +23,7 @@ interface PresentationLayoutProps {
   slideNotes?: PresenterNote[];
   slideTitles?: string[];
   onPresenterMode?: () => void;
+  isAdmin?: boolean;
 }
 
 export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
@@ -34,6 +35,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
   slideNotes,
   slideTitles,
   onPresenterMode,
+  isAdmin = false,
 }) => {
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(true);
@@ -89,7 +91,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         prevSlide();
-      } else if (e.key.toLowerCase() === 'n') {
+      } else if (e.key.toLowerCase() === 'n' && isAdmin) {
         e.preventDefault();
         setIsNotesOpen((prev) => !prev);
       } else if (e.key.toLowerCase() === 'm') {
@@ -100,7 +102,7 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextSlide, prevSlide]);
+  }, [nextSlide, prevSlide, isAdmin]);
 
   return (
     <div 
@@ -212,31 +214,33 @@ export const PresentationLayout: React.FC<PresentationLayoutProps> = ({
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        {/* Botão de Notas do Apresentador */}
-        <div className="pl-3 border-l border-slate-800 flex items-center gap-2">
-          <button
-            onClick={() => setIsNotesOpen(!isNotesOpen)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
-              isNotesOpen
-                ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
-                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
-            }`}
-            title="Notas do Apresentador (Atalho: N)"
-          >
-            <FileText className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">Notas</span>
-          </button>
+        {/* Notas do Apresentador e Modo Apresentador (somente admin) */}
+        {isAdmin && (
+          <div className="pl-3 border-l border-slate-800 flex items-center gap-2">
+            <button
+              onClick={() => setIsNotesOpen(!isNotesOpen)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                isNotesOpen
+                  ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
+                  : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+              }`}
+              title="Notas do Apresentador (Atalho: N)"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Notas</span>
+            </button>
 
-          {/* Modo Apresentador */}
-          <button
-            onClick={onPresenterMode}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/20"
-            title="Abrir modo apresentador com duas telas"
-          >
-            <Monitor className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">2 Telas</span>
-          </button>
-        </div>
+            {/* Modo Apresentador */}
+            <button
+              onClick={onPresenterMode}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/20"
+              title="Abrir modo apresentador com duas telas"
+            >
+              <Monitor className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">2 Telas</span>
+            </button>
+          </div>
+        )}
       </motion.div>
       )}
       </AnimatePresence>

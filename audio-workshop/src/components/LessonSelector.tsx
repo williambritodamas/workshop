@@ -1,136 +1,16 @@
 import { motion } from 'framer-motion';
-import { Music, Mic, Sliders, Sparkles, ArrowRight, Waves, Gauge, SlidersHorizontal } from 'lucide-react';
+import { Mic, Sparkles, ArrowRight } from 'lucide-react';
+import { aulasOrdenadas } from '../components/slides/registroAulas';
 
 interface LessonSelectorProps {
   onSelect: (lesson: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12) => void;
   filtroAulas?: (aulaId: number) => boolean;
 }
 
-const lessons = [
-  {
-    id: 1 as const,
-    title: 'O que é Som?',
-    subtitle: 'Conceitos fundamentais de acústica e eletroacústica',
-    description: 'Entenda o que é o som, como ele se propaga, e conheça os princípios básicos de microfones, alto-falantes e o fluxo de sinal.',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop',
-    icon: <Music className="w-8 h-8" />,
-    color: 'from-blue-600 to-cyan-500',
-    badge: '14 slides',
-  },
-  {
-    id: 2 as const,
-    title: 'Conhecendo os Equipamentos',
-    subtitle: 'Microfones, mesas, cabos e caixas de som',
-    description: 'Explore cada equipamento de um sistema de áudio profissional: do microfone à caixa de som, passando por mesas, cabos, DI boxes e amplificadores.',
-    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop',
-    icon: <Sliders className="w-8 h-8" />,
-    color: 'from-purple-600 to-pink-500',
-    badge: '15 slides',
-  },
-  {
-    id: 3 as const,
-    title: 'O Caminho do Som',
-    subtitle: 'Fluxo completo do sinal de áudio',
-    description: 'Entenda como o som percorre todo o sistema — da voz aos alto-falantes — e aprenda a identificar falhas em cada etapa do fluxo.',
-    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop',
-    icon: <Waves className="w-8 h-8" />,
-    color: 'from-amber-500 to-orange-500',
-    badge: '16 slides',
-  },
-  {
-    id: 4 as const,
-    title: 'Microfones',
-    subtitle: 'A porta de entrada do som',
-    description: 'Conheça os tipos de microfone, padrões polares, posicionamento correto e como escolher o microfone ideal para cada situação.',
-    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop',
-    icon: <Mic className="w-8 h-8" />,
-    color: 'from-blue-600 to-cyan-500',
-    badge: '15 slides',
-  },
-  {
-    id: 5 as const,
-    title: 'Mesas de Som',
-    subtitle: 'O cérebro do sistema',
-    description: 'Descubra como funciona uma mesa de som, seus canais, controles, caminho do sinal e as diferenças entre mesas analógicas e digitais.',
-    image: 'https://images.pexels.com/photos/33379549/pexels-photo-33379549.jpeg?auto=compress&cs=tinysrgb&w=800',
-    icon: <Sliders className="w-8 h-8" />,
-    color: 'from-green-600 to-teal-500',
-    badge: '15 slides',
-  },
-  {
-    id: 6 as const,
-    title: 'Gain, Volume e Clip',
-    subtitle: 'O segredo do som profissional',
-    description: 'Entenda de uma vez por todas a diferença entre Gain e Fader, o que é Clip, Headroom e como ajustar corretamente o nível de cada canal.',
-    image: 'https://images.pexels.com/photos/11884526/pexels-photo-11884526.jpeg?auto=compress&cs=tinysrgb&w=800',
-    icon: <Gauge className="w-8 h-8" />,
-    color: 'from-amber-500 to-orange-500',
-    badge: '16 slides',
-  },
-  {
-    id: 7 as const,
-    title: 'Equalização',
-    subtitle: 'Moldando o Som',
-    description: 'Aprenda a equilibrar graves, médios e agudos. Entenda o HPF, como ouvir as diferenças e por que cortar frequências é melhor que aumentar.',
-    image: 'https://images.pexels.com/photos/34068712/pexels-photo-34068712.jpeg?auto=compress&cs=tinysrgb&w=800',
-    icon: <SlidersHorizontal className="w-8 h-8" />,
-    color: 'from-blue-600 to-cyan-500',
-    badge: '16 slides',
-  },
-  {
-    id: 8 as const,
-    title: 'Compressão',
-    subtitle: 'Controlando a Dinâmica do Som',
-    description: 'Entenda o que é um compressor, como usar Threshold, Ratio, Attack, Release e Make-up Gain. Aprenda na prática com simulador interativo e quiz.',
-    image: '/images/dbx-compressors.jpg',
-    icon: <Waves className="w-8 h-8" />,
-    color: 'from-purple-600 to-pink-500',
-    badge: '16 slides',
-  },
-  {
-    id: 9 as const,
-    title: 'Fase e Polaridade',
-    subtitle: 'Quando dois sons trabalham juntos... ou contra você',
-    description: 'Entenda o que é fase, polaridade, como ondas se somam ou se cancelam, e por que dois microfones podem causar cancelamento de fase.',
-    image: '/images/interference-waves.png',
-    icon: <Waves className="w-8 h-8" />,
-    color: 'from-indigo-600 to-violet-500',
-    badge: '16 slides',
-  },
-  {
-    id: 10 as const,
-    title: 'Microfonia',
-    subtitle: 'O inimigo nº 1 do áudio ao vivo',
-    description: 'Entenda o que causa a microfonia, como evitá-la, como resolvê-la rapidamente e como posicionar caixas e microfones corretamente.',
-    image: '/images/microphone.jpg',
-    icon: <Waves className="w-8 h-8" />,
-    color: 'from-red-600 to-rose-500',
-    badge: '16 slides',
-  },
-  {
-    id: 11 as const,
-    title: 'Montando um Sistema Completo',
-    subtitle: 'Do microfone às caixas de som',
-    description: 'Aprenda a montar um sistema de áudio do zero: planejamento, conexões, organização de cabos, sequência de energização e diagnóstico de problemas.',
-    image: 'https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=800&auto=format&fit=crop',
-    icon: <Sliders className="w-8 h-8" />,
-    color: 'from-emerald-600 to-teal-500',
-    badge: '16 slides',
-  },
-  {
-    id: 12 as const,
-    title: 'Desafio Final',
-    subtitle: 'Agora você é o operador de áudio',
-    description: 'A última aula do workshop. Coloque em prática tudo o que aprendeu em situações reais: cenários, diagnóstico de problemas, quiz final, missão e certificado.',
-    image: '/images/wall-of-sound.jpg',
-    icon: <Sparkles className="w-8 h-8" />,
-    color: 'from-yellow-500 to-amber-500',
-    badge: '16 slides',
-  },
-];
-
 export default function LessonSelector({ onSelect, filtroAulas }: LessonSelectorProps) {
-  const aulasDisponiveis = filtroAulas ? lessons.filter(l => filtroAulas(l.id)) : lessons;
+  const aulasDisponiveis = filtroAulas
+    ? aulasOrdenadas.filter((l) => filtroAulas(l.id))
+    : aulasOrdenadas;
 
   return (
     <div className="relative min-h-screen bg-slate-950 text-white">
@@ -181,14 +61,14 @@ export default function LessonSelector({ onSelect, filtroAulas }: LessonSelector
               transition={{ duration: 0.6, delay: idx * 0.2, ease: 'easeOut' }}
               whileHover={{ y: -8, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => onSelect(lesson.id)}
+              onClick={() => onSelect(lesson.id as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12)}
               className="group relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 backdrop-blur-xl text-left transition-all hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10"
             >
               {/* Imagem de fundo com overlay */}
               <div className="relative h-48 md:h-56 w-full overflow-hidden">
                 <img
                   src={lesson.image}
-                  alt={lesson.title}
+                  alt={lesson.titulo}
                   className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 ${lesson.id === 4 ? 'object-bottom' : ''}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
@@ -199,7 +79,7 @@ export default function LessonSelector({ onSelect, filtroAulas }: LessonSelector
                 {/* Badge e ícone */}
                 <div className="flex items-center justify-between mb-4">
                   <span className="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">
-                    {lesson.badge}
+                    {lesson.slides.length} slides
                   </span>
                   <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all">
                     {lesson.icon}
@@ -208,7 +88,7 @@ export default function LessonSelector({ onSelect, filtroAulas }: LessonSelector
 
                 {/* Título e descrição */}
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-1.5 group-hover:text-blue-400 transition-colors">
-                  Aula {lesson.id} — {lesson.title}
+                  Aula {lesson.id} — {lesson.titulo}
                 </h2>
                 <p className="text-sm text-slate-400 font-medium mb-3">
                   {lesson.subtitle}
