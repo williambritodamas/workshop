@@ -113,11 +113,17 @@ export const useGerenciadorUsuarios = () => {
     return usuario;
   };
 
-  const atualizarUsuario = async (usuarioAtualizado: Usuario): Promise<Usuario[]> => {
-    await apiPatch(`/usuarios/${usuarioAtualizado.id}`, {
-      role: usuarioAtualizado.role,
-      aulasLiberadas: usuarioAtualizado.aulasLiberadas,
-    });
+  const atualizarUsuario = async (
+    usuarioId: string,
+    mudancas: {
+      nome?: string;
+      email?: string;
+      senha?: string;
+      role?: 'admin' | 'user';
+      aulasLiberadas?: number[];
+    },
+  ): Promise<Usuario[]> => {
+    await apiPatch(`/usuarios/${usuarioId}`, mudancas);
     return obterUsuarios();
   };
 

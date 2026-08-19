@@ -9,11 +9,12 @@ import {
   Check,
   Plus,
   X,
+  Pencil,
   Loader2,
   Lock,
   AlertCircle,
 } from 'lucide-react';
-import { useGerenciadorUsuarios } from '../contexts/AutenticacaoContext';
+import { useGerenciadorUsuarios, useAutenticacao } from '../contexts/AutenticacaoContext';
 import type { Usuario } from '../types/auth';
 
 interface PainelAdminProps {
@@ -26,8 +27,15 @@ const AULAS = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
-  const { obterUsuarios, removerUsuario, liberarAula, ocultarAula, criarUsuario } =
-    useGerenciadorUsuarios();
+  const {
+    obterUsuarios,
+    removerUsuario,
+    liberarAula,
+    ocultarAula,
+    criarUsuario,
+    atualizarUsuario,
+  } = useGerenciadorUsuarios();
+  const { usuarioAtual } = useAutenticacao();
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
@@ -42,6 +50,15 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
   });
   const [erroFormulario, setErroFormulario] = useState<string | null>(null);
   const [criando, setCriando] = useState(false);
+  const [usuarioEditando, setUsuarioEditando] = useState<Usuario | null>(null);
+  const [formularioEdicao, setFormularioEdicao] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+    role: 'user' as 'admin' | 'user',
+  });
+  const [erroEdicao, setErroEdicao] = useState<string | null>(null);
+  const [salvando, setSalvando] = useState(false);
 
   const carregarUsuarios = async () => {
     try {
@@ -111,6 +128,51 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
       setErroFormulario(e instanceof Error ? e.message : 'Erro ao criar usuário');
     } finally {
       setCriando(false);
+    }
+  };
+
+  const abrirEdicao = (usuario: Usuario) => {
+    setFormularioEdicao({
+      nome: usuario.nome,
+      email: usuario.email,
+      senha: '',
+      role: usuario.role,
+    });
+    setErroEdicao(null);
+    setUsuarioEditando(usuario);
+  };
+
+  const handleSalvarEdicao = async () => {
+    if (!usuarioEditando) return;
+    setErroEdicao(null);
+
+    if (!formularioEdicao.nome || !formularioEdicao.email) {
+      setErroEdicao('Nome e email são obrigatórios');
+      return;
+    }
+    if (formularioEdicao.senha && formularioEdicao.senha.length < 6) {
+      setErroEdicao('A senha deve ter pelo menos 6 caracteres');
+      return;
+    }
+    if (usuarioEditando.id === usuarioAtual?.id && formularioEdicao.role === 'user') {
+      setErroEdicao('Você não pode remover seu próprio acesso de administrador');
+      return;
+    }
+
+    setSalvando(true);
+    try {
+      await atualizarUsuario(usuarioEditando.id, {
+        nome: formularioEdicao.nome,
+        email: formularioEdicao.email,
+        senha: formularioEdicao.senha || undefined,
+        role: formularioEdicao.role,
+      });
+      await carregarUsuarios();
+      setUsuarioEditando(null);
+    } catch (e) {
+      setErroEdicao(e instanceof Error ? e.message : 'Erro ao salvar alterações');
+    } finally {
+      setSalvando(false);
     }
   };
 
@@ -306,18 +368,29 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
                         </div>
                       </div>
 
-                      {/* Botão Remover (só se não for admin padrão) */}
-                      {usuario.id !== 'admin-default' && (
+                      {/* Botões Editar / Remover */}
+                      <div className="flex gap-2">
                         <motion.button
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          onClick={() => handleRemoverUsuario(usuario.id)}
-                          className="w-full px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 font-bold hover:bg-red-500/20 transition-all flex items-center justify-center gap-2"
+                          onClick={() => abrirEdicao(usuario)}
+                          className="flex-1 px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 font-bold hover:bg-blue-500/20 transition-all flex items-center justify-center gap-2"
                         >
-                          <Trash2 className="w-4 h-4" />
-                          Remover Usuário
+                          <Pencil className="w-4 h-4" />
+                          Editar Usuário
                         </motion.button>
-                      )}
+                        {usuario.id !== 'admin-default' && (
+                          <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => handleRemoverUsuario(usuario.id)}
+                            className="flex-1 px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 font-bold hover:bg-red-500/20 transition-all flex items-center justify-center gap-2"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                            Remover Usuário
+                          </motion.button>
+                        )}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -459,6 +532,156 @@ export const PainelAdmin: React.FC<PainelAdminProps> = ({ onVoltar }) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Modal de Editar Usuário */}
+      <AnimatePresence>
+        {usuarioEditando && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+            onClick={() => setUsuarioEditando(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black/50 p-8"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-white">
+                  Editar {usuarioEditando.nome}
+                </h2>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setUsuarioEditando(null)}
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-all"
+                >
+                  <X className="w-5 h-5 text-slate-300" />
+                </motion.button>
+              </div>
+
+              {erroEdicao && (
+                <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
+                  {erroEdicao}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                {/* Nome */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Nome</label>
+                  <input
+                    type="text"
+                    value={formularioEdicao.nome}
+                    onChange={(e) =>
+                      setFormularioEdicao({ ...formularioEdicao, nome: e.target.value })
+                    }
+                    placeholder="Nome completo"
+                    className="w-full px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Email</label>
+                  <input
+                    type="email"
+                    value={formularioEdicao.email}
+                    onChange={(e) =>
+                      setFormularioEdicao({ ...formularioEdicao, email: e.target.value })
+                    }
+                    placeholder="usuario@email.com"
+                    className="w-full px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  />
+                </div>
+
+                {/* Senha */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Senha</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <input
+                      type="password"
+                      value={formularioEdicao.senha}
+                      onChange={(e) =>
+                        setFormularioEdicao({ ...formularioEdicao, senha: e.target.value })
+                      }
+                      placeholder="Deixe em branco para manter"
+                      className="w-full pl-9 pr-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    />
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Mínimo 6 caracteres (em branco = não alterar)
+                  </p>
+                </div>
+
+                {/* Role */}
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">Tipo de Perfil</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() =>
+                        setFormularioEdicao({ ...formularioEdicao, role: 'user' })
+                      }
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        formularioEdicao.role === 'user'
+                          ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white'
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      }`}
+                    >
+                      Aluno
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() =>
+                        setFormularioEdicao({ ...formularioEdicao, role: 'admin' })
+                      }
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        formularioEdicao.role === 'admin'
+                          ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      }`}
+                    >
+                      Admin
+                    </motion.button>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Ao tornar Admin, todas as aulas são liberadas automaticamente
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-8">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setUsuarioEditando(null)}
+                  className="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white font-semibold hover:bg-slate-700 transition-all"
+                >
+                  Cancelar
+                </motion.button>
+                <motion.button
+                  whileHover={salvando ? undefined : { scale: 1.02 }}
+                  whileTap={salvando ? undefined : { scale: 0.98 }}
+                  onClick={handleSalvarEdicao}
+                  disabled={salvando}
+                  className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:from-blue-500 hover:to-cyan-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {salvando ? 'Salvando...' : 'Salvar Alterações'}
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

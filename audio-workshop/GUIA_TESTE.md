@@ -164,7 +164,7 @@
 3. **Histórico de Mudanças**: Admin ver quem modificou o quê e quando
 4. **Busca de Usuários**: Campo de busca no painel admin
 5. **Exportar Dados**: Exportar lista de usuários em CSV/Excel
-6. **Editar Usuário**: Permitir editar nome e email de usuários existentes
+6. **Editar Usuário**: ✅ editar nome, email, senha e tipo de perfil no painel admin
 7. **Resetar Senha**: Admin poder resetar senha de usuários
 8. **Relatórios**: Dashboard com estatísticas de progresso dos alunos
 

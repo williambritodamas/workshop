@@ -211,7 +211,8 @@ Acesse `http://localhost:3007/`
 - [ ] Cookie httpOnly para o token
 - [ ] Recuperação de senha / email de confirmação
 - [ ] Dashboard de progresso
-- [ ] Busca/edição de usuários no painel
+- [x] Edição de usuários no painel (nome, email, senha e perfil)
+- [ ] Busca de usuários no painel
 
 ---
 

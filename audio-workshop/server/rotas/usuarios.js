@@ -49,17 +49,51 @@ router.post('/', async (req, res) => {
   res.status(201).json({ usuario: paraPublico(usuario) });
 });
 
-router.patch('/:id', (req, res) => {
-  const { role, aulasLiberadas } = req.body || {};
+router.patch('/:id', async (req, res) => {
+  const { nome, email, senha, role, aulasLiberadas } = req.body || {};
   const alvo = buscarUsuarioPorId(req.params.id);
   if (!alvo) {
     return res.status(404).json({ erro: 'Usuário não encontrado' });
   }
 
   const campos = {};
-  if (role !== undefined) {
-    campos.role = role === 'admin' ? 'admin' : 'user';
+
+  if (nome !== undefined) {
+    const nomeLimpo = String(nome).trim();
+    if (!nomeLimpo) {
+      return res.status(400).json({ erro: 'Nome não pode ficar vazio' });
+    }
+    campos.nome = nomeLimpo;
   }
+
+  if (email !== undefined) {
+    const emailNormalizado = String(email).trim().toLowerCase();
+    if (!emailNormalizado) {
+      return res.status(400).json({ erro: 'Email não pode ficar vazio' });
+    }
+    const existe = buscarUsuarioPorEmail(emailNormalizado);
+    if (existe && existe.id !== alvo.id) {
+      return res.status(409).json({ erro: 'Email já cadastrado' });
+    }
+    campos.email = emailNormalizado;
+  }
+
+  if (senha !== undefined && senha !== '') {
+    if (String(senha).length < 6) {
+      return res.status(400).json({ erro: 'A senha deve ter pelo menos 6 caracteres' });
+    }
+    campos.senha_hash = await bcrypt.hash(senha, 10);
+  }
+
+  if (role !== undefined) {
+    const novoRole = role === 'admin' ? 'admin' : 'user';
+    campos.role = novoRole;
+    // Administradores recebem acesso a todas as aulas automaticamente
+    if (novoRole === 'admin') {
+      campos.aulas_liberadas = JSON.stringify(TODAS_AS_AULAS);
+    }
+  }
+
   if (aulasLiberadas !== undefined) {
     if (!Array.isArray(aulasLiberadas)) {
       return res.status(400).json({ erro: 'aulasLiberadas deve ser um array' });
