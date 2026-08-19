@@ -6,7 +6,8 @@
 - [x] Login com email e senha
 - [x] Registro de novos usuários
 - [x] RBAC com roles 'admin' e 'user'
-- [x] Persistência em localStorage
+- [x] Backend real (Express + SQLite) com persistência em banco
+- [x] Senhas com hash bcrypt e autenticação JWT
 
 ### 2. Controle de Acesso a Aulas
 - [x] Função `podeAcesar()` para verificar permissão de acesso
@@ -30,9 +31,9 @@
 ## 📋 Funcionalidades Implementadas
 
 ### Autenticação
-- **Admin Padrão**: admin@audioworkshop.com (sem validação de senha em demo)
+- **Admin Padrão**: admin@audioworkshop.com / senha `admin123` (primeiro boot do servidor)
 - **Novo Usuário**: Email e senha com validação
-- **Persistência**: localStorage com chaves `usuarios_audio_workshop` e `usuario_logado_audio_workshop`
+- **Persistência**: SQLite em `server/data/audio-workshop.db` (API REST + JWT, token no localStorage)
 
 ### Controle de Aulas
 - Admin tem acesso a todas as 12 aulas por padrão
@@ -105,7 +106,8 @@ const { obterUsuarios, liberarAula, ocultarAula, removerUsuario } = useGerenciad
 - Acesso ao painel admin restrito (role === 'admin')
 - Verificação de permissão antes de acessar aulas
 - Remoção segura de usuários do sistema
-- localStorage apenas com dados não sensíveis
+- Backend com senhas hasheadas (bcrypt) e autenticação JWT
+- `senha_hash` nunca retorna nas respostas da API
 
 ### UX/UI
 - Animações suaves com Framer Motion
@@ -121,9 +123,10 @@ const { obterUsuarios, liberarAula, ocultarAula, removerUsuario } = useGerenciad
 
 ## 🚀 Próximas Melhorias (Sugestões)
 
-1. **Autenticação Real**: Integrar com backend (Node/Express/MongoDB)
-2. **Hash de Senhas**: Usar bcrypt para armazenar senhas com segurança
-3. **Tokens JWT**: Implementar autenticação stateless
+1. **Autenticação Real**: ✅ implementada (Express + SQLite)
+2. **Hash de Senhas**: ✅ bcrypt
+3. **Tokens JWT**: ✅ stateless com expiração
+4. **Auditoria**: Registrar mudanças feitas por admin (logs)
 4. **Auditoria**: Registrar mudanças feitas por admin (logs)
 5. **Recuperação de Senha**: Enviar email de reset de senha
 6. **2FA**: Autenticação de dois fatores
@@ -140,11 +143,12 @@ const { obterUsuarios, liberarAula, ocultarAula, removerUsuario } = useGerenciad
 - Animações Framer Motion mantidas
 - Download automático com nome dinâmico: `Certificado_[NomeAluno].pdf`
 
-### Sobre localStorage
-- Dados armazenados localmente sem criptografia (demo)
-- Em produção, usar JWT tokens + backend seguro
-- Dados persistem entre abas/sessões do mesmo navegador
-- Limpar cache limpa dados do app
+### Sobre o Backend
+- API REST em `server/` (Express + better-sqlite3)
+- Banco em `server/data/audio-workshop.db` (gitignored; use volume no Docker para persistir)
+- Admin seed: `admin@audioworkshop.com` / `admin123` (env `ADMIN_SENHA`)
+- JWT secret via env `JWT_SECRET`; token fica no localStorage (melhoria futura: cookie httpOnly)
+- Em dev, o Vite faz proxy de `/api` para `http://localhost:3001`
 
 ### Fluxo de Aula
 1. Usuário seleciona aula no LessonSelector

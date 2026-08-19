@@ -6,12 +6,12 @@
 **Problema**: Quando o admin desabilita uma aula, ela não desaparecia da tela principal para o usuário
 **Solução**: 
 - Adicionada sincronização de dados quando o usuário volta do painel admin
-- Implementado método `recarregarUsuario()` que sincroniza as mudanças do localStorage
+- Implementado método `recarregarUsuario()` que busca os dados atualizados na API
 - LessonSelector agora filtra aulas usando a função `podeAcesar`
 
 **Como Testar**:
-1. Inicie o dev server: `npm run dev`
-2. Faça login como admin (admin@audioworkshop.com, qualquer senha)
+1. Inicie a API e o frontend: `npm run dev:all` (ou `npm run server` + `npm run dev`)
+2. Faça login como admin (admin@audioworkshop.com, admin123)
 3. Vá ao Painel Admin
 4. Crie um novo usuário (ou selecione um existente)
 5. Desabilite a Aula 2 (clique no quadrado cinza para ficar ainda mais cinza)
@@ -30,6 +30,7 @@
 - Implementado modal com formulário para:
   - Nome completo
   - Email
+  - Senha (definida pelo admin)
   - Tipo de perfil (Aluno ou Admin)
 - Novos admins recebem acesso a todas as 12 aulas
 - Novos alunos começam com acesso apenas à Aula 1
@@ -41,6 +42,7 @@
 4. Preencha os dados:
    - Nome: "João Silva"
    - Email: "joao@example.com"
+   - Senha: "joao123"
    - Tipo: Aluno
 5. Clique "Criar Usuário"
 6. **✓ O novo usuário deve aparecer na lista**
@@ -50,6 +52,7 @@
 10. Preencha:
     - Nome: "Maria Admin"
     - Email: "maria@example.com"
+    - Senha: "maria123"
     - Tipo: Admin
 11. Clique "Criar Usuário"
 12. **✓ O novo admin deve aparecer com badge "Admin" roxo**
@@ -182,8 +185,9 @@
 - [ ] Verificar se há block de popup (permitir popups)
 
 ### Se o novo usuário não aparecer
-- [ ] Verificar localStorage: `JSON.parse(localStorage.getItem('usuarios_audio_workshop'))`
-- [ ] Verificar se email é único
+- [ ] Verificar se a API está rodando: `npm run server` (http://localhost:3001)
+- [ ] Verificar console: `fetch('/api/usuarios')` deve retornar 200 com token de admin
+- [ ] Verificar se email é único (duplicado retorna 409)
 - [ ] Tentar recarregar o app
 - [ ] Verificar console para erros
 
